@@ -16,7 +16,7 @@ class ExampleStepper extends StatefulWidget {
   final TextEditingController secondStepInputController = TextEditingController();
   final TextEditingController thirdStepInputController = TextEditingController();
 
-  final Function onCancel;
+  final Function? onCancel;
 
   ExampleStepper({this.onCancel});
 
@@ -41,7 +41,7 @@ class _ExampleStepperState extends State<ExampleStepper> {
 
   @override
   Widget build(BuildContext context) {
-    var onCancel = widget.onCancel != null ? widget.onCancel : () => {};
+    var onCancel = widget.onCancel != null ? widget.onCancel! : () => {};
     return FormStepper(steps: steps, onCancel: onCancel, onSave: () => {});
   }
 }
@@ -73,7 +73,7 @@ class _FirstStep implements FormStep {
   String get title => "First step";
 
   @override
-  bool validate() => formKey.currentState.validate();
+  bool validate() => formKey.currentState!.validate();
 }
 
 class _SecondStep implements FormStep {

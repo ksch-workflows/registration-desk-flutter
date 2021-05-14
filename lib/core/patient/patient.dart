@@ -1,19 +1,19 @@
 import "package:flutter/material.dart";
 
 class Patient {
-  final String id;
-  final String opdNumber;
+  final String? id;
+  final String? opdNumber;
   final String name;
-  final String fatherName;
+  final String? fatherName;
   final String location;
-  final DateTime lastVisit;
+  final DateTime? lastVisit;
 
   Patient({
     this.id,
     this.opdNumber,
-    @required this.name,
+    required this.name,
     this.fatherName,
-    @required this.location,
+    required this.location,
     this.lastVisit,
   });
 }

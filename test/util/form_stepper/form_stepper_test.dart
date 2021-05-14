@@ -113,7 +113,7 @@ extension WidgetTesterExtensions on WidgetTester {
   void verify(
     dynamic actual,
     dynamic matcher, {
-    String reason,
+    String? reason,
     dynamic skip, // true or a String
   }) {
     try {

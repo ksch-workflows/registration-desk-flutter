@@ -12,18 +12,17 @@ class RegisterPatientResult {
   final String visitType;
 
   RegisterPatientResult({
-    @required this.patient,
-    @required this.visitType,
-  })  : assert(patient != null),
-        assert(visitType != null);
+    required this.patient,
+    required this.visitType,
+  });
 }
 
 class RegisterPatientDialog extends StatefulWidget {
   final Function onDialogClose;
 
   const RegisterPatientDialog({
-    @required this.onDialogClose,
-  }) : assert(onDialogClose != null);
+    required this.onDialogClose,
+  });
 
   @override
   State<StatefulWidget> createState() => _RegisterPatientDialogState();
@@ -39,7 +38,7 @@ class _RegisterPatientDialogModel {
 class _RegisterPatientDialogState extends State<RegisterPatientDialog> {
   final _model = SingletonBucket.get(() => _RegisterPatientDialogModel());
 
-  List<FormStep> _steps;
+  late List<FormStep> _steps;
 
   @override
   void initState() {
@@ -47,14 +46,14 @@ class _RegisterPatientDialogState extends State<RegisterPatientDialog> {
 
     _steps = [
       PersonalDataFormStep(
-        nameController: _model.nameController,
-        fatherNameController: _model.fatherNameController,
+        nameController: _model!.nameController,
+        fatherNameController: _model!.fatherNameController,
       ),
       ContactInformationFormStep(
-        locationController: _model.locationController,
+        locationController: _model!.locationController,
       ),
       VisitTypeFormStep(
-        visitTypeSelection: _model.visitTypeSelection,
+        visitTypeSelection: _model!.visitTypeSelection,
       ),
     ];
   }
@@ -78,13 +77,13 @@ class _RegisterPatientDialogState extends State<RegisterPatientDialog> {
 
   void save() {
     final newPatient = Patient(
-      name: _model.nameController.text,
-      fatherName: _model.fatherNameController.text,
-      location: _model.locationController.text,
+      name: _model!.nameController.text,
+      fatherName: _model!.fatherNameController.text,
+      location: _model!.locationController.text,
     );
     final result = RegisterPatientResult(
       patient: newPatient,
-      visitType: _model.visitTypeSelection.value,
+      visitType: _model!.visitTypeSelection.value!,
     );
 
     SingletonBucket.reset<_RegisterPatientDialogModel>();

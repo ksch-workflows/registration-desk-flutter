@@ -5,8 +5,8 @@ import "../../../util/form_stepper/form_stepper.dart";
 class PersonalDataFormStep implements FormStep {
   final formKey = GlobalKey<FormState>();
 
-  final TextEditingController nameController;
-  final TextEditingController fatherNameController;
+  final TextEditingController? nameController;
+  final TextEditingController? fatherNameController;
 
   PersonalDataFormStep({
     this.nameController,
@@ -26,27 +26,27 @@ class PersonalDataFormStep implements FormStep {
   }
 
   @override
-  bool validate() => formKey.currentState.validate();
+  bool validate() => formKey.currentState!.validate();
 }
 
 class _PersonalDataForm extends StatefulWidget {
   const _PersonalDataForm({
-    Key key,
-    @required this.formKey,
-    @required this.nameController,
-    @required this.fatherNameController,
+    Key? key,
+    required this.formKey,
+    required this.nameController,
+    required this.fatherNameController,
   }) : super(key: key);
 
   final GlobalKey<FormState> formKey;
-  final TextEditingController nameController;
-  final TextEditingController fatherNameController;
+  final TextEditingController? nameController;
+  final TextEditingController? fatherNameController;
 
   @override
   _PersonalDataFormState createState() => _PersonalDataFormState();
 }
 
 class _PersonalDataFormState extends State<_PersonalDataForm> {
-  FocusNode initialFocus;
+  FocusNode? initialFocus;
 
   @override
   void initState() {
@@ -57,12 +57,12 @@ class _PersonalDataFormState extends State<_PersonalDataForm> {
   @override
   void dispose() {
     super.dispose();
-    initialFocus.dispose();
+    initialFocus!.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    initialFocus.requestFocus();
+    initialFocus!.requestFocus();
     return Form(
       key: widget.formKey,
       child: Column(children: <Widget>[
