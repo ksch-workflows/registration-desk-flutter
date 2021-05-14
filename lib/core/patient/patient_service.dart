@@ -5,17 +5,17 @@ import "patient.dart";
 int _nextOptNumberSuffix = 9000;
 
 abstract class PatientService {
-  Patient create(Patient patient);
+  Patient create(Patient? patient);
   Patient get(String patientId);
   List<Patient> find(String patientName);
 }
 
 class MockPatientService implements PatientService {
   @override
-  Patient create(Patient patient) {
+  Patient create(Patient? patient) {
     final result = Patient(
       id: Uuid().v4(),
-      name: patient.name,
+      name: patient!.name,
       opdNumber: "20-${_nextOptNumberSuffix++}",
       location: patient.location,
     );

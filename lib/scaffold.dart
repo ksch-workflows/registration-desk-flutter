@@ -7,16 +7,15 @@ import "util/test_bench.dart";
 class WebScaffold extends StatelessWidget {
   final String title;
   final Widget body;
-  final Widget floatingActionButton;
-  final Function onNavigateBack;
+  final Widget? floatingActionButton;
+  final Function? onNavigateBack;
 
   const WebScaffold({
-    @required this.title,
-    @required this.body,
+    required this.title,
+    required this.body,
     this.onNavigateBack,
     this.floatingActionButton,
-  })  : assert(title != null),
-        assert(body != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -66,12 +65,12 @@ class WebScaffold extends StatelessWidget {
 
 class _AppBar extends StatelessWidget {
   final String title;
-  final Function onNavigateBack;
+  final Function? onNavigateBack;
 
   const _AppBar({
-    @required this.title,
+    required this.title,
     this.onNavigateBack,
-  }) : assert(title != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -144,7 +143,7 @@ class _AppBar extends StatelessWidget {
       return IconButton(
         icon: const Icon(Icons.arrow_back),
         color: buttonColor,
-        onPressed: onNavigateBack,
+        onPressed: onNavigateBack as void Function()?,
       );
     } else {
       return const SizedBox(

@@ -7,13 +7,11 @@ class ActionButtons extends StatelessWidget {
   final bool isLastStep;
 
   const ActionButtons({
-    @required this.onBack,
-    @required this.onCancel,
-    @required this.onContinue,
+    required this.onBack,
+    required this.onCancel,
+    required this.onContinue,
     this.isLastStep = false,
-  })  : assert(onBack != null),
-        assert(onCancel != null),
-        assert(onContinue != null);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +49,7 @@ class ActionButtons extends StatelessWidget {
           isLastStep ? "Save" : "Continue",
           style: TextStyle(color: Theme.of(context).colorScheme.onSecondary),
         ),
-        onPressed: onContinue,
+        onPressed: onContinue as void Function()?,
       ),
     );
   }
@@ -60,7 +58,7 @@ class ActionButtons extends StatelessWidget {
     return RaisedButton(
       key: const ValueKey("cancelButton"),
       child: const Text("Cancel"),
-      onPressed: onCancel,
+      onPressed: onCancel as void Function()?,
     );
   }
 
@@ -70,7 +68,7 @@ class ActionButtons extends StatelessWidget {
       child: RaisedButton(
         key: const ValueKey("backButton"),
         child: const Text("Back"),
-        onPressed: onBack,
+        onPressed: onBack as void Function()?,
       ),
     );
   }

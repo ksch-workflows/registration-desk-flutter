@@ -4,9 +4,9 @@ import "bubbles.dart";
 
 class Header extends StatelessWidget {
   final List<String> stepTitles;
-  final int currentStep;
+  final int? currentStep;
 
-  const Header({@required this.stepTitles, @required this.currentStep}) : assert(stepTitles != null);
+  const Header({required this.stepTitles, required this.currentStep});
 
   @override
   Widget build(BuildContext context) {
