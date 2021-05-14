@@ -1,6 +1,6 @@
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 
-import "bubbles.dart";
+import 'bubbles.dart';
 
 class Header extends StatelessWidget {
   final List<String> stepTitles;

@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 
 class ActionButtons extends StatelessWidget {
   final Function onBack;
@@ -41,12 +41,12 @@ class ActionButtons extends StatelessWidget {
 
   Widget _continueButton(BuildContext context) {
     return Tooltip(
-      message: "Go to the next step.",
+      message: 'Go to the next step.',
       child: RaisedButton(
-        key: const ValueKey("continueButton"),
+        key: const ValueKey('continueButton'),
         color: Theme.of(context).accentColor,
         child: Text(
-          isLastStep ? "Save" : "Continue",
+          isLastStep ? 'Save' : 'Continue',
           style: TextStyle(color: Theme.of(context).colorScheme.onSecondary),
         ),
         onPressed: onContinue as void Function()?,
@@ -56,18 +56,18 @@ class ActionButtons extends StatelessWidget {
 
   Widget _cancelButton() {
     return RaisedButton(
-      key: const ValueKey("cancelButton"),
-      child: const Text("Cancel"),
+      key: const ValueKey('cancelButton'),
+      child: const Text('Cancel'),
       onPressed: onCancel as void Function()?,
     );
   }
 
   Widget _backButton() {
     return Tooltip(
-      message: "Go back to the previous step.",
+      message: 'Go back to the previous step.',
       child: RaisedButton(
-        key: const ValueKey("backButton"),
-        child: const Text("Back"),
+        key: const ValueKey('backButton'),
+        child: const Text('Back'),
         onPressed: onBack as void Function()?,
       ),
     );

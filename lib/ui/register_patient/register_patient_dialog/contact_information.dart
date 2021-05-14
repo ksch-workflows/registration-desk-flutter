@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import "../../../util/form_stepper/form_stepper.dart";
+import '../../../util/form_stepper/form_stepper.dart';
 
 class ContactInformationFormStep implements FormStep {
   final formKey = GlobalKey<FormState>();
@@ -68,7 +68,7 @@ class _ContactInformationFormState extends State<_ContactInformationForm> {
             labelText: "Patient's location*",
             border: OutlineInputBorder(),
             hintText: "Please enter the patient's location",
-            helperText: "* Required",
+            helperText: '* Required',
           ),
         ),
       ]),

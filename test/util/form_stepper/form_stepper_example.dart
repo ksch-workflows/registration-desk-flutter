@@ -1,6 +1,6 @@
-import "package:flutter/material.dart";
-import "package:registration_desk/util/form_stepper/form_stepper.dart";
-import "package:registration_desk/util/test_bench.dart";
+import 'package:flutter/material.dart';
+import 'package:registration_desk/util/form_stepper/form_stepper.dart';
+import 'package:registration_desk/util/test_bench.dart';
 
 // Start via commandline: flutter run -d chrome test/util/form_stepper/form_stepper_example.dart
 void main() {
@@ -57,11 +57,11 @@ class _FirstStep implements FormStep {
     return Form(
       key: formKey,
       child: TextFormField(
-        key: const ValueKey("firstStepInput"),
+        key: const ValueKey('firstStepInput'),
         controller: firstStepInputController,
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return "The input for the first step is mandatory.";
+            return 'The input for the first step is mandatory.';
           }
           return null;
         },
@@ -70,7 +70,7 @@ class _FirstStep implements FormStep {
   }
 
   @override
-  String get title => "First step";
+  String get title => 'First step';
 
   @override
   bool validate() => formKey.currentState!.validate();
@@ -87,14 +87,14 @@ class _SecondStep implements FormStep {
     return Form(
       key: formKey,
       child: TextFormField(
-        key: const ValueKey("secondStepInput"),
+        key: const ValueKey('secondStepInput'),
         controller: secondStepInputController,
       ),
     );
   }
 
   @override
-  String get title => "Second step";
+  String get title => 'Second step';
 
   @override
   bool validate() => true;
@@ -111,14 +111,14 @@ class _ThirdStep implements FormStep {
     return Form(
       key: formKey,
       child: TextFormField(
-        key: const ValueKey("thirdStepInput"),
+        key: const ValueKey('thirdStepInput'),
         controller: thirdStepInputController,
       ),
     );
   }
 
   @override
-  String get title => "Third step";
+  String get title => 'Third step';
 
   @override
   bool validate() => true;

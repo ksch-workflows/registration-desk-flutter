@@ -61,7 +61,7 @@ class _RegisterPatientDialogState extends State<RegisterPatientDialog> {
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
-      title: const Text("Register patient"),
+      title: const Text('Register patient'),
       children: <Widget>[
         ConstrainedBox(
           constraints: BoxConstraints.tight(const Size(800, 400)),

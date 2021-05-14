@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 
 class TestBench extends StatelessWidget {
   final Widget child;
@@ -14,16 +14,16 @@ class TestBench extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Test Bench",
+      title: 'Test Bench',
       home: isFullPage ? child : wrapComponentInScaffold(),
-      theme: ThemeData(fontFamily: "Roboto"),
+      theme: ThemeData(fontFamily: 'Roboto'),
     );
   }
 
   Scaffold wrapComponentInScaffold() {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Test Bench"),
+        title: const Text('Test Bench'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(100.0),

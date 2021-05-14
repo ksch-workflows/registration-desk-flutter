@@ -1,24 +1,24 @@
-import "package:flutter/material.dart";
-import "package:flutter/widgets.dart";
-import "package:flutter_test/flutter_test.dart";
-import "package:registration_desk/util/test_bench.dart";
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:registration_desk/util/test_bench.dart';
 
-import "form_stepper_example.dart";
+import 'form_stepper_example.dart';
 
 void main() {
-  testWidgets("Should allow to enter text for the first step", (tester) async {
+  testWidgets('Should allow to enter text for the first step', (tester) async {
     var exampleStepper = ExampleStepper();
     await tester.open(exampleStepper);
 
-    await tester.enterText(find.byKey(const ValueKey("firstStepInput")), "John Doe");
+    await tester.enterText(find.byKey(const ValueKey('firstStepInput')), 'John Doe');
     await tester.pump();
 
-    expect(exampleStepper.firstStepInputController.text, equals("John Doe"));
+    expect(exampleStepper.firstStepInputController.text, equals('John Doe'));
   });
 
   testWidgets('Should go to next step', (tester) async {
     await tester.open(ExampleStepper());
-    await tester.enterText(find.byKey(const ValueKey('firstStepInput')), "John Doe");
+    await tester.enterText(find.byKey(const ValueKey('firstStepInput')), 'John Doe');
 
     await goToNextStep(tester);
 
@@ -100,7 +100,7 @@ extension WidgetTesterExtensions on WidgetTester {
   }
 
   void printStringValueKeys() {
-    print("══╡ CURRENT STRING VALUE KEYS ╞═════════════════════════════════════════════════════════════════════");
+    print('══╡ CURRENT STRING VALUE KEYS ╞═════════════════════════════════════════════════════════════════════');
     allWidgets
         .map((widget) => widget.key)
         .whereType<ValueKey>()

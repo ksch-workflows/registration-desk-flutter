@@ -1,9 +1,9 @@
-import "package:registration_desk/util/form_stepper/form_stepper.dart";
-import "package:registration_desk/util/singleton_bucket.dart";
-import "package:test/test.dart";
+import 'package:registration_desk/util/form_stepper/form_stepper.dart';
+import 'package:registration_desk/util/singleton_bucket.dart';
+import 'package:test/test.dart';
 
 void main() {
-  test("Should register dialog model", () {
+  test('Should register dialog model', () {
     var firstRetrieval = SingletonBucket.get(() => ExampleDialogModel())!;
     expect(firstRetrieval, isNotNull);
     firstRetrieval.selectedShoeSize.value = 42;
@@ -11,7 +11,7 @@ void main() {
     expect(secondRetrieval.selectedShoeSize.value, equals(42));
   });
 
-  test("Should reset dialog model", () {
+  test('Should reset dialog model', () {
     var firstRetrieval = SingletonBucket.get(() => ExampleDialogModel())!;
     firstRetrieval.selectedShoeSize.value = 42;
     var secondRetrieval = SingletonBucket.get(() => ExampleDialogModel())!;
@@ -28,6 +28,6 @@ class ExampleDialogModel {
   final selectedShoeSize = FormValue<int>();
 
   ExampleDialogModel() {
-    print("[INFO] Constructor called");
+    print('[INFO] Constructor called');
   }
 }
