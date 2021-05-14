@@ -5,7 +5,7 @@ linter:
     lines_longer_than_80_chars: false
     public_member_api_docs: false
 
-    prefer_double_quotes: true
+    prefer_single_quotes: true
     avoid_classes_with_only_static_members: false
     prefer_const_constructors: true
     prefer_const_constructors_in_immutables: true

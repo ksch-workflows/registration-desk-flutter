@@ -1,16 +1,16 @@
-import "package:flutter/material.dart";
-import "package:flutter/painting.dart";
+import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 
-import "../../routing.dart";
-import "../../scaffold.dart";
-import "../../util/test_bench.dart";
-import "../register_patient/register_patient_page.dart";
+import '../../routing.dart';
+import '../../scaffold.dart';
+import '../../util/test_bench.dart';
+import '../register_patient/register_patient_page.dart';
 
 class RegistrationDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WebScaffold(
-      title: "Dashboard",
+      title: 'Dashboard',
       body: Align(
         alignment: Alignment.topLeft,
         child: Container(
@@ -18,7 +18,7 @@ class RegistrationDashboard extends StatelessWidget {
           child: Wrap(
             alignment: WrapAlignment.start,
             children: const [
-              TileButton(icon: Icons.menu_book, title: "Register patient"),
+              TileButton(icon: Icons.menu_book, title: 'Register patient'),
             ],
           ),
         ),

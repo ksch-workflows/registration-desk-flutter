@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 
 import "../../../util/form_stepper/form_stepper.dart";
 
@@ -10,7 +10,7 @@ class ContactInformationFormStep implements FormStep {
   ContactInformationFormStep({this.locationController});
 
   @override
-  String get title => "Contact information";
+  String get title => 'Contact information';
 
   @override
   Widget get body {

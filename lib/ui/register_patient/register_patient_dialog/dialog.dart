@@ -1,11 +1,11 @@
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 
-import "../../../core/patient/patient.dart";
-import "../../../util/form_stepper/form_stepper.dart";
-import "../../../util/singleton_bucket.dart";
-import "contact_information.dart";
-import "personal_data.dart";
-import "visit_type.dart";
+import '../../../core/patient/patient.dart';
+import '../../../util/form_stepper/form_stepper.dart';
+import '../../../util/singleton_bucket.dart';
+import 'contact_information.dart';
+import 'personal_data.dart';
+import 'visit_type.dart';
 
 class RegisterPatientResult {
   final Patient patient;
