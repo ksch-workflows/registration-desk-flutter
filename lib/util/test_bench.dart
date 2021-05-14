@@ -1,12 +1,15 @@
 import "package:flutter/material.dart";
 
-
 class TestBench extends StatelessWidget {
   final Widget child;
   final bool isFullPage;
   final Size? pageSize;
 
-  const TestBench({required this.child, this.isFullPage = false, this.pageSize}) : assert(child != null);
+  const TestBench({
+    required this.child,
+    this.isFullPage = false,
+    this.pageSize,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +33,7 @@ class TestBench extends StatelessWidget {
             maxHeight: 600,
           ),
           child: Container(
-            decoration: BoxDecoration(
-                border: Border.all(color: Colors.black)
-            ),
+            decoration: BoxDecoration(border: Border.all(color: Colors.black)),
             child: Center(
               child: child,
             ),
