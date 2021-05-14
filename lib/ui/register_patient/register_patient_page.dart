@@ -1,15 +1,15 @@
-import "package:flutter/material.dart";
-import "package:get_it/get_it.dart";
-import 'package:registration_desk/util/test_bench.dart';
+import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 import '../../context.dart';
-import "../../core/patient/patient.dart";
-import "../../core/patient/patient_service.dart";
-import "../../core/visit/visit_service.dart";
-import "../../routing.dart";
-import "../../scaffold.dart";
-import "../dashboard/dashboard.dart";
-import "register_patient_dialog/dialog.dart";
+import '../../core/patient/patient.dart';
+import '../../core/patient/patient_service.dart';
+import '../../core/visit/visit_service.dart';
+import '../../routing.dart';
+import '../../scaffold.dart';
+import '../../util/test_bench.dart';
+import '../dashboard/dashboard.dart';
+import 'register_patient_dialog/dialog.dart';
 
 class RegisterPatientPage extends StatefulWidget {
   @override
@@ -32,7 +32,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
   @override
   Widget build(BuildContext context) {
     return WebScaffold(
-      title: "Register patient",
+      title: 'Register patient',
       body: Column(
         children: [
           _buildActionRow(),
@@ -56,10 +56,10 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
           if (result != null) {
             final createdPatient = patientService!.create(result.patient);
             visitService!.startVisit(createdPatient.id);
-            print("Patient created: ${createdPatient.id}");
+            print('Patient created: ${createdPatient.id}');
           }
         },
-        tooltip: "Add new patient",
+        tooltip: 'Add new patient',
         child: const Icon(Icons.add),
       ),
     );
@@ -70,7 +70,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
       return Container();
     }
     if (matchingPatients!.isEmpty) {
-      return const Text("No patients found.");
+      return const Text('No patients found.');
     }
 
     return Flexible(
@@ -87,16 +87,16 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
                 child: DataTable(
                   columns: const <DataColumn>[
                     DataColumn(
-                      label: Text("OPD No."),
+                      label: Text('OPD No.'),
                     ),
                     DataColumn(
-                      label: Text("Name"),
+                      label: Text('Name'),
                     ),
                     DataColumn(
-                      label: Text("Location"),
+                      label: Text('Location'),
                     ),
                     DataColumn(
-                      label: Text("Last visit"),
+                      label: Text('Last visit'),
                     ),
                   ],
                   rows: _buildTableRows(),
@@ -133,7 +133,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
               controller: searchTermController,
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
-                hintText: "Search patient...",
+                hintText: 'Search patient...',
                 suffixIcon: Container(
                   child: const Icon(Icons.search),
                 ),

@@ -1,6 +1,6 @@
-import "package:uuid/uuid.dart";
+import 'package:uuid/uuid.dart';
 
-import "visit.dart";
+import 'visit.dart';
 
 // ignore: one_member_abstracts
 abstract class VisitService {
@@ -11,7 +11,7 @@ class MockVisitService implements VisitService {
   @override
   Visit startVisit(String? patientId) {
     return Visit(
-      id: Uuid().v4(),
+      id: const Uuid().v4(),
       patientId: patientId,
     );
   }

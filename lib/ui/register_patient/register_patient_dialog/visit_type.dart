@@ -1,7 +1,7 @@
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 
-import "../../../util/form_stepper/form_stepper.dart";
-import "../../../util/test_bench.dart";
+import '../../../util/form_stepper/form_stepper.dart';
+import '../../../util/test_bench.dart';
 
 class VisitTypeFormStep implements FormStep {
   final _formKey = GlobalKey<FormState>();
@@ -10,7 +10,7 @@ class VisitTypeFormStep implements FormStep {
   VisitTypeFormStep({this.visitTypeSelection});
 
   @override
-  String get title => "Visit type";
+  String get title => 'Visit type';
 
   @override
   bool validate() => _formKey.currentState!.validate();
@@ -69,7 +69,7 @@ class _VisitTypeFormStepBodyState extends State<_VisitTypeFormStepBody> {
   InputDecorator _visitTypeSelector() {
     return InputDecorator(
       decoration: InputDecoration(
-        labelText: widget.visitTypeSelection!.value != null ? "Visit type" : null,
+        labelText: widget.visitTypeSelection!.value != null ? 'Visit type' : null,
         border: const OutlineInputBorder(),
         contentPadding: const EdgeInsets.only(left: 10),
       ),
@@ -82,7 +82,7 @@ class _VisitTypeFormStepBodyState extends State<_VisitTypeFormStepBody> {
             iconSize: 24,
             elevation: 16,
             style: const TextStyle(color: Colors.deepPurple),
-            hint: const Text("Please select a visit type..."),
+            hint: const Text('Please select a visit type...'),
             onChanged: _handleVisitTypeSelectionChanged,
             items: _visitTypeOptions(),
             validator: _validateVisitTypeSelection,
@@ -94,14 +94,14 @@ class _VisitTypeFormStepBodyState extends State<_VisitTypeFormStepBody> {
 
   String? _validateVisitTypeSelection(value) {
     if (value == null || value.isEmpty) {
-      return "Please select a visit type";
+      return 'Please select a visit type';
     } else {
       return null;
     }
   }
 
   List<DropdownMenuItem<String>> _visitTypeOptions() {
-    return <String>["OPD", "IPD"].map<DropdownMenuItem<String>>((value) {
+    return <String>['OPD', 'IPD'].map<DropdownMenuItem<String>>((value) {
       return DropdownMenuItem<String>(
         value: value,
         child: Text(value),

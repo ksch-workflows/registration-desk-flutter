@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 
 class IndexBubble extends StatelessWidget {
   final int? index;

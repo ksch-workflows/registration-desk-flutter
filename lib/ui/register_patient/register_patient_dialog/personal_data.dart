@@ -1,6 +1,6 @@
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 
-import "../../../util/form_stepper/form_stepper.dart";
+import '../../../util/form_stepper/form_stepper.dart';
 
 class PersonalDataFormStep implements FormStep {
   final formKey = GlobalKey<FormState>();
@@ -14,7 +14,7 @@ class PersonalDataFormStep implements FormStep {
   });
 
   @override
-  String get title => "Personal data";
+  String get title => 'Personal data';
 
   @override
   Widget get body {
@@ -79,7 +79,7 @@ class _PersonalDataFormState extends State<_PersonalDataForm> {
               labelText: "Patient's name*",
               border: OutlineInputBorder(),
               hintText: "Please enter the patient's name",
-              helperText: "* Required"),
+              helperText: '* Required'),
         ),
         const SizedBox(
           height: 15,

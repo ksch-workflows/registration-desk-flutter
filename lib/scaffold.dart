@@ -1,8 +1,8 @@
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 
-import "routing.dart";
-import "ui/dashboard/dashboard.dart";
-import "util/test_bench.dart";
+import 'routing.dart';
+import 'ui/dashboard/dashboard.dart';
+import 'util/test_bench.dart';
 
 class WebScaffold extends StatelessWidget {
   final String title;
@@ -125,14 +125,14 @@ class _AppBar extends StatelessWidget {
             Icons.settings,
             color: color,
           ),
-          onPressed: () => print("TODO: Open settings dialog"),
+          onPressed: () => print('TODO: Open settings dialog'),
         ),
         IconButton(
           icon: Icon(
             Icons.logout,
             color: color,
           ),
-          onPressed: () => print("TODO: Trigger logout"),
+          onPressed: () => print('TODO: Trigger logout'),
         ),
       ],
     );
@@ -157,10 +157,10 @@ void main() {
   runApp(
     TestBench(
       child: WebScaffold(
-        title: "Hello",
+        title: 'Hello',
         body: Row(
           children: const [
-            Text("Hello, Test Bench!"),
+            Text('Hello, Test Bench!'),
           ],
         ),
       ),

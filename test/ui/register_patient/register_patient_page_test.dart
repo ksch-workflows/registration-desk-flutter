@@ -1,13 +1,13 @@
-import "package:flutter/material.dart";
-import "package:flutter_test/flutter_test.dart";
-import "package:registration_desk/context.dart";
-import "package:registration_desk/util/test_bench.dart";
-import "package:registration_desk/ui/register_patient/register_patient_page.dart";
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:registration_desk/context.dart';
+import 'package:registration_desk/util/test_bench.dart';
+import 'package:registration_desk/ui/register_patient/register_patient_page.dart';
 
 void main() {
   setUpAll(createMockContext);
 
-  testWidgets("Should show search results", (tester) async {
+  testWidgets('Should show search results', (tester) async {
     tester.binding.window.textScaleFactorTestValue = 0.2;
 
     await tester.pumpWidget(TestBench(
@@ -16,13 +16,13 @@ void main() {
     ));
     var patientSearchInputField = find.byType(TextField);
 
-    await tester.enterText(patientSearchInputField, "John");
+    await tester.enterText(patientSearchInputField, 'John');
     await tester.pump();
 
     expect(find.byType(DataTable), findsOneWidget);
   });
 
-  testWidgets("Should not show search result table before the search", (tester) async {
+  testWidgets('Should not show search result table before the search', (tester) async {
     tester.binding.window.textScaleFactorTestValue = 0.2;
 
     await tester.pumpWidget(TestBench(
@@ -33,7 +33,7 @@ void main() {
     expect(find.byType(DataTable), findsNothing);
   });
 
-  testWidgets("Should show message about no search results", (tester) async {
+  testWidgets('Should show message about no search results', (tester) async {
     tester.binding.window.textScaleFactorTestValue = 0.2;
 
     await tester.pumpWidget(TestBench(
@@ -42,9 +42,9 @@ void main() {
     ));
 
     var patientSearchInputField = find.byType(TextField);
-    await tester.enterText(patientSearchInputField, "xxxxxxx");
+    await tester.enterText(patientSearchInputField, 'xxxxxxx');
     await tester.pump();
 
-    expect(find.text("No patients found."), findsOneWidget);
+    expect(find.text('No patients found.'), findsOneWidget);
   });
 }

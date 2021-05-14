@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 
 /// Enables writing tests for widgets which depend upon the MaterialApp widget.
 class TestApp extends StatelessWidget {

@@ -1,14 +1,14 @@
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 
-import "context.dart";
-import "ui/dashboard/dashboard.dart";
+import 'context.dart';
+import 'ui/dashboard/dashboard.dart';
 
 void main() {
   createMockContext();
 
   runApp(
     MaterialApp(
-      title: "Registration",
+      title: 'Registration',
       home: RegistrationDashboard(),
       debugShowCheckedModeBanner: false,
     ),
