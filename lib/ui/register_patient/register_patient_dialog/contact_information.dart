@@ -5,7 +5,7 @@ import "../../../util/form_stepper/form_stepper.dart";
 class ContactInformationFormStep implements FormStep {
   final formKey = GlobalKey<FormState>();
 
-  final TextEditingController locationController;
+  final TextEditingController? locationController;
 
   ContactInformationFormStep({this.locationController});
 
@@ -18,24 +18,24 @@ class ContactInformationFormStep implements FormStep {
   }
 
   @override
-  bool validate() => formKey.currentState.validate();
+  bool validate() => formKey.currentState!.validate();
 }
 
 class _ContactInformationForm extends StatefulWidget {
   const _ContactInformationForm({
-    @required this.formKey,
-    @required this.locationController,
+    required this.formKey,
+    required this.locationController,
   });
 
   final GlobalKey<FormState> formKey;
-  final TextEditingController locationController;
+  final TextEditingController? locationController;
 
   @override
   _ContactInformationFormState createState() => _ContactInformationFormState();
 }
 
 class _ContactInformationFormState extends State<_ContactInformationForm> {
-  FocusNode initialFocus;
+  FocusNode? initialFocus;
 
   @override
   void initState() {
@@ -46,12 +46,12 @@ class _ContactInformationFormState extends State<_ContactInformationForm> {
   @override
   void dispose() {
     super.dispose();
-    initialFocus.dispose();
+    initialFocus!.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    initialFocus.requestFocus();
+    initialFocus!.requestFocus();
     return Form(
       key: widget.formKey,
       child: Column(children: <Widget>[

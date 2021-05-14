@@ -17,12 +17,12 @@ class RegisterPatientPage extends StatefulWidget {
 }
 
 class _RegisterPatientPageState extends State<RegisterPatientPage> {
-  List<Patient> matchingPatients;
+  List<Patient>? matchingPatients;
 
   final ScrollController scrollController = ScrollController();
   final TextEditingController searchTermController = TextEditingController();
-  final PatientService patientService = GetIt.I<PatientService>();
-  final VisitService visitService = GetIt.I<VisitService>();
+  final PatientService? patientService = GetIt.I<PatientService>();
+  final VisitService? visitService = GetIt.I<VisitService>();
 
   @override
   void initState() {
@@ -54,8 +54,8 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
                 );
               });
           if (result != null) {
-            final createdPatient = patientService.create(result.patient);
-            visitService.startVisit(createdPatient.id);
+            final createdPatient = patientService!.create(result.patient);
+            visitService!.startVisit(createdPatient.id);
             print("Patient created: ${createdPatient.id}");
           }
         },
@@ -69,7 +69,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
     if (matchingPatients == null) {
       return Container();
     }
-    if (matchingPatients.isEmpty) {
+    if (matchingPatients!.isEmpty) {
       return const Text("No patients found.");
     }
 
@@ -78,7 +78,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
         children: [
           Expanded(
             child: Scrollbar(
-              isAlwaysShown: matchingPatients.length > 7,
+              isAlwaysShown: matchingPatients!.length > 7,
               thickness: 8,
               controller: scrollController,
               child: SingleChildScrollView(
@@ -110,10 +110,10 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
   }
 
   List<DataRow> _buildTableRows() {
-    return matchingPatients
+    return matchingPatients!
         .map((e) => DataRow(
               cells: [
-                DataCell(Text(e.opdNumber)),
+                DataCell(Text(e.opdNumber!)),
                 DataCell(Text(e.name)),
                 DataCell(Text(e.location)),
                 DataCell(Text(e.lastVisit.toString())),
@@ -144,7 +144,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
                   if (normalizedValue.isEmpty) {
                     matchingPatients = null;
                   } else {
-                    matchingPatients = patientService.find(normalizedValue);
+                    matchingPatients = patientService!.find(normalizedValue);
                   }
                 });
               },

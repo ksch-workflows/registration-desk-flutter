@@ -5,7 +5,7 @@ import "../../../util/test_bench.dart";
 
 class VisitTypeFormStep implements FormStep {
   final _formKey = GlobalKey<FormState>();
-  final FormValue<String> visitTypeSelection;
+  final FormValue<String>? visitTypeSelection;
 
   VisitTypeFormStep({this.visitTypeSelection});
 
@@ -13,7 +13,7 @@ class VisitTypeFormStep implements FormStep {
   String get title => "Visit type";
 
   @override
-  bool validate() => _formKey.currentState.validate();
+  bool validate() => _formKey.currentState!.validate();
 
   @override
   Widget get body => _VisitTypeFormStepBody(
@@ -23,8 +23,8 @@ class VisitTypeFormStep implements FormStep {
 }
 
 class _VisitTypeFormStepBody extends StatefulWidget {
-  final GlobalKey<FormState> formKey;
-  final FormValue<String> visitTypeSelection;
+  final GlobalKey<FormState>? formKey;
+  final FormValue<String>? visitTypeSelection;
 
   const _VisitTypeFormStepBody({this.formKey, this.visitTypeSelection});
 
@@ -33,7 +33,7 @@ class _VisitTypeFormStepBody extends StatefulWidget {
 }
 
 class _VisitTypeFormStepBodyState extends State<_VisitTypeFormStepBody> {
-  FocusNode initialFocus;
+  FocusNode? initialFocus;
 
   @override
   void initState() {
@@ -44,12 +44,12 @@ class _VisitTypeFormStepBodyState extends State<_VisitTypeFormStepBody> {
   @override
   void dispose() {
     super.dispose();
-    initialFocus.dispose();
+    initialFocus!.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    initialFocus.requestFocus();
+    initialFocus!.requestFocus();
     return Form(
       key: widget.formKey,
       child: Column(
@@ -69,14 +69,14 @@ class _VisitTypeFormStepBodyState extends State<_VisitTypeFormStepBody> {
   InputDecorator _visitTypeSelector() {
     return InputDecorator(
       decoration: InputDecoration(
-        labelText: widget.visitTypeSelection.value != null ? "Visit type" : null,
+        labelText: widget.visitTypeSelection!.value != null ? "Visit type" : null,
         border: const OutlineInputBorder(),
         contentPadding: const EdgeInsets.only(left: 10),
       ),
       child: Container(
         child: DropdownButtonHideUnderline(
           child: DropdownButtonFormField<String>(
-            value: widget.visitTypeSelection.value,
+            value: widget.visitTypeSelection!.value,
             focusNode: initialFocus,
             icon: const Icon(Icons.arrow_downward),
             iconSize: 24,
@@ -92,7 +92,7 @@ class _VisitTypeFormStepBodyState extends State<_VisitTypeFormStepBody> {
     );
   }
 
-  String _validateVisitTypeSelection(value) {
+  String? _validateVisitTypeSelection(value) {
     if (value == null || value.isEmpty) {
       return "Please select a visit type";
     } else {
@@ -111,7 +111,7 @@ class _VisitTypeFormStepBodyState extends State<_VisitTypeFormStepBody> {
 
   void _handleVisitTypeSelectionChanged(newValue) {
     setState(() {
-      widget.visitTypeSelection.value = newValue;
+      widget.visitTypeSelection!.value = newValue;
     });
   }
 }

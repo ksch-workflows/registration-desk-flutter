@@ -24,5 +24,5 @@ abstract class FormStepWidget implements Widget {
 /// - https://api.flutter.dev/flutter/material/Switch-class.html
 /// - https://api.flutter.dev/flutter/material/Radio-class.html
 class FormValue<T> {
-  T value;
+  T? value;
 }

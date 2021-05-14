@@ -4,7 +4,7 @@ class SingletonBucket {
   static final Map<String, dynamic> _bucket = {};
 
   /// Returns the existing singleton instance for type <T> or creates a new one with the given creator.
-  static T get<T>(T Function() creator) {
+  static T? get<T>(T Function() creator) {
     return _bucket.putIfAbsent(T.toString(), creator);
   }
   

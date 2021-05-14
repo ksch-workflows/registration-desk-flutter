@@ -16,19 +16,18 @@ class FormStepper extends StatefulWidget {
   final Function onSave;
 
   const FormStepper({
-    @required this.steps,
-    @required this.onCancel,
-    @required this.onSave,
-  })  : assert(steps != null),
-        assert(onCancel != null);
+    required this.steps,
+    required this.onCancel,
+    required this.onSave,
+  });
 
   @override
   _FormStepperState createState() => _FormStepperState();
 }
 
 class _FormStepperState extends State<FormStepper> {
-  int currentIndex;
-  FormStep currentStep;
+  late int currentIndex;
+  late FormStep currentStep;
 
   _FormStepperState({int initialStepIndex = 0}) {
     currentIndex = initialStepIndex;

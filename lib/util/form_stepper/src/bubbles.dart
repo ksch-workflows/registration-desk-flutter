@@ -1,9 +1,9 @@
 import "package:flutter/material.dart";
 
 class IndexBubble extends StatelessWidget {
-  final int index;
-  final Color foregroundColor;
-  final Color backgroundColor;
+  final int? index;
+  final Color? foregroundColor;
+  final Color? backgroundColor;
 
   const IndexBubble({
     this.index,
@@ -22,7 +22,7 @@ class IndexBubble extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
-          (index + 1).toString(),
+          (index! + 1).toString(),
           style: TextStyle(
             color: foregroundColor,
           ),

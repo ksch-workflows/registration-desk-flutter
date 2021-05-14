@@ -31,9 +31,7 @@ class TileButton extends StatelessWidget {
   final IconData icon;
   final String title;
 
-  const TileButton({@required this.icon, @required this.title})
-      : assert(icon != null),
-        assert(title != null);
+  const TileButton({required this.icon, required this.title});
 
   @override
   Widget build(BuildContext context) {

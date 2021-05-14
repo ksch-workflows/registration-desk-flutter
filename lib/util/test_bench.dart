@@ -4,9 +4,9 @@ import "package:flutter/material.dart";
 class TestBench extends StatelessWidget {
   final Widget child;
   final bool isFullPage;
-  final Size pageSize;
+  final Size? pageSize;
 
-  const TestBench({this.child, this.isFullPage = false, this.pageSize}) : assert(child != null);
+  const TestBench({required this.child, this.isFullPage = false, this.pageSize}) : assert(child != null);
 
   @override
   Widget build(BuildContext context) {
