@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../api/patient/patient.dart';
+import '../../api/patient/patient_service.dart';
+import '../../api/visit/visit_service.dart';
 import '../../context.dart';
-import '../../core/patient/patient.dart';
-import '../../core/patient/patient_service.dart';
-import '../../core/visit/visit_service.dart';
 import '../../routing.dart';
-import '../../scaffold.dart';
-import '../../util/test_bench.dart';
+import '../../widgets/test_bench.dart';
+import '../../widgets/scaffold.dart';
 import '../dashboard/dashboard.dart';
 import 'register_patient_dialog/dialog.dart';
 
