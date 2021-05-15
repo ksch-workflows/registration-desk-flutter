@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'context.dart';
-import 'ui/dashboard/dashboard.dart';
+import 'pages/dashboard/dashboard.dart';
 
 void main() {
   createMockContext();

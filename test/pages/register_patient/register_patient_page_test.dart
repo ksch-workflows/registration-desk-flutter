@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:registration_desk/context.dart';
 import 'package:registration_desk/util/test_bench.dart';
-import 'package:registration_desk/ui/register_patient/register_patient_page.dart';
+import 'package:registration_desk/pages/register_patient/register_patient_page.dart';
 
 void main() {
   setUpAll(createMockContext);

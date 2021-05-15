@@ -25,11 +25,31 @@ The Registration Desk app is a single-page web application, powered by [Flutter 
 
 ### Code structure
 
-TBD
+The code is structured by the default 
+
+- `/doc`: Miscellaneous files for the project documentation.
+- `/lib`: Main home of the application's source code.
+  - `/api`: Provides services and data structures for the access of the REST API of the app's backend.
+  - `/l10n`: Files required for the localization of the app. 
+  - `/pages`: Every page of the web app gets a directory here.
+  - `/util`: Non-UI related tools which may be accessed from all other parts of the app.
+  - `/widgets`: UI components which may be access from all pages of the app.
+- `/test`: The code in the `/test` directory reflect the structure of the `/lib` directory.
+- `/web`: HTML scaffold for the generated web page.
+
+### Design principles
+
+> You Can't Write Perfect Software. Did that hurt? It shouldn't. Accept it as an axiom of life. Embrace it. Celebrate it. Because perfect software doesn't exist. No one in the brief history of computing has ever written a piece of perfect software. It's unlikely that you'll be the first. And unless you accept this as a fact, you'll end up wasting time and energy chasing an impossible dream. - [The Pragmatic Programmer](https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/)
+
+However, the project is aimed to provide long-term value for the support of health care workers.
+So, let's try our best to create software which is "good enough" for their needs:
+
+- TDD: Enable a stable code base which supports regular refactoring by test-driven developement.
+- SOLID: Keep the code base clear to understand by the application of the SOLID design principles.
 
 ## Development
 
-For local development the Registration Desk app can be started like this:
+For local development, the Registration Desk app can be started like this:
 
 ```
 flutter run -d chrome
