@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../util/form_stepper/form_stepper.dart';
+import '../../../widgets/form_stepper/form_stepper.dart';
 
 class ContactInformationFormStep implements FormStep {
   final formKey = GlobalKey<FormState>();

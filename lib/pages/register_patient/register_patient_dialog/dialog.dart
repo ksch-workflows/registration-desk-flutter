@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../api/patient/patient.dart';
-import '../../../util/form_stepper/form_stepper.dart';
-import '../../../util/singleton_bucket.dart';
+import '../../../utils/singleton_bucket.dart';
+import '../../../widgets/form_stepper/form_stepper.dart';
 import 'contact_information.dart';
 import 'personal_data.dart';
 import 'visit_type.dart';

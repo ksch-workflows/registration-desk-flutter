@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../pages/dashboard/dashboard.dart';
 import '../routing.dart';
-import '../util/test_bench.dart';
+import 'test_bench.dart';
 
 class WebScaffold extends StatelessWidget {
   final String title;

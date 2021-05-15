@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
 import '../../routing.dart';
+import '../../widgets/test_bench.dart';
 import '../../widgets/scaffold.dart';
-import '../../util/test_bench.dart';
 import '../register_patient/register_patient_page.dart';
 
 class RegistrationDashboard extends StatelessWidget {

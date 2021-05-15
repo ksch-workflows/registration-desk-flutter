@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:registration_desk/util/test_bench.dart';
+import 'package:registration_desk/widgets/test_bench.dart';
 
 import 'form_stepper_example.dart';
 
