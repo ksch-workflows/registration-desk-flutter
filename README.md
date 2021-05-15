@@ -42,7 +42,7 @@ The code is structured by the default
 > You Can't Write Perfect Software. Did that hurt? It shouldn't. Accept it as an axiom of life. Embrace it. Celebrate it. Because perfect software doesn't exist. No one in the brief history of computing has ever written a piece of perfect software. It's unlikely that you'll be the first. And unless you accept this as a fact, you'll end up wasting time and energy chasing an impossible dream. - [The Pragmatic Programmer](https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/)
 
 However, the project is aimed to provide long-term value for the support of health care workers.
-So, let's try our best to create software which is "good enough" for their needs:
+So, let's give our best to create software which is actually "good enough" for their needs:
 
 - TDD: Enable a stable code base which supports regular refactoring by test-driven developement.
 - SOLID: Keep the code base clear to understand by the application of the SOLID design principles.
