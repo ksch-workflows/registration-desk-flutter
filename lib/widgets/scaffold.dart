@@ -75,7 +75,7 @@ class _AppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appBarColor = Theme.of(context).primaryColor;
-    final buttonColor = Theme.of(context).buttonColor;
+    final buttonColor = Colors.grey[350]!;
 
     return Container(
       color: appBarColor,
@@ -90,7 +90,7 @@ class _AppBar extends StatelessWidget {
     );
   }
 
-  IconButton _homeButton(BuildContext context, Color color) {
+  IconButton _homeButton(BuildContext context, Color? color) {
     return IconButton(
       icon: Icon(Icons.home, color: color),
       onPressed: () => Navigator.push(context, WebPageRoute(builder: (context) => RegistrationDashboard())),
