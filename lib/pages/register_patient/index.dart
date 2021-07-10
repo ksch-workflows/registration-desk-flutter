@@ -21,8 +21,8 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
 
   final ScrollController scrollController = ScrollController();
   final TextEditingController searchTermController = TextEditingController();
-  final PatientService? patientService = GetIt.I<PatientService>();
-  final VisitService? visitService = GetIt.I<VisitService>();
+  final PatientService patientService = GetIt.I<PatientService>();
+  final VisitService visitService = GetIt.I<VisitService>();
 
   @override
   void initState() {
@@ -54,8 +54,8 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
                 );
               });
           if (result != null) {
-            final createdPatient = patientService!.create(result.patient);
-            visitService!.startVisit(createdPatient.id);
+            final createdPatient = await patientService.create(result.patient);
+            visitService.startVisit(createdPatient.id);
             print('Patient created: ${createdPatient.id}');
           }
         },
@@ -113,10 +113,10 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
     return matchingPatients!
         .map((e) => DataRow(
               cells: [
-                DataCell(Text(e.opdNumber!)),
-                DataCell(Text(e.name)),
-                DataCell(Text(e.location)),
-                DataCell(Text(e.lastVisit.toString())),
+                DataCell(Text(e.opdNumber ?? 'n/a')),
+                DataCell(Text(e.name ?? 'n/a')),
+                DataCell(Text(e.location ?? 'n/a')),
+                DataCell(Text(e.lastVisit.toString())), // TODO This renders a not-nice value if "lastVisit" is null.
               ],
             ))
         .toList();
@@ -138,14 +138,17 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
                   child: const Icon(Icons.search),
                 ),
               ),
-              onChanged: (value) {
+              onChanged: (value) async {
+                List<Patient>? update;
+                final normalizedValue = value.trim().toLowerCase();
+                if (normalizedValue.isEmpty) {
+                  update = null;
+                } else {
+                  update = await patientService.find(normalizedValue);
+                }
+
                 setState(() {
-                  final normalizedValue = value.trim().toLowerCase();
-                  if (normalizedValue.isEmpty) {
-                    matchingPatients = null;
-                  } else {
-                    matchingPatients = patientService!.find(normalizedValue);
-                  }
+                  matchingPatients = update;
                 });
               },
               autofocus: true,
@@ -156,15 +159,3 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
     );
   }
 }
-
-void main() {
-  createMockContext();
-
-  runApp(
-    TestBench(
-      child: RegisterPatientPage(),
-      isFullPage: true,
-    ),
-  );
-}
-

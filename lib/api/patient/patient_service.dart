@@ -1,3 +1,5 @@
+import 'package:ksch_dart_client/src/client.dart';
+import 'package:ksch_dart_client/src/patients/payload.dart';
 import 'package:uuid/uuid.dart';
 
 import 'patient.dart';
@@ -5,14 +7,66 @@ import 'patient.dart';
 int _nextOptNumberSuffix = 9000;
 
 abstract class PatientService {
-  Patient create(Patient? patient);
-  Patient get(String patientId);
-  List<Patient> find(String patientName);
+  Future<Patient> create(Patient? patient);
+
+  Future<Patient> get(String patientId);
+
+  Future<List<Patient>> find(String query);
+}
+
+// TODO Create unit test
+class PatientServiceImpl implements PatientService {
+  final KschApi _api;
+
+  PatientServiceImpl(String baseUrl) : _api = KschApi(baseUrl);
+
+  @override
+  Future<Patient> create(Patient? patient) async {
+    late PatientResponsePayload response;
+    if (patient == null) {
+      response = await _api.patients.create();
+    } else {
+      response = await _api.patients.create(CreatePatientRequestPayload(
+        name: patient.name,
+        residentialAddress: patient.location,
+      ));
+    }
+    // TODO Make sure that all the values are being mapped.
+    return Patient(
+      id: response.id,
+      name: response.name,
+    );
+  }
+
+  // TODO How to handle multiple pages?
+  @override
+  Future<List<Patient>> find(String query) async {
+    var searchResults = await _api.patients.search(query);
+    // TODO make sure that all the values get mapped. There should be a test which fails if one gets forgotten.
+    return searchResults.patients
+        .map((p) => Patient(
+              id: p.id,
+              name: p.name,
+              location: p.residentialAddress,
+            ))
+        .toList();
+  }
+
+  @override
+  Future<Patient> get(String patientId) async {
+    var response = await _api.patients(patientId).get();
+    // TODO make sure that all the values get mapped. There should be a test which fails if one gets forgotten.
+    return Patient(
+      id: response.id,
+      name: response.name,
+      location: response.residentialAddress,
+    );
+  }
 }
 
 class MockPatientService implements PatientService {
   @override
-  Patient create(Patient? patient) {
+  Future<Patient> create(Patient? patient) {
     final result = Patient(
       id: const Uuid().v4(),
       name: patient!.name,
@@ -20,17 +74,22 @@ class MockPatientService implements PatientService {
       location: patient.location,
     );
     _mockPatientRepository.add(result);
-    return result;
+    return Future.sync(() => result);
   }
 
   @override
-  Patient get(String patientId) {
-    return _mockPatientRepository.where((element) => element.id == patientId).first;
+  Future<Patient> get(String patientId) {
+    var result = _mockPatientRepository.where((element) => element.id == patientId).first;
+    return Future.sync(() => result);
   }
 
   @override
-  List<Patient> find(String patientName) {
-    return _mockPatientRepository.where((patient) => patient.name.toLowerCase().contains(patientName)).toList();
+  Future<List<Patient>> find(String patientName) {
+    var result = _mockPatientRepository
+        .where((patient) => patient.name != null)
+        .where((patient) => patient.name!.toLowerCase().contains(patientName))
+        .toList();
+    return Future.sync(() => result);
   }
 }
 
@@ -173,18 +232,88 @@ final List<Patient> _mockPatientRepository = [
       name: 'Kancanabha Nithin',
       location: 'Academy',
       lastVisit: DateTime.now()),
-  Patient(id: const Uuid().v4().toString(), opdNumber: '10-3001', name: 'Jane Doe', location: 'Academy', lastVisit: DateTime.now()),
-  Patient(id: const Uuid().v4().toString(), opdNumber: '10-3002', name: 'Jane Doe', location: 'Academy', lastVisit: DateTime.now()),
-  Patient(id: const Uuid().v4().toString(), opdNumber: '10-3003', name: 'Jane Doe', location: 'Academy', lastVisit: DateTime.now()),
-  Patient(id: const Uuid().v4().toString(), opdNumber: '10-3004', name: 'Jane Doe', location: 'Academy', lastVisit: DateTime.now()),
-  Patient(id: const Uuid().v4().toString(), opdNumber: '10-3005', name: 'Jane Doe', location: 'Academy', lastVisit: DateTime.now()),
-  Patient(id: const Uuid().v4().toString(), opdNumber: '10-3006', name: 'Jane Doe', location: 'Academy', lastVisit: DateTime.now()),
-  Patient(id: const Uuid().v4().toString(), opdNumber: '10-3007', name: 'Jane Doe', location: 'Academy', lastVisit: DateTime.now()),
-  Patient(id: const Uuid().v4().toString(), opdNumber: '10-3009', name: 'Jane Doe', location: 'Academy', lastVisit: DateTime.now()),
-  Patient(id: const Uuid().v4().toString(), opdNumber: '10-3010', name: 'Jane Doe', location: 'Academy', lastVisit: DateTime.now()),
-  Patient(id: const Uuid().v4().toString(), opdNumber: '10-3011', name: 'Jane Doe', location: 'Academy', lastVisit: DateTime.now()),
-  Patient(id: const Uuid().v4().toString(), opdNumber: '10-3012', name: 'Jane Doe', location: 'Academy', lastVisit: DateTime.now()),
-  Patient(id: const Uuid().v4().toString(), opdNumber: '10-3013', name: 'Jane Doe', location: 'Academy', lastVisit: DateTime.now()),
-  Patient(id: const Uuid().v4().toString(), opdNumber: '10-3014', name: 'Jane Doe', location: 'Academy', lastVisit: DateTime.now()),
-  Patient(id: const Uuid().v4().toString(), opdNumber: '10-3015', name: 'Jane Doe', location: 'Academy', lastVisit: DateTime.now()),
+  Patient(
+      id: const Uuid().v4().toString(),
+      opdNumber: '10-3001',
+      name: 'Jane Doe',
+      location: 'Academy',
+      lastVisit: DateTime.now()),
+  Patient(
+      id: const Uuid().v4().toString(),
+      opdNumber: '10-3002',
+      name: 'Jane Doe',
+      location: 'Academy',
+      lastVisit: DateTime.now()),
+  Patient(
+      id: const Uuid().v4().toString(),
+      opdNumber: '10-3003',
+      name: 'Jane Doe',
+      location: 'Academy',
+      lastVisit: DateTime.now()),
+  Patient(
+      id: const Uuid().v4().toString(),
+      opdNumber: '10-3004',
+      name: 'Jane Doe',
+      location: 'Academy',
+      lastVisit: DateTime.now()),
+  Patient(
+      id: const Uuid().v4().toString(),
+      opdNumber: '10-3005',
+      name: 'Jane Doe',
+      location: 'Academy',
+      lastVisit: DateTime.now()),
+  Patient(
+      id: const Uuid().v4().toString(),
+      opdNumber: '10-3006',
+      name: 'Jane Doe',
+      location: 'Academy',
+      lastVisit: DateTime.now()),
+  Patient(
+      id: const Uuid().v4().toString(),
+      opdNumber: '10-3007',
+      name: 'Jane Doe',
+      location: 'Academy',
+      lastVisit: DateTime.now()),
+  Patient(
+      id: const Uuid().v4().toString(),
+      opdNumber: '10-3009',
+      name: 'Jane Doe',
+      location: 'Academy',
+      lastVisit: DateTime.now()),
+  Patient(
+      id: const Uuid().v4().toString(),
+      opdNumber: '10-3010',
+      name: 'Jane Doe',
+      location: 'Academy',
+      lastVisit: DateTime.now()),
+  Patient(
+      id: const Uuid().v4().toString(),
+      opdNumber: '10-3011',
+      name: 'Jane Doe',
+      location: 'Academy',
+      lastVisit: DateTime.now()),
+  Patient(
+      id: const Uuid().v4().toString(),
+      opdNumber: '10-3012',
+      name: 'Jane Doe',
+      location: 'Academy',
+      lastVisit: DateTime.now()),
+  Patient(
+      id: const Uuid().v4().toString(),
+      opdNumber: '10-3013',
+      name: 'Jane Doe',
+      location: 'Academy',
+      lastVisit: DateTime.now()),
+  Patient(
+      id: const Uuid().v4().toString(),
+      opdNumber: '10-3014',
+      name: 'Jane Doe',
+      location: 'Academy',
+      lastVisit: DateTime.now()),
+  Patient(
+      id: const Uuid().v4().toString(),
+      opdNumber: '10-3015',
+      name: 'Jane Doe',
+      location: 'Academy',
+      lastVisit: DateTime.now()),
 ];
