@@ -26,7 +26,7 @@ class ActionButtons extends StatelessWidget {
         ),
         FocusTraversalOrder(
           order: const NumericFocusOrder(3),
-          child: _cancelButton(),
+          child: _cancelButton(context),
         ),
         const SizedBox(
           width: 20,
@@ -41,34 +41,38 @@ class ActionButtons extends StatelessWidget {
 
   Widget _continueButton(BuildContext context) {
     return Tooltip(
-      message: 'Go to the next step.',
-      child: RaisedButton(
+      message: 'Go to the next step',
+      child: ElevatedButton(
         key: const ValueKey('continueButton'),
-        color: Theme.of(context).accentColor,
         child: Text(
           isLastStep ? 'Save' : 'Continue',
-          style: TextStyle(color: Theme.of(context).colorScheme.onSecondary),
         ),
         onPressed: onContinue as void Function()?,
       ),
     );
   }
 
-  Widget _cancelButton() {
-    return RaisedButton(
+  Widget _cancelButton(BuildContext context) {
+    return ElevatedButton(
       key: const ValueKey('cancelButton'),
-      child: const Text('Cancel'),
+      child: const Text('Cancel', style: TextStyle(color: Colors.black)),
       onPressed: onCancel as void Function()?,
+      style: ElevatedButton.styleFrom(
+        primary: Colors.grey[350],
+      ),
     );
   }
 
   Widget _backButton() {
     return Tooltip(
       message: 'Go back to the previous step.',
-      child: RaisedButton(
+      child: ElevatedButton(
         key: const ValueKey('backButton'),
-        child: const Text('Back'),
+        child: const Text('Back', style: TextStyle(color: Colors.black)),
         onPressed: onBack as void Function()?,
+        style: ElevatedButton.styleFrom(
+          primary: Colors.grey[350],
+        ),
       ),
     );
   }

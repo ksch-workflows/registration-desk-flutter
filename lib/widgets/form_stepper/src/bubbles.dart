@@ -42,7 +42,7 @@ class ActiveIndexBubble extends StatelessWidget {
     return IndexBubble(
       index: index,
       foregroundColor: Theme.of(context).colorScheme.onSecondary,
-      backgroundColor: Theme.of(context).accentColor,
+      backgroundColor: Theme.of(context).colorScheme.secondary,
     );
   }
 }
@@ -56,7 +56,7 @@ class InactiveIndexBubble extends StatelessWidget {
   Widget build(BuildContext context) {
     return IndexBubble(
       index: index,
-      backgroundColor: Theme.of(context).buttonColor,
+      backgroundColor: Colors.grey[350],
       foregroundColor: Theme.of(context).colorScheme.onSurface,
     );
   }
