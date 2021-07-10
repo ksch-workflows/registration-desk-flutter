@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../pages/dashboard/dashboard.dart';
+import '../pages/dashboard/index.dart';
 import '../routing.dart';
 import 'test_bench.dart';
 
