@@ -6,10 +6,10 @@ import '../../api/patient/patient_service.dart';
 import '../../api/visit/visit_service.dart';
 import '../../context.dart';
 import '../../routing.dart';
-import '../../widgets/test_bench.dart';
 import '../../widgets/scaffold.dart';
-import '../dashboard/dashboard.dart';
-import 'register_patient_dialog/dialog.dart';
+import '../../widgets/test_bench.dart';
+import '../dashboard/index.dart';
+import 'register_patient_dialog/index.dart';
 
 class RegisterPatientPage extends StatefulWidget {
   @override

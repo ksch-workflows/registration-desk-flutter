@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
 import '../../routing.dart';
-import '../../widgets/test_bench.dart';
 import '../../widgets/scaffold.dart';
-import '../register_patient/register_patient_page.dart';
+import '../../widgets/test_bench.dart';
+import '../register_patient/index.dart';
 
 class RegistrationDashboard extends StatelessWidget {
   @override
