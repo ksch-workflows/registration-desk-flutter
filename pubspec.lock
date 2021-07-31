@@ -232,11 +232,9 @@ packages:
   ksch_dart_client:
     dependency: "direct main"
     description:
-      path: "."
-      ref: "44bf9fc8de794026911989a3423fbb9c7062013c"
-      resolved-ref: "44bf9fc8de794026911989a3423fbb9c7062013c"
-      url: "https://github.com/ksch-workflows/ksch_dart_client"
-    source: git
+      path: "../ksch_dart_client"
+      relative: true
+    source: path
     version: "0.0.0"
   logging:
     dependency: transitive
@@ -273,6 +271,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  nock:
+    dependency: "direct dev"
+    description:
+      name: nock
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.0"
   node_preamble:
     dependency: transitive
     description:
