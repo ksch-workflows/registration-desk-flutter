@@ -58,7 +58,7 @@ flutter run -d chrome
 
 For demos and quality assurance, the Registration Desk app is deployed on GitHub Pages:
 
-https://ksch-workflows.github.io/registration-desk
+https://ksch-workflows.github.io/registration_desk
 
 This gets automatically updated with every change on the repository with the help of [GitHub Actions](https://dev.to/janux_de/automatically-publish-a-flutter-web-app-on-github-pages-3m1f).
 
