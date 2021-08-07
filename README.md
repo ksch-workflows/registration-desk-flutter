@@ -46,6 +46,16 @@ The code is structured by the default
 
 ## Development
 
+### Getting started
+
+```
+git clone git@github.com:ksch-workflows/registration-desk.git \
+  -o upstream \
+  registration_desk
+```
+
+### Run dev tests
+
 For local development, the Registration Desk app can be started like this:
 
 ```
@@ -58,7 +68,7 @@ flutter run -d chrome
 
 For demos and quality assurance, the Registration Desk app is deployed on GitHub Pages:
 
-https://ksch-workflows.github.io/registration_desk
+https://ksch-workflows.github.io/registration-desk
 
 This gets automatically updated with every change on the repository with the help of [GitHub Actions](https://dev.to/janux_de/automatically-publish-a-flutter-web-app-on-github-pages-3m1f).
 
