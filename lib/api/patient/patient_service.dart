@@ -14,7 +14,6 @@ abstract class PatientService {
   Future<List<Patient>> find(String query);
 }
 
-// TODO Create unit test
 class PatientServiceImpl implements PatientService {
   final KschApi _api;
 

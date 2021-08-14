@@ -1,3 +1,5 @@
+import 'package:ksch_dart_client/ksch_dart_client.dart';
+
 class Patient {
   final String? id;
   final String? opdNumber;
@@ -14,4 +16,12 @@ class Patient {
     this.location,
     this.lastVisit,
   });
+
+  Patient.from(PatientResponsePayload payload)
+      : id = payload.id,
+        opdNumber = null,
+        name = payload.name,
+        fatherName = null,
+        location = payload.residentialAddress,
+        lastVisit = null;
 }

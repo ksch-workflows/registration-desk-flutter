@@ -17,10 +17,10 @@ dependencies:
   test: ^1.16.5
   get_it: ^7.1.3
   ksch_dart_client:
-    path: ../ksch_dart_client
-#    git:
-#      url: https://github.com/ksch-workflows/ksch_dart_client
-#      ref: 44bf9fc8de794026911989a3423fbb9c7062013c
+#    path: ../ksch_dart_client
+    git:
+      url: https://github.com/ksch-workflows/ksch_dart_client
+      ref: a85c7f0cb83087d13e207b1331bcf6f64676e995
 
 dev_dependencies:
   effective_dart: ^1.3.1
