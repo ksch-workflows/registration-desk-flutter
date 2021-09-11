@@ -9,6 +9,7 @@ void main() {
     var response = PatientResponsePayload(
       id: const Uuid().v4(),
       name: 'Jonny Doe',
+      gender: 'MALE',
       residentialAddress: 'Guesthouse',
       links: Links(
         self: Link(href: 'http://localhost'),
@@ -30,6 +31,7 @@ class TestPatient extends Equatable implements Patient {
   final String? id;
   final DateTime? lastVisit;
   final String? location;
+  final String? gender;
   final String? opdNumber;
 
   TestPatient.fromPayload(PatientResponsePayload payload)
@@ -38,6 +40,7 @@ class TestPatient extends Equatable implements Patient {
         id = payload.id,
         lastVisit = null,
         location = payload.residentialAddress,
+        gender = payload.gender,
         opdNumber = null;
 
   TestPatient.fromModel(Patient patient)
@@ -46,6 +49,7 @@ class TestPatient extends Equatable implements Patient {
         id = patient.id,
         lastVisit = patient.lastVisit,
         location = patient.location,
+        gender = patient.gender,
         opdNumber = patient.opdNumber;
 
   @override
@@ -55,6 +59,7 @@ class TestPatient extends Equatable implements Patient {
         id,
         lastVisit,
         location,
+        gender,
         opdNumber,
       ];
 }

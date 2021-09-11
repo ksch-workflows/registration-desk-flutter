@@ -28,7 +28,7 @@ class PatientServiceImpl implements PatientService {
       response = await _api.patients.create(CreatePatientRequestPayload(
         name: patient.name,
         residentialAddress: patient.location,
-        gender: null, // FIXME
+        gender: patient.gender,
       ));
     }
     return Patient.from(response);

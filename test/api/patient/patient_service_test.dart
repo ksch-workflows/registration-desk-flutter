@@ -36,6 +36,9 @@ class MinimalPatientResponse extends PatientResponsePayload {
   MinimalPatientResponse(String id)
       : super(
           id: id,
+          name: null,
+          residentialAddress: null,
+          gender: null,
           links: Links(self: Link(href: 'http://localhost/api/patients/$id')),
         );
 }

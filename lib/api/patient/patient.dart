@@ -6,6 +6,7 @@ class Patient {
   final String? name;
   final String? fatherName;
   final String? location; // TODO Rename to "residentialAddress"
+  final String? gender; // TODO Use enum instead of String
   final DateTime? lastVisit;
 
   Patient({
@@ -14,6 +15,7 @@ class Patient {
     this.name,
     this.fatherName,
     this.location,
+    this.gender,
     this.lastVisit,
   });
 
@@ -23,5 +25,6 @@ class Patient {
         name = payload.name,
         fatherName = null,
         location = payload.residentialAddress,
+        gender = payload.gender,
         lastVisit = null;
 }
