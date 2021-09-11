@@ -38,13 +38,8 @@ class PatientServiceImpl implements PatientService {
   @override
   Future<List<Patient>> find(String query) async {
     var searchResults = await _api.patients.search(query);
-    // TODO make sure that all the values get mapped. There should be a test which fails if one gets forgotten.
     return searchResults.patients
-        .map((p) => Patient(
-              id: p.id,
-              name: p.name,
-              location: p.residentialAddress,
-            ))
+        .map((p) => Patient.from(p))
         .toList();
   }
 
