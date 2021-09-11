@@ -31,11 +31,7 @@ class PatientServiceImpl implements PatientService {
         gender: null, // FIXME
       ));
     }
-    // TODO Make sure that all the values are being mapped.
-    return Patient(
-      id: response.id,
-      name: response.name,
-    );
+    return Patient.from(response);
   }
 
   // TODO How to handle multiple pages?
