@@ -26,7 +26,7 @@ void main() {
 
 class TestPatient extends Equatable implements Patient {
   final String name;
-  final String fatherName;
+  final String? fatherName;
   final String? id;
   final DateTime? lastVisit;
   final String? location;
@@ -34,7 +34,7 @@ class TestPatient extends Equatable implements Patient {
 
   TestPatient.fromPayload(PatientResponsePayload payload)
       : name = payload.name!,
-        fatherName = ,
+        fatherName = null,
         id = payload.id,
         lastVisit = null,
         location = payload.residentialAddress,
@@ -42,7 +42,7 @@ class TestPatient extends Equatable implements Patient {
 
   TestPatient.fromModel(Patient patient)
       : name = patient.name!,
-        fatherName = patient.fatherName!,
+        fatherName = patient.fatherName,
         id = patient.id,
         lastVisit = patient.lastVisit,
         location = patient.location,
