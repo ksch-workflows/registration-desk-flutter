@@ -28,6 +28,7 @@ class PatientServiceImpl implements PatientService {
       response = await _api.patients.create(CreatePatientRequestPayload(
         name: patient.name,
         residentialAddress: patient.location,
+        gender: null, // FIXME
       ));
     }
     // TODO Make sure that all the values are being mapped.
@@ -54,12 +55,7 @@ class PatientServiceImpl implements PatientService {
   @override
   Future<Patient> get(String patientId) async {
     var response = await _api.patients(patientId).get();
-    // TODO make sure that all the values get mapped. There should be a test which fails if one gets forgotten.
-    return Patient(
-      id: response.id,
-      name: response.name,
-      location: response.residentialAddress,
-    );
+    return Patient.from(response);
   }
 }
 

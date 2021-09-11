@@ -1,4 +1,4 @@
-import 'package:ksch_dart_client/ksch_dart_client.dart';
+import 'package:ksch_dart_client/core.dart';
 
 class Patient {
   final String? id;

@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:ksch_dart_client/ksch_dart_client.dart';
+import 'package:ksch_dart_client/core.dart';
 import 'package:registration_desk/api/patient/patient.dart';
 import 'package:test/test.dart';
 import 'package:uuid/uuid.dart';
