@@ -29,6 +29,7 @@ class PatientServiceImpl implements PatientService {
         name: patient.name,
         residentialAddress: patient.location,
         gender: patient.gender,
+        patientCategory: patient.category,
       ));
     }
     return Patient.from(response);

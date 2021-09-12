@@ -11,6 +11,7 @@ void main() {
       name: 'Jonny Doe',
       gender: 'MALE',
       residentialAddress: 'Guesthouse',
+      patientCategory: 'OPD',
       links: Links(
         self: Link(href: 'http://localhost'),
       ),
@@ -33,6 +34,7 @@ class TestPatient extends Equatable implements Patient {
   final String? location;
   final String? gender;
   final String? opdNumber;
+  final String? category;
 
   TestPatient.fromPayload(PatientResponsePayload payload)
       : name = payload.name!,
@@ -41,6 +43,7 @@ class TestPatient extends Equatable implements Patient {
         lastVisit = null,
         location = payload.residentialAddress,
         gender = payload.gender,
+        category = payload.patientCategory,
         opdNumber = null;
 
   TestPatient.fromModel(Patient patient)
@@ -50,6 +53,7 @@ class TestPatient extends Equatable implements Patient {
         lastVisit = patient.lastVisit,
         location = patient.location,
         gender = patient.gender,
+        category = patient.category,
         opdNumber = patient.opdNumber;
 
   @override
@@ -60,6 +64,7 @@ class TestPatient extends Equatable implements Patient {
         lastVisit,
         location,
         gender,
+        category,
         opdNumber,
       ];
 }

@@ -8,6 +8,7 @@ class Patient {
   final String? location; // TODO Rename to "residentialAddress"
   final String? gender; // TODO Use enum instead of String
   final DateTime? lastVisit;
+  final String? category; // TODO Use enum
 
   Patient({
     this.id,
@@ -17,6 +18,7 @@ class Patient {
     this.location,
     this.gender,
     this.lastVisit,
+    this.category,
   });
 
   Patient.from(PatientResponsePayload payload)
@@ -26,5 +28,6 @@ class Patient {
         fatherName = null,
         location = payload.residentialAddress,
         gender = payload.gender,
+        category = payload.patientCategory,
         lastVisit = null;
 }
