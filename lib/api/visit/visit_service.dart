@@ -1,3 +1,4 @@
+import 'package:ksch_dart_client/resources.dart';
 import 'package:ksch_dart_client/src/client.dart';
 
 import 'package:uuid/uuid.dart';
@@ -10,14 +11,20 @@ abstract class VisitService {
 }
 
 class VisitServiceImpl implements VisitService {
-
   final KschApi _api;
 
   VisitServiceImpl(this._api);
 
+  // TODO Make patientId required
+  // TODO Add parameter for visit type
   @override
-  Future<Visit> startVisit(String? patientId) {
-    throw UnimplementedError();
+  Future<Visit> startVisit(String? patientId) async {
+    var response =
+        await _api.patients(patientId!).visits.startVisit(VisitType.OPD);
+    return Visit(
+      id: response.id,
+      patientId: patientId,
+    );
   }
 }
 

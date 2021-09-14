@@ -7,6 +7,7 @@ import 'package:test/test.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../util/request_matcher.dart';
+import '../visit/visit_service_test.dart';
 
 void main() {
   late PatientServiceImpl patientService;
@@ -40,7 +41,8 @@ void main() {
 }
 
 void givenCreatePatientResponse(dynamic body) {
-  nock('http://localhost').post('/api/patients', any())..reply(200, body);
+  nock('http://localhost').post('/api/patients/$uuidPattern/visits', any())
+    ..reply(200, body);
 }
 
 class MinimalPatientResponse extends PatientResponsePayload {
@@ -79,5 +81,3 @@ class JohnDoe implements Patient {
   final String opdNumber = '10-12354';
   final String category = 'OPD';
 }
-
-
