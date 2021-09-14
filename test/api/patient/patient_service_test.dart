@@ -6,7 +6,7 @@ import 'package:registration_desk/api/patient/patient_service.dart';
 import 'package:test/test.dart';
 import 'package:uuid/uuid.dart';
 
-import 'request_matcher.dart';
+import '../../util/request_matcher.dart';
 
 void main() {
   late PatientServiceImpl patientService;
