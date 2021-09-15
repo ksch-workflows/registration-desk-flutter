@@ -7,7 +7,6 @@ import 'package:test/test.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../util/request_matcher.dart';
-import '../visit/visit_service_test.dart';
 
 void main() {
   late PatientServiceImpl patientService;
