@@ -58,7 +58,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
             final createdPatient = await patientService.create(result.patient);
             var visitType = VisitType.values.firstWhere(
                 (e) => e.toString() == 'VisitType.${result.visitType}');
-            visitService.startVisit(createdPatient.id, visitType);
+            visitService.startVisit(createdPatient.id!, visitType);
             print('Patient created: ${createdPatient.id}');
           }
         },

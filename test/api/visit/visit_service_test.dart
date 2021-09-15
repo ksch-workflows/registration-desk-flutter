@@ -1,11 +1,11 @@
+import 'dart:convert';
+
 import 'package:ksch_dart_client/core.dart';
 import 'package:ksch_dart_client/resources.dart';
 import 'package:nock/nock.dart';
 import 'package:registration_desk/api/visit/visit_service.dart';
 import 'package:test/test.dart';
 import 'package:uuid/uuid.dart';
-
-import 'dart:convert';
 
 import '../../util/request_matcher.dart';
 

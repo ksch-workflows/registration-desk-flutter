@@ -7,7 +7,7 @@ import 'visit.dart';
 
 // ignore: one_member_abstracts
 abstract class VisitService {
-  Future<Visit> startVisit(String? patientId, VisitType type);
+  Future<Visit> startVisit(String patientId, VisitType type);
 }
 
 class VisitServiceImpl implements VisitService {
@@ -18,9 +18,9 @@ class VisitServiceImpl implements VisitService {
   // TODO Make patientId required
   // TODO Add parameter for visit type
   @override
-  Future<Visit> startVisit(String? patientId, VisitType type) async {
+  Future<Visit> startVisit(String patientId, VisitType type) async {
     var response =
-        await _api.patients(patientId!).visits.startVisit(VisitType.OPD);
+        await _api.patients(patientId).visits.startVisit(VisitType.OPD);
     return Visit(
       id: response.id,
       patientId: patientId,
