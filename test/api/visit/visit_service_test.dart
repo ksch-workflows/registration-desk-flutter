@@ -40,7 +40,7 @@ void main() {
 
 void givenStartVisitResponse(dynamic body) {
   nock('http://localhost')
-      .post(RegExp(r'^/api/patients/' + uuidPattern + '/visits'), any())
+      .post(RegExp('^/api/patients/$uuidPattern/visits'), any())
     ..reply(201, json.encode(body));
 }
 
