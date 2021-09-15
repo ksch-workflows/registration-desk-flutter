@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:ksch_dart_client/resources.dart';
 
 import '../../api/patient/patient.dart';
 import '../../api/patient/patient_service.dart';
@@ -39,12 +40,14 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
         ],
       ),
       onNavigateBack: () {
-        Navigator.push(context, WebPageRoute(builder: (context) => RegistrationDashboard()));
+        Navigator.push(context,
+            WebPageRoute(builder: (context) => RegistrationDashboard()));
       },
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           searchTermController.clear();
-          final result = await showDialog(
+          // ignore: omit_local_variable_types
+          final RegisterPatientResult? result = await showDialog(
               context: context,
               builder: (context) {
                 return RegisterPatientDialog(
@@ -53,7 +56,9 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
               });
           if (result != null) {
             final createdPatient = await patientService.create(result.patient);
-            visitService.startVisit(createdPatient.id);
+            var visitType = VisitType.values.firstWhere(
+                (e) => e.toString() == 'VisitType.${result.visitType}');
+            visitService.startVisit(createdPatient.id, visitType);
             print('Patient created: ${createdPatient.id}');
           }
         },
@@ -114,7 +119,8 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
                 DataCell(Text(e.opdNumber ?? 'n/a')),
                 DataCell(Text(e.name ?? 'n/a')),
                 DataCell(Text(e.location ?? 'n/a')),
-                DataCell(Text(e.lastVisit.toString())), // TODO This renders a not-nice value if "lastVisit" is null.
+                DataCell(Text(e.lastVisit.toString())),
+                // TODO This renders a not-nice value if "lastVisit" is null.
               ],
             ))
         .toList();
