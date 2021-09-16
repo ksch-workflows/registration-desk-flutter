@@ -15,17 +15,17 @@ class VisitServiceImpl implements VisitService {
 
   VisitServiceImpl(this._api);
 
-  // TODO Make patientId required
-  // TODO Add parameter for visit type
   @override
   Future<Visit> startVisit(String patientId, VisitType type) async {
     var response =
         await _api.patients(patientId).visits.startVisit(VisitType.OPD);
-    return Visit(
+    var result = Visit(
       id: response.id,
       patientId: patientId,
       type: response.type,
     );
+    print("[INFO] Started visit '${result.id}' for patient '$patientId'.");
+    return result;
   }
 }
 
