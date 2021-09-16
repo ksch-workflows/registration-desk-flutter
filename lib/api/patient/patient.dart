@@ -5,10 +5,10 @@ class Patient {
   final String? opdNumber;
   final String? name;
   final String? fatherName;
-  final String? location; // TODO Rename to "residentialAddress"
-  final String? gender; // TODO Use enum instead of String
+  final String? location;
+  final String? gender;
   final DateTime? lastVisit;
-  final String? category; // TODO Use enum
+  final String? category;
 
   Patient({
     this.id,

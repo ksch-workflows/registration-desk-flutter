@@ -35,7 +35,6 @@ class PatientServiceImpl implements PatientService {
     return Patient.from(response);
   }
 
-  // TODO How to handle multiple pages?
   @override
   Future<List<Patient>> find(String query) async {
     var searchResults = await _api.patients.search(query);

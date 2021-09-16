@@ -25,17 +25,23 @@ void main() {
 
   test('Should start visit', () async {
     const expectedVisitType = VisitType.IPD;
-    givenStartVisitResponse(ExampleVisitResponsePayload(visitType: expectedVisitType));
+    final expectedId = const Uuid().v4();
+    const expectedOpdNumber = '10-2342';
+    final expectedTimeStart = DateTime.now();
+
+    givenStartVisitResponse(ExampleVisitResponsePayload(
+      id: expectedId,
+      visitType: expectedVisitType,
+      timeStart: expectedTimeStart,
+      opdNumber: expectedOpdNumber,
+    ));
     var patientId = const Uuid().v4();
 
     var visit = await visitService.startVisit(patientId, expectedVisitType);
 
     expect(visit, isNotNull);
+    expect(visit.id, equals(expectedId));
     expect(visit.type, equals(expectedVisitType));
-
-    // TODO Test that response contains OPD number
-    // TODO Test that response contains resource ID
-    // TODO Test that response contains resource ID
   });
 }
 
@@ -46,11 +52,15 @@ void givenStartVisitResponse(dynamic body) {
 }
 
 class ExampleVisitResponsePayload extends VisitResponsePayload {
-  ExampleVisitResponsePayload({required VisitType visitType})
-      : super(
-          id: const Uuid().v4(),
+  ExampleVisitResponsePayload({
+    required String id,
+    required VisitType visitType,
+    required String opdNumber,
+    required DateTime timeStart,
+  }) : super(
+          id: id,
           type: visitType,
-          opdNumber: '12-1234',
-          timeStart: DateTime.now(),
+          opdNumber: opdNumber,
+          timeStart: timeStart,
         );
 }

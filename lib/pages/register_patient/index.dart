@@ -119,8 +119,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
                 DataCell(Text(e.opdNumber ?? 'n/a')),
                 DataCell(Text(e.name ?? 'n/a')),
                 DataCell(Text(e.location ?? 'n/a')),
-                DataCell(Text(e.lastVisit.toString())),
-                // TODO This renders a not-nice value if "lastVisit" is null.
+                DataCell(Text(e.lastVisit?.toString() ?? 'n/a')),
               ],
             ))
         .toList();
