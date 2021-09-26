@@ -29,14 +29,3 @@ class VisitServiceImpl implements VisitService {
   }
 }
 
-class MockVisitService implements VisitService {
-  @override
-  Future<Visit> startVisit(String? patientId, VisitType type) {
-    var result = Visit(
-      id: const Uuid().v4(),
-      patientId: patientId,
-      type: type,
-    );
-    return Future.sync(() => result);
-  }
-}
