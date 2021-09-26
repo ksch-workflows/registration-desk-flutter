@@ -28,4 +28,3 @@ class VisitServiceImpl implements VisitService {
     return result;
   }
 }
-

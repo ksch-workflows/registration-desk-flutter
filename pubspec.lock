@@ -232,9 +232,11 @@ packages:
   ksch_dart_client:
     dependency: "direct main"
     description:
-      path: "../ksch-dart-client"
-      relative: true
-    source: path
+      path: "."
+      ref: c70f8724f81d01898251c840f2a165fbaf7f5075
+      resolved-ref: c70f8724f81d01898251c840f2a165fbaf7f5075
+      url: "https://github.com/ksch-workflows/ksch-dart-client"
+    source: git
     version: "0.0.0"
   logging:
     dependency: transitive

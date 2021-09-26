@@ -20,7 +20,9 @@ class MockPatientService implements PatientService {
 
   @override
   Future<Patient> get(String patientId) {
-    var result = _mockPatientRepository.where((element) => element.id == patientId).first;
+    var result = _mockPatientRepository
+        .where((element) => element.id == patientId)
+        .first;
     return Future.sync(() => result);
   }
 

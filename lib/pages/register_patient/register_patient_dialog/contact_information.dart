@@ -14,7 +14,10 @@ class ContactInformationFormStep implements FormStep {
 
   @override
   Widget get body {
-    return _ContactInformationForm(formKey: formKey, locationController: locationController);
+    return _ContactInformationForm(
+      formKey: formKey,
+      locationController: locationController,
+    );
   }
 
   @override

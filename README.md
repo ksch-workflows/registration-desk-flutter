@@ -69,6 +69,13 @@ For local development, the Registration Desk app can be started like this:
 flutter run -d chrome
 ```
 
+### Linting
+
+```
+dart format .
+dart analyze
+```
+
 ## Deployment
 
 ### Testing

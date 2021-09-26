@@ -22,7 +22,8 @@ void main() {
     expect(find.byType(DataTable), findsOneWidget);
   });
 
-  testWidgets('Should not show search result table before the search', (tester) async {
+  testWidgets('Should not show search result table before the search',
+      (tester) async {
     tester.binding.window.textScaleFactorTestValue = 0.2;
 
     await tester.pumpWidget(TestBench(
@@ -48,5 +49,3 @@ void main() {
     expect(find.text('No patients found.'), findsOneWidget);
   });
 }
-
-

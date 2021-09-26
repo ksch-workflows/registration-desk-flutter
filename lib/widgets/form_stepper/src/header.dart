@@ -15,7 +15,10 @@ class Header extends StatelessWidget {
       final Widget stepTitleWidget = Row(
         children: [
           i == currentStep ? ActiveIndexBubble(i) : InactiveIndexBubble(i),
-          Text(stepTitles[i], style: i == currentStep ? const TextStyle(fontWeight: FontWeight.bold) : null),
+          Text(stepTitles[i],
+              style: i == currentStep
+                  ? const TextStyle(fontWeight: FontWeight.bold)
+                  : null),
         ],
       );
       stepTitleWidgets.add(stepTitleWidget);

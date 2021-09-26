@@ -59,7 +59,10 @@ class TileButton extends StatelessWidget {
           ),
         ),
         onTap: () {
-          Navigator.push(context, WebPageRoute(builder: (context) => RegisterPatientPage()));
+          Navigator.push(
+            context,
+            WebPageRoute(builder: (context) => RegisterPatientPage()),
+          );
         },
       ),
     );

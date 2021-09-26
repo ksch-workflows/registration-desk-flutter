@@ -93,7 +93,10 @@ class _AppBar extends StatelessWidget {
   IconButton _homeButton(BuildContext context, Color? color) {
     return IconButton(
       icon: Icon(Icons.home, color: color),
-      onPressed: () => Navigator.push(context, WebPageRoute(builder: (context) => RegistrationDashboard())),
+      onPressed: () => Navigator.push(
+        context,
+        WebPageRoute(builder: (context) => RegistrationDashboard()),
+      ),
     );
   }
 
