@@ -46,6 +46,14 @@ The code is structured by the default
 
 ## Development
 
+### Getting started
+
+```
+git clone git@github.com:ksch-workflows/registration-desk.git \
+  -o upstream \
+  registration_desk
+```
+
 ### Start the backend
 
 ```
