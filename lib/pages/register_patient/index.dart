@@ -17,6 +17,7 @@ class RegisterPatientPage extends StatefulWidget {
 
 class _RegisterPatientPageState extends State<RegisterPatientPage> {
   List<Patient>? matchingPatients;
+  bool isWaitingForHttpResponse = false;
 
   final ScrollController scrollController = ScrollController();
   final TextEditingController searchTermController = TextEditingController();
@@ -137,9 +138,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
                 hintText: 'Search patient...',
-                suffixIcon: Container(
-                  child: const Icon(Icons.search),
-                ),
+                suffixIcon: _searchPatientInputSuffixIcon(),
               ),
               onChanged: (value) async {
                 List<Patient>? update;
@@ -147,10 +146,14 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
                 if (normalizedValue.isEmpty) {
                   update = null;
                 } else {
+                  setState(() {
+                    isWaitingForHttpResponse = true;
+                  });
                   update = await patientService.find(normalizedValue);
                 }
 
                 setState(() {
+                  isWaitingForHttpResponse = false;
                   matchingPatients = update;
                 });
               },
@@ -160,5 +163,24 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
         )
       ],
     );
+  }
+
+  Widget _searchPatientInputSuffixIcon() {
+    if (isWaitingForHttpResponse) {
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(
+            maxHeight: 8,
+            maxWidth: 8,
+          ),
+          child: const CircularProgressIndicator(),
+        ),
+      );
+    } else {
+      return Container(
+        child: const Icon(Icons.search),
+      );
+    }
   }
 }
