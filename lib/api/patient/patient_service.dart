@@ -1,5 +1,4 @@
-import 'package:ksch_dart_client/src/client.dart';
-import 'package:ksch_dart_client/src/patients/payload.dart';
+import 'package:ksch_dart_client/core.dart';
 
 import 'patient.dart';
 
