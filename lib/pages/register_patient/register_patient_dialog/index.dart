@@ -36,6 +36,7 @@ class _RegisterPatientDialogModel {
 }
 
 class _RegisterPatientDialogState extends State<RegisterPatientDialog> {
+  // FIXME Dispose is missing
   final _model = SingletonBucket.get(() => _RegisterPatientDialogModel());
 
   late List<FormStep> _steps;

@@ -5,7 +5,7 @@ import 'package:registration_desk/pages/register_patient/index.dart';
 import 'package:registration_desk/widgets/test_bench.dart';
 
 void main() {
-  setUpAll(createMockContext);
+  setUpAll(initialiseMockContext);
 
   testWidgets('Should show search results', (tester) async {
     tester.binding.window.textScaleFactorTestValue = 0.2;
@@ -48,3 +48,5 @@ void main() {
     expect(find.text('No patients found.'), findsOneWidget);
   });
 }
+
+

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:ksch_dart_client/resources.dart';
 
 import '../../api/patient/patient.dart';
 import '../../api/patient/patient_service.dart';
 import '../../api/visit/visit_service.dart';
-import '../../context.dart';
 import '../../routing.dart';
 import '../../widgets/scaffold.dart';
-import '../../widgets/test_bench.dart';
 import '../dashboard/index.dart';
 import 'register_patient_dialog/index.dart';
 
@@ -18,11 +17,12 @@ class RegisterPatientPage extends StatefulWidget {
 
 class _RegisterPatientPageState extends State<RegisterPatientPage> {
   List<Patient>? matchingPatients;
+  bool isWaitingForHttpResponse = false;
 
   final ScrollController scrollController = ScrollController();
   final TextEditingController searchTermController = TextEditingController();
-  final PatientService? patientService = GetIt.I<PatientService>();
-  final VisitService? visitService = GetIt.I<VisitService>();
+  final PatientService patientService = GetIt.I<PatientService>();
+  final VisitService visitService = GetIt.I<VisitService>();
 
   @override
   void initState() {
@@ -41,12 +41,14 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
         ],
       ),
       onNavigateBack: () {
-        Navigator.push(context, WebPageRoute(builder: (context) => RegistrationDashboard()));
+        Navigator.push(context,
+            WebPageRoute(builder: (context) => RegistrationDashboard()));
       },
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           searchTermController.clear();
-          final result = await showDialog(
+          // ignore: omit_local_variable_types
+          final RegisterPatientResult? result = await showDialog(
               context: context,
               builder: (context) {
                 return RegisterPatientDialog(
@@ -54,8 +56,10 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
                 );
               });
           if (result != null) {
-            final createdPatient = patientService!.create(result.patient);
-            visitService!.startVisit(createdPatient.id);
+            final createdPatient = await patientService.create(result.patient);
+            var visitType = VisitType.values.firstWhere(
+                (e) => e.toString() == 'VisitType.${result.visitType}');
+            visitService.startVisit(createdPatient.id!, visitType);
             print('Patient created: ${createdPatient.id}');
           }
         },
@@ -113,10 +117,10 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
     return matchingPatients!
         .map((e) => DataRow(
               cells: [
-                DataCell(Text(e.opdNumber!)),
-                DataCell(Text(e.name)),
-                DataCell(Text(e.location)),
-                DataCell(Text(e.lastVisit.toString())),
+                DataCell(Text(e.opdNumber ?? 'n/a')),
+                DataCell(Text(e.name ?? 'n/a')),
+                DataCell(Text(e.location ?? 'n/a')),
+                DataCell(Text(e.lastVisit?.toString() ?? 'n/a')),
               ],
             ))
         .toList();
@@ -134,18 +138,23 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
                 hintText: 'Search patient...',
-                suffixIcon: Container(
-                  child: const Icon(Icons.search),
-                ),
+                suffixIcon: _searchPatientInputSuffixIcon(),
               ),
-              onChanged: (value) {
+              onChanged: (value) async {
+                List<Patient>? update;
+                final normalizedValue = value.trim().toLowerCase();
+                if (normalizedValue.isEmpty) {
+                  update = null;
+                } else {
+                  setState(() {
+                    isWaitingForHttpResponse = true;
+                  });
+                  update = await patientService.find(normalizedValue);
+                }
+
                 setState(() {
-                  final normalizedValue = value.trim().toLowerCase();
-                  if (normalizedValue.isEmpty) {
-                    matchingPatients = null;
-                  } else {
-                    matchingPatients = patientService!.find(normalizedValue);
-                  }
+                  isWaitingForHttpResponse = false;
+                  matchingPatients = update;
                 });
               },
               autofocus: true,
@@ -155,16 +164,23 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
       ],
     );
   }
+
+  Widget _searchPatientInputSuffixIcon() {
+    if (isWaitingForHttpResponse) {
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(
+            maxHeight: 8,
+            maxWidth: 8,
+          ),
+          child: const CircularProgressIndicator(),
+        ),
+      );
+    } else {
+      return Container(
+        child: const Icon(Icons.search),
+      );
+    }
+  }
 }
-
-void main() {
-  createMockContext();
-
-  runApp(
-    TestBench(
-      child: RegisterPatientPage(),
-      isFullPage: true,
-    ),
-  );
-}
-

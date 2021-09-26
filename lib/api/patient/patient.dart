@@ -1,17 +1,33 @@
+import 'package:ksch_dart_client/core.dart';
+
 class Patient {
   final String? id;
   final String? opdNumber;
-  final String name;
+  final String? name;
   final String? fatherName;
-  final String location;
+  final String? location;
+  final String? gender;
   final DateTime? lastVisit;
+  final String? category;
 
   Patient({
     this.id,
     this.opdNumber,
-    required this.name,
+    this.name,
     this.fatherName,
-    required this.location,
+    this.location,
+    this.gender,
     this.lastVisit,
+    this.category,
   });
+
+  Patient.from(PatientResponsePayload payload)
+      : id = payload.id,
+        opdNumber = null,
+        name = payload.name,
+        fatherName = null,
+        location = payload.residentialAddress,
+        gender = payload.gender,
+        category = payload.patientCategory,
+        lastVisit = null;
 }

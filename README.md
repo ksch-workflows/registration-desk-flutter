@@ -41,7 +41,7 @@ The code is structured by the default
 
 > Clean code always looks like it was written by someone who cares. There is nothing obvious you can do to make it better. - [Michael Feathers](https://cvuorinen.net/2014/04/what-is-clean-code-and-why-should-you-care/)
 
-- TDD: Enable a stable code base which supports regular refactoring by test-driven developement.
+- TDD: Enable a stable code base which supports regular refactoring by test-driven development.
 - SOLID: Keep the code base clear to understand by the application of the SOLID design principles.
 
 ## Development
@@ -54,7 +54,14 @@ git clone git@github.com:ksch-workflows/registration-desk.git \
   registration_desk
 ```
 
-### Run dev tests
+### Start the backend
+
+```
+cd ../backend
+./gradlew bootRun
+```
+
+### Start the app
 
 For local development, the Registration Desk app can be started like this:
 

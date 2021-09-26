@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 
+import 'app.dart';
 import 'context.dart';
-import 'pages/dashboard/index.dart';
 
 void main() {
-  createMockContext();
-
-  runApp(
-    MaterialApp(
-      title: 'Registration',
-      home: RegistrationDashboard(),
-      debugShowCheckedModeBanner: false,
-    ),
+  var apiBaseUrl = const String.fromEnvironment(
+    'apiBaseUrl',
+    defaultValue: 'http://localhost:8080',
   );
+  initialiseContext(apiBaseUrl);
+
+  runApp(RegistrationDeskApp());
 }
