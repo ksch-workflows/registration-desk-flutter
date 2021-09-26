@@ -17,4 +17,5 @@ jobs:
       - run: flutter test
       - uses: bluefireteam/flutter-gh-pages@v7
         with:
-          customArgs: --dart-define="${{ secrets.API_BASE_URL }}"
+          baseHref: /registration-desk/
+          customArgs: --dart-define="apiBaseUrl=${{ secrets.API_BASE_URL }}"
