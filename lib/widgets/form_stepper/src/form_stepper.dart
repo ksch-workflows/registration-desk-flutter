@@ -6,7 +6,6 @@ import 'action_buttons.dart';
 import 'header.dart';
 import 'util.dart';
 
-
 /// References
 /// - https://material.io/archive/guidelines/components/steppers.html#
 /// - https://flutter.dev/docs/cookbook/forms
@@ -90,8 +89,7 @@ class _FormStepperState extends State<FormStepper> {
     }
     if (isLastStep()) {
       widget.onSave();
-    }
-    else {
+    } else {
       setState(() {
         currentIndex++;
         currentStep = widget.steps[currentIndex];

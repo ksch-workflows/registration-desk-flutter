@@ -10,7 +10,10 @@ void main() {
     var exampleStepper = ExampleStepper();
     await tester.open(exampleStepper);
 
-    await tester.enterText(find.byKey(const ValueKey('firstStepInput')), 'John Doe');
+    await tester.enterText(
+      find.byKey(const ValueKey('firstStepInput')),
+      'John Doe',
+    );
     await tester.pump();
 
     expect(exampleStepper.firstStepInputController.text, equals('John Doe'));
@@ -18,7 +21,10 @@ void main() {
 
   testWidgets('Should go to next step', (tester) async {
     await tester.open(ExampleStepper());
-    await tester.enterText(find.byKey(const ValueKey('firstStepInput')), 'John Doe');
+    await tester.enterText(
+      find.byKey(const ValueKey('firstStepInput')),
+      'John Doe',
+    );
 
     await goToNextStep(tester);
 
@@ -27,7 +33,10 @@ void main() {
 
   testWidgets('Should go to previous step', (tester) async {
     await tester.open(ExampleStepper());
-    await tester.enterText(find.byKey(const ValueKey('firstStepInput')), 'John Doe');
+    await tester.enterText(
+      find.byKey(const ValueKey('firstStepInput')),
+      'John Doe',
+    );
     await goToNextStep(tester);
     expectOnSecondPage(tester);
 
@@ -48,16 +57,20 @@ void main() {
     expect(canceledHasBeenCalled, isTrue);
   });
 
-  testWidgets('Should validate form before going to the next step', (tester) async {
+  testWidgets('Should validate form before going to the next step',
+      (tester) async {
     await tester.open(ExampleStepper());
-    await tester.enterText(find.byKey(const ValueKey('firstStepInput')), '');
+    await tester.enterText(
+      find.byKey(const ValueKey('firstStepInput')),
+      '',
+    );
 
     await goToNextStep(tester);
 
-    expect(find.text('The input for the first step is mandatory.'), findsOneWidget);
+    expect(find.text('The input for the first step is mandatory.'),
+        findsOneWidget);
   });
 }
-
 
 Future goToNextStep(WidgetTester tester) async {
   var continueButton = find.byKey(const ValueKey('continueButton'));
@@ -93,14 +106,16 @@ void expectOnSecondPage(WidgetTester tester) {
 
 extension WidgetTesterExtensions on WidgetTester {
   Future open(Widget widgetUnderTest) async {
-    binding.window.textScaleFactorTestValue = 0.2; // Workaround to avoid pixel overflow errors
+    // Workaround to avoid pixel overflow errors
+    binding.window.textScaleFactorTestValue = 0.2;
     return pumpWidget(TestBench(
       child: widgetUnderTest,
     ));
   }
 
   void printStringValueKeys() {
-    print('══╡ CURRENT STRING VALUE KEYS ╞═════════════════════════════════════════════════════════════════════');
+    print(
+        '══╡ CURRENT STRING VALUE KEYS ╞═════════════════════════════════════════════════════════════════════');
     allWidgets
         .map((widget) => widget.key)
         .whereType<ValueKey>()

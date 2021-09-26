@@ -1,7 +1,5 @@
+import 'package:ksch_dart_client/core.dart';
 import 'package:ksch_dart_client/resources.dart';
-import 'package:ksch_dart_client/src/client.dart';
-
-import 'package:uuid/uuid.dart';
 
 import 'visit.dart';
 
@@ -28,4 +26,3 @@ class VisitServiceImpl implements VisitService {
     return result;
   }
 }
-

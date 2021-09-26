@@ -40,8 +40,7 @@ void main() {
 }
 
 void givenCreatePatientResponse(dynamic body) {
-  nock('http://localhost').post('/api/patients', any())
-    ..reply(200, body);
+  nock('http://localhost').post('/api/patients', any())..reply(200, body);
 }
 
 class MinimalPatientResponse extends PatientResponsePayload {

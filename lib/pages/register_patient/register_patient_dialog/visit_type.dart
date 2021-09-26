@@ -69,7 +69,8 @@ class _VisitTypeFormStepBodyState extends State<_VisitTypeFormStepBody> {
   InputDecorator _visitTypeSelector() {
     return InputDecorator(
       decoration: InputDecoration(
-        labelText: widget.visitTypeSelection!.value != null ? 'Visit type' : null,
+        labelText:
+            widget.visitTypeSelection!.value != null ? 'Visit type' : null,
         border: const OutlineInputBorder(),
         contentPadding: const EdgeInsets.only(left: 10),
       ),
@@ -117,7 +118,9 @@ class _VisitTypeFormStepBodyState extends State<_VisitTypeFormStepBody> {
 }
 
 void main() {
-  var contactInformationStep = VisitTypeFormStep(visitTypeSelection: FormValue<String>());
+  var contactInformationStep = VisitTypeFormStep(
+    visitTypeSelection: FormValue<String>(),
+  );
 
   runApp(
     TestBench(

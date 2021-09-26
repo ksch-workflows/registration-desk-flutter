@@ -12,9 +12,12 @@ void main() {
 }
 
 class ExampleStepper extends StatefulWidget {
-  final TextEditingController firstStepInputController = TextEditingController();
-  final TextEditingController secondStepInputController = TextEditingController();
-  final TextEditingController thirdStepInputController = TextEditingController();
+  final TextEditingController firstStepInputController =
+      TextEditingController();
+  final TextEditingController secondStepInputController =
+      TextEditingController();
+  final TextEditingController thirdStepInputController =
+      TextEditingController();
 
   final Function? onCancel;
 
@@ -23,7 +26,6 @@ class ExampleStepper extends StatefulWidget {
   @override
   _ExampleStepperState createState() => _ExampleStepperState();
 }
-
 
 class _ExampleStepperState extends State<ExampleStepper> {
   List<FormStep> steps = [];
