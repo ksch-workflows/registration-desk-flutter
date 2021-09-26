@@ -46,9 +46,9 @@ void main() {
 }
 
 void givenStartVisitResponse(dynamic body) {
-  nock('http://localhost')
-      .post(RegExp('^/api/patients/$uuidPattern/visits'), any())
-    ..reply(201, json.encode(body));
+  nock('https://run.mocky.io')
+      .get('/v3/49c23ebc-c107-4dae-b1c6-5d325b8f8b58')
+    ..reply(200, json.encode('{"id": "49c23ebc-c107-4dae-b1c6-5d325b8f8b58", "name": "Example }'));
 }
 
 class ExampleVisitResponsePayload extends VisitResponsePayload {
