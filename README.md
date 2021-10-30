@@ -25,8 +25,6 @@ The Registration Desk app is a single-page web application, powered by [Flutter 
 
 ### Code structure
 
-The code is structured by the default 
-
 - `/doc`: Miscellaneous files for the project documentation.
 - `/lib`: Main home of the application's source code.
   - `/api`: Provides services and data structures for the access of the REST API of the app's backend.
