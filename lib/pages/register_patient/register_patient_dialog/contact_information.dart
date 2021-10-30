@@ -61,17 +61,10 @@ class _ContactInformationFormState extends State<_ContactInformationForm> {
         TextFormField(
           controller: widget.locationController,
           focusNode: initialFocus,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return "The patient's location is required information.";
-            }
-            return null;
-          },
           decoration: const InputDecoration(
-            labelText: "Patient's location*",
+            labelText: "Patient's location",
             border: OutlineInputBorder(),
             hintText: "Please enter the patient's location",
-            helperText: '* Required',
           ),
         ),
       ]),

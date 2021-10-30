@@ -69,17 +69,11 @@ class _PersonalDataFormState extends State<_PersonalDataForm> {
         TextFormField(
           controller: widget.nameController,
           focusNode: initialFocus,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return "The patient's name is required information.";
-            }
-            return null;
-          },
           decoration: const InputDecoration(
-              labelText: "Patient's name*",
+              labelText: "Patient's name",
               border: OutlineInputBorder(),
               hintText: "Please enter the patient's name",
-              helperText: '* Required'),
+          ),
         ),
         const SizedBox(
           height: 15,
