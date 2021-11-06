@@ -22,7 +22,7 @@ class VisitServiceImpl implements VisitService {
       patientId: patientId,
       type: response.type,
     );
-    print("[INFO] Started visit '${result.id}' for patient '$patientId'.");
+    print("[INFO] Started visit '${result.id}' of type '${type.name}' for patient '$patientId'.");
     return result;
   }
 }

@@ -1,4 +1,6 @@
+
 import 'package:flutter/material.dart';
+import 'package:ksch_dart_client/resources.dart';
 
 import '../../../widgets/form_stepper/form_stepper.dart';
 import '../../../widgets/test_bench.dart';
@@ -13,7 +15,7 @@ class VisitTypeFormStep implements FormStep {
   String get title => 'Visit type';
 
   @override
-  bool validate() => _formKey.currentState!.validate();
+  bool validate() => true;
 
   @override
   Widget get body => _VisitTypeFormStepBody(
@@ -34,11 +36,14 @@ class _VisitTypeFormStepBody extends StatefulWidget {
 
 class _VisitTypeFormStepBodyState extends State<_VisitTypeFormStepBody> {
   FocusNode? initialFocus;
+  late VisitType selectedVisitType;
 
   @override
   void initState() {
     super.initState();
     initialFocus = FocusNode();
+    selectedVisitType = VisitType.EMERGENCY;
+    widget.visitTypeSelection!.value = selectedVisitType.toString();
   }
 
   @override
@@ -47,73 +52,52 @@ class _VisitTypeFormStepBodyState extends State<_VisitTypeFormStepBody> {
     initialFocus!.dispose();
   }
 
+  void setSelectedVisitType(VisitType visitType) {
+    setState(() {
+      selectedVisitType = visitType;
+      widget.visitTypeSelection!.value = visitType.toString();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     initialFocus!.requestFocus();
-    return Form(
-      key: widget.formKey,
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: _visitTypeSelector(),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  InputDecorator _visitTypeSelector() {
-    return InputDecorator(
-      decoration: InputDecoration(
-        labelText:
-            widget.visitTypeSelection!.value != null ? 'Visit type' : null,
-        border: const OutlineInputBorder(),
-        contentPadding: const EdgeInsets.only(left: 10),
-      ),
-      child: Container(
-        child: DropdownButtonHideUnderline(
-          child: DropdownButtonFormField<String>(
-            value: widget.visitTypeSelection!.value,
-            focusNode: initialFocus,
-            icon: const Icon(Icons.arrow_downward),
-            iconSize: 24,
-            elevation: 16,
-            style: const TextStyle(color: Colors.deepPurple),
-            hint: const Text('Please select a visit type...'),
-            onChanged: _handleVisitTypeSelectionChanged,
-            items: _visitTypeOptions(),
-            validator: _validateVisitTypeSelection,
-          ),
+    return Column(
+      children: [
+        RadioListTile<VisitType>(
+          value: VisitType.EMERGENCY,
+          title: const Text('Emergency'),
+          groupValue: selectedVisitType,
+          onChanged: (value) {
+            if (value != null) {
+              setSelectedVisitType(value);
+            }
+          },
         ),
-      ),
+        RadioListTile<VisitType>(
+          value: VisitType.OPD,
+          title: const Text('OPD'),
+          subtitle: const Text('Outpatient department'),
+          groupValue: selectedVisitType,
+          onChanged: (value) {
+            if (value != null) {
+              setSelectedVisitType(value);
+            }
+          },
+        ),
+        RadioListTile<VisitType>(
+          value: VisitType.IPD,
+          title: const Text('IPD'),
+          subtitle: const Text('Inpatient department'),
+          groupValue: selectedVisitType,
+          onChanged: (value) {
+            if (value != null) {
+              setSelectedVisitType(value);
+            }
+          },
+        ),
+      ],
     );
-  }
-
-  String? _validateVisitTypeSelection(value) {
-    if (value == null || value.isEmpty) {
-      return 'Please select a visit type';
-    } else {
-      return null;
-    }
-  }
-
-  List<DropdownMenuItem<String>> _visitTypeOptions() {
-    return <String>['OPD', 'IPD'].map<DropdownMenuItem<String>>((value) {
-      return DropdownMenuItem<String>(
-        value: value,
-        child: Text(value),
-      );
-    }).toList();
-  }
-
-  void _handleVisitTypeSelectionChanged(newValue) {
-    setState(() {
-      widget.visitTypeSelection!.value = newValue;
-    });
   }
 }
 

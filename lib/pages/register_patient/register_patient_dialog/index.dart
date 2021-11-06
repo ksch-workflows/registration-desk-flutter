@@ -86,7 +86,7 @@ class _RegisterPatientDialogState extends State<RegisterPatientDialog> {
       patient: newPatient,
       visitType: _model!.visitTypeSelection.value!,
     );
-
+    // FIXME: This needs to trigger a disposal
     SingletonBucket.reset<_RegisterPatientDialogModel>();
     widget.onDialogClose(result);
   }
