@@ -7,7 +7,7 @@ import '../../../widgets/test_bench.dart';
 
 class VisitTypeFormStep implements FormStep {
   final _formKey = GlobalKey<FormState>();
-  final FormValue<String>? visitTypeSelection;
+  final FormValue<VisitType>? visitTypeSelection;
 
   VisitTypeFormStep({this.visitTypeSelection});
 
@@ -26,7 +26,7 @@ class VisitTypeFormStep implements FormStep {
 
 class _VisitTypeFormStepBody extends StatefulWidget {
   final GlobalKey<FormState>? formKey;
-  final FormValue<String>? visitTypeSelection;
+  final FormValue<VisitType>? visitTypeSelection;
 
   const _VisitTypeFormStepBody({this.formKey, this.visitTypeSelection});
 
@@ -43,7 +43,7 @@ class _VisitTypeFormStepBodyState extends State<_VisitTypeFormStepBody> {
     super.initState();
     initialFocus = FocusNode();
     selectedVisitType = VisitType.EMERGENCY;
-    widget.visitTypeSelection!.value = selectedVisitType.toString();
+    widget.visitTypeSelection!.value = selectedVisitType;
   }
 
   @override
@@ -55,7 +55,7 @@ class _VisitTypeFormStepBodyState extends State<_VisitTypeFormStepBody> {
   void setSelectedVisitType(VisitType visitType) {
     setState(() {
       selectedVisitType = visitType;
-      widget.visitTypeSelection!.value = visitType.toString();
+      widget.visitTypeSelection!.value = visitType;
     });
   }
 
@@ -103,7 +103,7 @@ class _VisitTypeFormStepBodyState extends State<_VisitTypeFormStepBody> {
 
 void main() {
   var contactInformationStep = VisitTypeFormStep(
-    visitTypeSelection: FormValue<String>(),
+    visitTypeSelection: FormValue<VisitType>(),
   );
 
   runApp(

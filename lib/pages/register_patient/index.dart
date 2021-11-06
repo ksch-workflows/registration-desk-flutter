@@ -1,7 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:ksch_dart_client/resources.dart';
 
 import '../../api/patient/patient.dart';
 import '../../api/patient/patient_service.dart';
@@ -51,10 +49,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
           final result = await _showRegisterPatientDialog(context);
           if (result != null) {
             final createdPatient = await patientService.create(result.patient);
-            visitService.startVisit(
-              createdPatient.id!,
-              _parseVisitType(result),
-            );
+            visitService.startVisit(createdPatient.id!, result.visitType);
           }
         },
         tooltip: 'Add new patient',
@@ -117,11 +112,6 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
         ],
       ),
     );
-  }
-
-  VisitType _parseVisitType(RegisterPatientResult result) {
-    return VisitType.values
-        .firstWhere((e) => e.toString() == '${result.visitType}');
   }
 
   List<DataRow> _buildTableRows() {

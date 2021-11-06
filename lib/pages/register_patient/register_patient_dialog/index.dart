@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ksch_dart_client/resources.dart';
 
 import '../../../api/patient/patient.dart';
 import '../../../utils/singleton_bucket.dart';
@@ -9,7 +10,7 @@ import 'visit_type.dart';
 
 class RegisterPatientResult {
   final Patient patient;
-  final String visitType;
+  final VisitType visitType;
 
   RegisterPatientResult({
     required this.patient,
@@ -29,7 +30,7 @@ class RegisterPatientDialog extends StatefulWidget {
 }
 
 class _RegisterPatientDialogModel {
-  final visitTypeSelection = FormValue<String>();
+  final visitTypeSelection = FormValue<VisitType>();
   final nameController = TextEditingController();
   final fatherNameController = TextEditingController();
   final locationController = TextEditingController();
