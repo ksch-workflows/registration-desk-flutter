@@ -28,6 +28,7 @@ class PatientServiceImpl implements PatientService {
         patientCategory: patient.category,
       ));
     }
+    print('Patient created: ${response.id}');
     return Patient.from(response);
   }
 

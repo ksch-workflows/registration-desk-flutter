@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:ksch_dart_client/resources.dart';
 
 import '../../api/patient/patient.dart';
 import '../../api/patient/patient_service.dart';
@@ -47,26 +46,28 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           searchTermController.clear();
-          // ignore: omit_local_variable_types
-          final RegisterPatientResult? result = await showDialog(
-              context: context,
-              builder: (context) {
-                return RegisterPatientDialog(
-                  onDialogClose: (result) => Navigator.pop(context, result),
-                );
-              });
+          final result = await _showRegisterPatientDialog(context);
           if (result != null) {
             final createdPatient = await patientService.create(result.patient);
-            var visitType = VisitType.values.firstWhere(
-                (e) => e.toString() == 'VisitType.${result.visitType}');
-            visitService.startVisit(createdPatient.id!, visitType);
-            print('Patient created: ${createdPatient.id}');
+            visitService.startVisit(createdPatient.id!, result.visitType);
           }
         },
         tooltip: 'Add new patient',
         child: const Icon(Icons.add),
       ),
     );
+  }
+
+  Future<RegisterPatientResult?> _showRegisterPatientDialog(
+    BuildContext context,
+  ) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return RegisterPatientDialog(
+            onDialogClose: (result) => Navigator.pop(context, result),
+          );
+        });
   }
 
   Widget _buildPatientTable() {
