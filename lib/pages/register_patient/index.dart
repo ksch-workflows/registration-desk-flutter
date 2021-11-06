@@ -64,7 +64,8 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
   }
 
   Future<RegisterPatientResult?> _showRegisterPatientDialog(
-      BuildContext context) {
+    BuildContext context,
+  ) {
     return showDialog(
         context: context,
         builder: (context) {
