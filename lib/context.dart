@@ -13,7 +13,7 @@ void initialiseContext(String apiBaseUrl) {
   GetIt.I.registerSingleton<VisitService>(VisitServiceImpl(api));
 }
 
-void initialiseMockContext() {
-  GetIt.I.registerSingleton<PatientService>(MockPatientService());
-  GetIt.I.registerSingleton<VisitService>(MockVisitService());
+void initialiseInMemoryContext() {
+  GetIt.I.registerSingleton<PatientService>(InMemoryPatientService());
+  GetIt.I.registerSingleton<VisitService>(InMemoryVisitService());
 }

@@ -72,6 +72,7 @@ class JohnDoe implements Patient {
   final String fatherName = 'Max Mustermann';
   final String gender = 'MALE';
   final String id = const Uuid().v4();
+  final String? currentVisit = null;
   final DateTime? lastVisit = null;
   final String location = 'Guesthouse';
   final String name = 'John Doe';

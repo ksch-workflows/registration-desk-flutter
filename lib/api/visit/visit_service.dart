@@ -6,6 +6,8 @@ import 'visit.dart';
 // ignore: one_member_abstracts
 abstract class VisitService {
   Future<Visit> startVisit(String patientId, VisitType type);
+
+  Future<Visit> get({required String patientId, required String visitId});
 }
 
 class VisitServiceImpl implements VisitService {
@@ -22,7 +24,22 @@ class VisitServiceImpl implements VisitService {
       patientId: patientId,
       type: response.type,
     );
-    print("[INFO] Started visit '${result.id}' of type '${type.name}' for patient '$patientId'.");
+    print(
+        "[INFO] Started visit '${result.id}' of type '${type.name}' for patient '$patientId'.");
     return result;
+  }
+
+  // TODO This method needs a unit test
+  @override
+  Future<Visit> get({
+    required String patientId,
+    required String visitId,
+  }) async {
+    var response = await _api.patients(patientId).visits(visitId).get();
+    return Visit(
+      id: response.id,
+      patientId: patientId,
+      type: response.type,
+    );
   }
 }

@@ -5,7 +5,7 @@ import '../../widgets/test_bench.dart';
 import 'index.dart';
 
 void main() {
-  initialiseMockContext();
+  initialiseInMemoryContext();
 
   runApp(
     TestBench(

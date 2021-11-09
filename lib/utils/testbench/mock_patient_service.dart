@@ -1,3 +1,4 @@
+import 'package:mocktail/mocktail.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../api/patient/patient.dart';
@@ -5,7 +6,9 @@ import '../../api/patient/patient_service.dart';
 
 int _nextOptNumberSuffix = 9000;
 
-class MockPatientService implements PatientService {
+class MockPatientService extends Mock implements PatientService {}
+
+class InMemoryPatientService implements PatientService {
   @override
   Future<Patient> create(Patient? patient) {
     final result = Patient(
@@ -14,13 +17,13 @@ class MockPatientService implements PatientService {
       opdNumber: '20-${_nextOptNumberSuffix++}',
       location: patient.location,
     );
-    _mockPatientRepository.add(result);
+    _inMemoryPatientRepository.add(result);
     return Future.sync(() => result);
   }
 
   @override
   Future<Patient> get(String patientId) {
-    var result = _mockPatientRepository
+    var result = _inMemoryPatientRepository
         .where((element) => element.id == patientId)
         .first;
     return Future.sync(() => result);
@@ -28,7 +31,7 @@ class MockPatientService implements PatientService {
 
   @override
   Future<List<Patient>> find(String patientName) {
-    var result = _mockPatientRepository
+    var result = _inMemoryPatientRepository
         .where((patient) => patient.name != null)
         .where((patient) => patient.name!.toLowerCase().contains(patientName))
         .toList();
@@ -36,7 +39,7 @@ class MockPatientService implements PatientService {
   }
 }
 
-final List<Patient> _mockPatientRepository = [
+final List<Patient> _inMemoryPatientRepository = [
   Patient(
     id: const Uuid().v4().toString(),
     opdNumber: '10-1102',

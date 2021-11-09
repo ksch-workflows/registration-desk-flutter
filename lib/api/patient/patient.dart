@@ -1,4 +1,5 @@
 import 'package:ksch_dart_client/core.dart';
+import 'package:registration_desk/api/visit/visit.dart';
 
 class Patient {
   final String? id;
@@ -7,6 +8,8 @@ class Patient {
   final String? fatherName;
   final String? location;
   final String? gender;
+  final String? currentVisit;
+  // TODO Probably this should also be just an ID
   final DateTime? lastVisit;
   final String? category;
 
@@ -17,6 +20,7 @@ class Patient {
     this.fatherName,
     this.location,
     this.gender,
+    this.currentVisit,
     this.lastVisit,
     this.category,
   });
@@ -29,5 +33,6 @@ class Patient {
         location = payload.residentialAddress,
         gender = payload.gender,
         category = payload.patientCategory,
+        currentVisit = payload.links.currentVisit?.visitId,
         lastVisit = null;
 }

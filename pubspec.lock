@@ -232,11 +232,9 @@ packages:
   ksch_dart_client:
     dependency: "direct main"
     description:
-      path: "."
-      ref: fa9113927206fc552c31bd2fa49c4879f6c4f8e5
-      resolved-ref: fa9113927206fc552c31bd2fa49c4879f6c4f8e5
-      url: "https://github.com/ksch-workflows/ksch-dart-client"
-    source: git
+      path: "../ksch-dart-client"
+      relative: true
+    source: path
     version: "0.0.0"
   logging:
     dependency: transitive
@@ -266,6 +264,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  mocktail:
+    dependency: "direct main"
+    description:
+      name: mocktail
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
   nested:
     dependency: transitive
     description:

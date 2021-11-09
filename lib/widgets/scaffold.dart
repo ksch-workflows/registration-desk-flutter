@@ -29,6 +29,10 @@ class WebScaffold extends StatelessWidget {
                 title: title,
                 onNavigateBack: onNavigateBack,
               ),
+              Container(
+                color: Colors.grey[200],
+                height: 150,
+              ),
               const SizedBox(
                 height: 50,
               ),
@@ -50,8 +54,8 @@ class WebScaffold extends StatelessWidget {
         ),
         ConstrainedBox(
           constraints: BoxConstraints(
-            maxHeight: constraints.maxHeight - 145,
-            maxWidth: constraints.maxWidth - 200,
+            maxHeight: 500,
+            maxWidth: 1200,
           ),
           child: body,
         ),

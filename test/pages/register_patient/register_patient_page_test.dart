@@ -5,7 +5,7 @@ import 'package:registration_desk/pages/register_patient/index.dart';
 import 'package:registration_desk/widgets/test_bench.dart';
 
 void main() {
-  setUpAll(initialiseMockContext);
+  setUpAll(initialiseInMemoryContext);
 
   testWidgets('Should show search results', (tester) async {
     tester.binding.window.textScaleFactorTestValue = 0.2;
