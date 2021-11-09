@@ -33,6 +33,23 @@ class WebScaffold extends StatelessWidget {
                 color: Colors.grey[200],
                 height: 150,
               ),
+              ConstrainedBox(
+                constraints: BoxConstraints.loose(Size(1200, 50)),
+                child: DefaultTabController(
+                  length: 3,
+                  child: Scaffold(
+                    appBar: AppBar(
+                      bottom: TabBar(
+                        tabs: [
+                          Tab(child: Text('General')),
+                          Tab(child: Text('Visits')),
+                          Tab(child: Text('Billing')),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
               const SizedBox(
                 height: 50,
               ),
