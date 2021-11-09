@@ -32,19 +32,38 @@ class WebScaffold extends StatelessWidget {
               Container(
                 color: Colors.grey[200],
                 height: 150,
-              ),
-              ConstrainedBox(
-                constraints: BoxConstraints.loose(Size(1200, 50)),
-                child: DefaultTabController(
-                  length: 3,
-                  child: Scaffold(
-                    appBar: AppBar(
-                      bottom: TabBar(
-                        tabs: [
-                          Tab(child: Text('General')),
-                          Tab(child: Text('Visits')),
-                          Tab(child: Text('Billing')),
-                        ],
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(100, 0, 0, 0),
+                  child: Align(
+                    alignment: Alignment.bottomLeft,
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints.loose(Size(1200, 50)),
+                      child: DefaultTabController(
+                        length: 3,
+                        child: TabBar(
+                          // indicatorColor: Colors.red,
+                          isScrollable: true,
+                          tabs: [
+                            Tab(
+                              child: Text(
+                                'General',
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                            Tab(
+                              child: Text(
+                                'Visits',
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                            Tab(
+                              child: Text(
+                                'Billing',
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
