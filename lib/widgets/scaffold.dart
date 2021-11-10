@@ -32,41 +32,47 @@ class WebScaffold extends StatelessWidget {
               Container(
                 color: Colors.grey[200],
                 height: 150,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(100, 0, 0, 0),
-                  child: Align(
-                    alignment: Alignment.bottomLeft,
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints.loose(Size(1200, 50)),
-                      child: DefaultTabController(
-                        length: 3,
-                        child: TabBar(
-                          // indicatorColor: Colors.red,
-                          isScrollable: true,
-                          tabs: [
-                            Tab(
-                              child: Text(
-                                'General',
-                                style: TextStyle(color: Colors.black),
-                              ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    PatientSummary(),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(100, 0, 0, 0),
+                      child: Align(
+                        alignment: Alignment.bottomLeft,
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints.loose(Size(1200, 50)),
+                          child: DefaultTabController(
+                            length: 3,
+                            child: TabBar(
+                              // indicatorColor: Colors.red,
+                              isScrollable: true,
+                              tabs: [
+                                Tab(
+                                  child: Text(
+                                    'General',
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                ),
+                                Tab(
+                                  child: Text(
+                                    'Visits',
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                ),
+                                Tab(
+                                  child: Text(
+                                    'Billing',
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                ),
+                              ],
                             ),
-                            Tab(
-                              child: Text(
-                                'Visits',
-                                style: TextStyle(color: Colors.black),
-                              ),
-                            ),
-                            Tab(
-                              child: Text(
-                                'Billing',
-                                style: TextStyle(color: Colors.black),
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ),
               const SizedBox(
@@ -99,6 +105,32 @@ class WebScaffold extends StatelessWidget {
           width: 100,
         ),
       ],
+    );
+  }
+}
+
+class PatientSummary extends StatelessWidget {
+  const PatientSummary({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(100, 20, 100, 20),
+      child: Align(
+        alignment: Alignment.topLeft,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'unknown',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
