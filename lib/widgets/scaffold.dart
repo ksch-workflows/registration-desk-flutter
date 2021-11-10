@@ -7,12 +7,14 @@ import 'test_bench.dart';
 class WebScaffold extends StatelessWidget {
   final String title;
   final Widget body;
+  final Widget? summary;
   final Widget? floatingActionButton;
   final Function? onNavigateBack;
 
   const WebScaffold({
     required this.title,
     required this.body,
+    this.summary,
     this.onNavigateBack,
     this.floatingActionButton,
   });
