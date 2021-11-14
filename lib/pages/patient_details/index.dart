@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:registration_desk/pages/patient_details/patient_resource_bloc/patient_resource_bloc.dart';
 import 'package:registration_desk/widgets/patient_summary_panel/patient_summary_panel.dart';
 
 import '../../api/patient/patient.dart';
@@ -10,8 +12,8 @@ import '../../routing.dart';
 import '../../widgets/scaffold.dart';
 import '../dashboard/index.dart';
 
-final _patientService = GetIt.I.get<PatientService>();
-final _visitService = GetIt.I.get<VisitService>();
+final PatientService _patientService = GetIt.I.get();
+final VisitService _visitService = GetIt.I.get();
 
 class PatientDetailsPage extends StatefulWidget {
   final String patientId;
@@ -22,26 +24,11 @@ class PatientDetailsPage extends StatefulWidget {
   State<PatientDetailsPage> createState() => _PatientDetailsPageState();
 }
 
+// TODO: Now that BloC is used, this widget doesn't need a state
 class _PatientDetailsPageState extends State<PatientDetailsPage> {
-  late Future<PatientDetailsModel> model;
-
   @override
   void initState() {
-    model = getPatientDetails();
     super.initState();
-  }
-
-  Future<PatientDetailsModel> getPatientDetails() async {
-    print("Start");
-    var patient = await _patientService.get(widget.patientId);
-    var currentVisit = patient.currentVisit;
-    Visit? visit;
-    if (currentVisit != null) {
-      visit = await _visitService.get(
-          patientId: patient.id!, visitId: currentVisit);
-    }
-    print("End");
-    return PatientDetailsModel(patient: patient, visit: visit);
   }
 
   @override
@@ -54,29 +41,24 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
           WebPageRoute(builder: (context) => RegistrationDashboard()),
         );
       },
-      body: FutureBuilder(
-          future: model,
-          builder: (context, AsyncSnapshot<PatientDetailsModel> snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
+      body: BlocProvider(
+        create: (context) => PatientResourceBloc(
+          patientId: widget.patientId,
+          patientService: _patientService,
+          visitService: _visitService,
+        ),
+        child: BlocBuilder<PatientResourceBloc, PatientState>(
+          builder: (context, state) {
+            if (state is LoadingPatient) {
+              return Text("Loading");
             }
-
-            if (snapshot.connectionState == ConnectionState.done) {
-              return Column();
+            if (state is DisplayingPatient) {
+              return Text("Displaying patient");
             }
-
-            return const Text('An error occurred.');
-          }),
+            return const Text('An error occurred');
+          },
+        ),
+      ),
     );
   }
-}
-
-class PatientDetailsModel {
-  final Patient patient;
-  final Visit? visit;
-
-  PatientDetailsModel({
-    required this.patient,
-    this.visit,
-  });
 }
