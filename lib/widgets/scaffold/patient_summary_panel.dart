@@ -86,7 +86,10 @@ class _DetailsPageState extends State<DetailsPage>
         ),
         BlocBuilder<TabSelectionBloc, int>(
           builder: (context, state) {
-            return widget.tabs[state].child;
+            return Align(
+              alignment: Alignment.bottomRight,
+              child: widget.tabs[state].child,
+            );
           },
         ),
       ],
