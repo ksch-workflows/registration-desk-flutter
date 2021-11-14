@@ -44,42 +44,47 @@ class _DetailsPageState extends State<DetailsPage>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.grey[200],
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          PatientSummary(),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(100, 0, 0, 0),
-            child: Align(
-              alignment: Alignment.bottomLeft,
-              child: ConstrainedBox(
-                constraints: BoxConstraints.loose(Size(1200, 50)),
-                child: TabBar(
-                  controller: tabController,
-                  // indicatorColor: Colors.red,
-                  isScrollable: true,
-                  tabs: [
-                    Tab(
-                      child: Text(
-                        'General',
-                        style: TextStyle(color: Colors.black),
-                      ),
+    return Column(
+      children: [
+        Container(
+          color: Colors.grey[200],
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              PatientSummary(),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(100, 0, 0, 0),
+                child: Align(
+                  alignment: Alignment.bottomLeft,
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints.loose(Size(1200, 50)),
+                    child: TabBar(
+                      controller: tabController,
+                      // indicatorColor: Colors.red,
+                      isScrollable: true,
+                      tabs: [
+                        Tab(
+                          child: Text(
+                            'General',
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ),
+                        Tab(
+                          child: Text(
+                            'Visits',
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ),
+                      ],
                     ),
-                    Tab(
-                      child: Text(
-                        'Visits',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
+        ),
+        Text("Placeholder for content"),
+      ],
     );
   }
 
