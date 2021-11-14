@@ -6,13 +6,11 @@ class DetailsPage extends StatefulWidget {
   final Patient patient;
   final TabSelectionBloc tabSelectionBloc;
   final List<SummaryPanelTab> tabs;
-  final int initialTab;
 
   const DetailsPage({
     required this.patient,
     required this.tabs,
     required this.tabSelectionBloc,
-    this.initialTab = 0,
     Key? key,
   }) : super(key: key);
 
@@ -30,9 +28,10 @@ class _DetailsPageState extends State<DetailsPage>
     tabController = TabController(
       length: widget.tabs.length,
       vsync: this,
-      initialIndex: widget.initialTab,
+      initialIndex: widget.tabSelectionBloc.state,
     );
-    selectedTab = widget.initialTab;
+    tabController.addListener(_triggerTabSelectionEvent);
+    selectedTab = widget.tabSelectionBloc.state;
     _triggerTabSelectionEvent();
     super.initState();
   }
@@ -47,7 +46,6 @@ class _DetailsPageState extends State<DetailsPage>
   Widget build(BuildContext context) {
     return Container(
       color: Colors.grey[200],
-      height: 150,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -58,46 +56,35 @@ class _DetailsPageState extends State<DetailsPage>
               alignment: Alignment.bottomLeft,
               child: ConstrainedBox(
                 constraints: BoxConstraints.loose(Size(1200, 50)),
-                child: DefaultTabController(
-                  length: 3,
-                  child: TabBar(
-                    // indicatorColor: Colors.red,
-                    isScrollable: true,
-                    tabs: [
-                      Tab(
-                        child: Text(
-                          'General',
-                          style: TextStyle(color: Colors.black),
-                        ),
+                child: TabBar(
+                  controller: tabController,
+                  // indicatorColor: Colors.red,
+                  isScrollable: true,
+                  tabs: [
+                    Tab(
+                      child: Text(
+                        'General',
+                        style: TextStyle(color: Colors.black),
                       ),
-                      Tab(
-                        child: Text(
-                          'Visits',
-                          style: TextStyle(color: Colors.black),
-                        ),
+                    ),
+                    Tab(
+                      child: Text(
+                        'Visits',
+                        style: TextStyle(color: Colors.black),
                       ),
-                      Tab(
-                        child: Text(
-                          'Billing',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
           ),
-          const SizedBox(
-            height: 50,
-          )
         ],
       ),
     );
   }
 
   void _triggerTabSelectionEvent() {
-    widget.tabSelectionBloc.add(TabSelectionChanged(selectedTab));
+    widget.tabSelectionBloc.add(TabSelectionChanged(tabController.index));
   }
 }
 

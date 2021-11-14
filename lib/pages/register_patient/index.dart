@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:registration_desk/widgets/scaffold/scaffold2.dart';
 
 import '../../api/patient/patient.dart';
 import '../../api/patient/patient_service.dart';
 import '../../api/visit/visit_service.dart';
 import '../../routing.dart';
-import '../../widgets/scaffold.dart';
+import '../../widgets/scaffold/scaffold.dart';
 import '../dashboard/index.dart';
 import 'register_patient_dialog/index.dart';
 
@@ -59,8 +60,8 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
   }
 
   Future<RegisterPatientResult?> _showRegisterPatientDialog(
-    BuildContext context,
-  ) {
+      BuildContext context,
+      ) {
     return showDialog(
         context: context,
         builder: (context) {
@@ -117,13 +118,13 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
   List<DataRow> _buildTableRows() {
     return matchingPatients!
         .map((e) => DataRow(
-              cells: [
-                DataCell(Text(e.opdNumber ?? 'n/a')),
-                DataCell(Text(e.name ?? 'n/a')),
-                DataCell(Text(e.location ?? 'n/a')),
-                DataCell(Text(e.lastVisit?.toString() ?? 'n/a')),
-              ],
-            ))
+      cells: [
+        DataCell(Text(e.opdNumber ?? 'n/a')),
+        DataCell(Text(e.name ?? 'n/a')),
+        DataCell(Text(e.location ?? 'n/a')),
+        DataCell(Text(e.lastVisit?.toString() ?? 'n/a')),
+      ],
+    ))
         .toList();
   }
 

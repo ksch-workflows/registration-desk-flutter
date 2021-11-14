@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../routing.dart';
-import '../../widgets/scaffold.dart';
+import '../../widgets/scaffold/scaffold.dart';
 import '../../widgets/test_bench.dart';
 import '../register_patient/index.dart';
 

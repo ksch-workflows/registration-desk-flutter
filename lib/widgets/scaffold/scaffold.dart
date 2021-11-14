@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 
-import '../pages/dashboard/index.dart';
-import '../routing.dart';
-import 'test_bench.dart';
+import '../../pages/dashboard/index.dart';
+import '../../routing.dart';
+import '../test_bench.dart';
 
 class WebScaffold extends StatelessWidget {
   final String title;
   final Widget body;
-  final Widget? summary;
   final Widget? floatingActionButton;
   final Function? onNavigateBack;
 
   const WebScaffold({
     required this.title,
     required this.body,
-    this.summary,
     this.onNavigateBack,
     this.floatingActionButton,
   });
@@ -30,6 +28,9 @@ class WebScaffold extends StatelessWidget {
               _AppBar(
                 title: title,
                 onNavigateBack: onNavigateBack,
+              ),
+              const SizedBox(
+                height: 50,
               ),
               _buildBodyWrapper(constraints)
             ],
@@ -49,8 +50,8 @@ class WebScaffold extends StatelessWidget {
         ),
         ConstrainedBox(
           constraints: BoxConstraints(
-            maxHeight: 500,
-            maxWidth: 1200,
+            maxHeight: constraints.maxHeight - 145,
+            maxWidth: constraints.maxWidth - 200,
           ),
           child: body,
         ),
@@ -58,32 +59,6 @@ class WebScaffold extends StatelessWidget {
           width: 100,
         ),
       ],
-    );
-  }
-}
-
-class PatientSummary extends StatelessWidget {
-  const PatientSummary({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(100, 20, 100, 20),
-      child: Align(
-        alignment: Alignment.topLeft,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'unknown',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 25,
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
