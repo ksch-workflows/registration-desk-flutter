@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:registration_desk/widgets/patient_summary_panel/patient_summary_panel.dart';
 
 import '../../api/patient/patient.dart';
 import '../../api/patient/patient_service.dart';
@@ -55,124 +56,13 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
       },
       body: FutureBuilder(
           future: model,
-          builder: (
-            BuildContext context,
-            AsyncSnapshot<PatientDetailsModel> snapshot,
-          ) {
+          builder: (context, AsyncSnapshot<PatientDetailsModel> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
             }
 
             if (snapshot.connectionState == ConnectionState.done) {
-              return Column(
-                children: [
-                  Card(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const ListTile(
-                          leading: const Icon(Icons.perm_identity),
-                          title: Text('Identity'),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(25, 0, 40, 10),
-                          child: Column(
-                            children: [
-                              Column(
-                                children: [
-                                  TextFormField(
-                                    // controller: widget.nameController,
-                                    // focusNode: initialFocus,
-                                    decoration: const InputDecoration(
-                                      labelText: "Patient's name",
-                                      border: OutlineInputBorder(),
-                                      hintText: "Please enter the patient's name",
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 15,
-                                  ),
-                                  TextFormField(
-                                    // controller: widget.fatherNameController,
-                                    decoration: const InputDecoration(
-                                      labelText: "Father's name",
-                                      border: OutlineInputBorder(),
-                                      hintText: "Please enter the patient father's name, if applicable",
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-                            ],
-
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                TextButton(
-                                  onPressed: () => {},
-                                  child: Text('CAPTURE PHOTOGRAPH'),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                IconButton(
-                                  icon: const Icon(Icons.edit),
-                                  onPressed: () {},
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Card(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const ListTile(
-                          leading: const Icon(Icons.event_note),
-                          title: Text('Current visit'),
-                        ),
-                        Text(
-                            'Patient has been admitted on XX-XX-XXXX with visit type XXX.'),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                TextButton(
-                                  onPressed: () => {},
-                                  child: Text('PRINT REGISTRATION CARD'),
-                                ),
-                                SizedBox(width: 15),
-                                TextButton(
-                                  onPressed: () => {},
-                                  child: Text('DISCHARGE'),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                IconButton(
-                                  icon: const Icon(Icons.edit),
-                                  onPressed: () {},
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              );
+              return Column();
             }
 
             return const Text('An error occurred.');
