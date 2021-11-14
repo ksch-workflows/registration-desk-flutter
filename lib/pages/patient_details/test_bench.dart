@@ -8,8 +8,8 @@ import '../../api/patient/patient.dart';
 import '../../api/patient/patient_service.dart';
 import '../../api/visit/visit.dart';
 import '../../api/visit/visit_service.dart';
-import '../../utils/testbench/mock_patient_service.dart';
-import '../../utils/testbench/mock_visit_service.dart';
+import '../../utils/test_bench/mock_patient_service.dart';
+import '../../utils/test_bench/mock_visit_service.dart';
 import '../../widgets/test_bench.dart';
 import 'index.dart';
 

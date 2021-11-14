@@ -74,6 +74,26 @@ dart format .
 dart analyze
 ```
 
+### Enable desktop supporting
+
+During development it might be useful to start the app in desktop mode, so that hot reload can be used.
+To enable this, you need to enable desktop support in your global Flutter configuration.
+
+See https://flutter.dev/desktop
+
+**macOS**
+
+```shell
+$ flutter config --enable-macos-desktop
+```
+
+**Ubuntu**
+
+```shell
+$ sudo apt-get install clang cmake ninja-build pkg-config libgtk-3-dev
+$ flutter config --enable-linux-desktop
+```
+
 ## Deployment
 
 ### Testing
