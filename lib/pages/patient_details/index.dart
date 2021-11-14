@@ -52,13 +52,13 @@ class PatientDetailsPage extends StatelessWidget {
                 tabs: [
                   SummaryPanelTab(
                     title: 'General',
-                    content: Container(
+                    child: Container(
                       child: Text('Placeholder for general content.'),
                     ),
                   ),
                   SummaryPanelTab(
                     title: 'Visits',
-                    content: Container(
+                    child: Container(
                       child: Text('Placeholder for visits content.'),
                     ),
                   ),

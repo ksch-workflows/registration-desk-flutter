@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:registration_desk/api/patient/patient.dart';
 import 'package:registration_desk/widgets/tab_selection_bloc/tab_selection_bloc.dart';
 
@@ -83,7 +84,11 @@ class _DetailsPageState extends State<DetailsPage>
             ],
           ),
         ),
-        Text("Placeholder for content"),
+        BlocBuilder<TabSelectionBloc, int>(
+          builder: (context, state) {
+            return widget.tabs[state].child;
+          },
+        ),
       ],
     );
   }
@@ -95,11 +100,11 @@ class _DetailsPageState extends State<DetailsPage>
 
 class SummaryPanelTab {
   final String title;
-  final Widget content;
+  final Widget child;
 
   const SummaryPanelTab({
     required this.title,
-    required this.content,
+    required this.child,
   });
 }
 
