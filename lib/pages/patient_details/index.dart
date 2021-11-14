@@ -39,7 +39,7 @@ class PatientDetailsPage extends StatelessWidget {
         child: BlocBuilder<PatientResourceBloc, PatientState>(
           builder: (context, state) {
             if (state is LoadingPatient) {
-              return Text("Loading");
+              return const Center(child: CircularProgressIndicator(),);
             }
             if (state is DisplayingPatient) {
               return Text("Displaying patient");
