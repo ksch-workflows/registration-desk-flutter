@@ -23,6 +23,7 @@ class _DetailsPageState extends State<DetailsPage>
     with SingleTickerProviderStateMixin {
   late int selectedTab;
   late TabController tabController;
+  final ScrollController scrollController = ScrollController();
 
   @override
   void initState() {
@@ -31,9 +32,15 @@ class _DetailsPageState extends State<DetailsPage>
       vsync: this,
       initialIndex: widget.tabSelectionBloc.state,
     );
-    tabController.addListener(_triggerTabSelectionEvent);
+    tabController.addListener(() {
+      triggerTabSelectionEvent();
+      setState(() {
+        scrollController.jumpTo(0);
+      });
+
+    });
     selectedTab = widget.tabSelectionBloc.state;
-    _triggerTabSelectionEvent();
+    triggerTabSelectionEvent();
     super.initState();
   }
 
@@ -90,9 +97,18 @@ class _DetailsPageState extends State<DetailsPage>
               color: Colors.red,
               child: BlocBuilder<TabSelectionBloc, int>(
                 builder: (context, state) {
-                  return Align(
-                    alignment: Alignment.bottomRight,
-                    child: widget.tabs[state].child,
+                  return Scrollbar(
+                    isAlwaysShown: false,
+                    controller: scrollController,
+                    child: ListView.builder(
+                        controller: scrollController,
+                        itemCount: 100,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text('Scrollable 1 : Index $index'),
+                          );
+                        }),
                   );
                 },
               ),
@@ -103,7 +119,7 @@ class _DetailsPageState extends State<DetailsPage>
     );
   }
 
-  void _triggerTabSelectionEvent() {
+  void triggerTabSelectionEvent() {
     widget.tabSelectionBloc.add(TabSelectionChanged(tabController.index));
   }
 }
