@@ -37,7 +37,6 @@ class _DetailsPageState extends State<DetailsPage>
       setState(() {
         scrollController.jumpTo(0);
       });
-
     });
     selectedTab = widget.tabSelectionBloc.state;
     triggerTabSelectionEvent();
@@ -71,20 +70,14 @@ class _DetailsPageState extends State<DetailsPage>
                         controller: tabController,
                         // indicatorColor: Colors.red,
                         isScrollable: true,
-                        tabs: [
-                          Tab(
-                            child: Text(
-                              'General',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ),
-                          Tab(
-                            child: Text(
-                              'Visits',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ),
-                        ],
+                        tabs: widget.tabs
+                            .map((t) => Tab(
+                                  child: Text(
+                                    t.title,
+                                    style: const TextStyle(color: Colors.black),
+                                  ),
+                                ))
+                            .toList(),
                       ),
                     ),
                   ),
@@ -93,25 +86,26 @@ class _DetailsPageState extends State<DetailsPage>
             ),
           ),
           Expanded(
-            child: Container(
-              color: Colors.red,
-              child: BlocBuilder<TabSelectionBloc, int>(
-                builder: (context, state) {
-                  return Scrollbar(
-                    isAlwaysShown: false,
-                    controller: scrollController,
-                    child: ListView.builder(
-                        controller: scrollController,
-                        itemCount: 100,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text('Scrollable 1 : Index $index'),
-                          );
-                        }),
-                  );
-                },
-              ),
+            child: BlocBuilder<TabSelectionBloc, int>(
+              builder: (context, state) {
+                return Scrollbar(
+                  isAlwaysShown: false,
+                  controller: scrollController,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(100, 50, 100, 0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.topLeft,
+                            child: widget.tabs[state].child,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
             ),
           ),
         ],
