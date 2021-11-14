@@ -15,21 +15,10 @@ import '../dashboard/index.dart';
 final PatientService _patientService = GetIt.I.get();
 final VisitService _visitService = GetIt.I.get();
 
-class PatientDetailsPage extends StatefulWidget {
+class PatientDetailsPage extends StatelessWidget {
   final String patientId;
 
   const PatientDetailsPage(this.patientId, {Key? key}) : super(key: key);
-
-  @override
-  State<PatientDetailsPage> createState() => _PatientDetailsPageState();
-}
-
-// TODO: Now that BloC is used, this widget doesn't need a state
-class _PatientDetailsPageState extends State<PatientDetailsPage> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +32,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
       },
       body: BlocProvider(
         create: (context) => PatientResourceBloc(
-          patientId: widget.patientId,
+          patientId: patientId,
           patientService: _patientService,
           visitService: _visitService,
         ),
