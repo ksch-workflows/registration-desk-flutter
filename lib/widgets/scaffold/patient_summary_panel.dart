@@ -55,7 +55,7 @@ class _DetailsPageState extends State<DetailsPage>
       child: Column(
         children: [
           Container(
-            color: Colors.grey[200],
+            color: Colors.grey[300],
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -133,18 +133,44 @@ class PatientSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(100, 20, 100, 20),
-      child: Align(
-        alignment: Alignment.topLeft,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+    return Container(
+      height: 100,
+      // decoration: BoxDecoration(
+      //   border: Border.all(),
+      // ),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(100, 20, 100, 0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              'unknown',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 25,
+            Align(
+              alignment: Alignment.topLeft,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'unknown',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Row(
+                    children: [
+                      InfoTable([
+                        InfoTableEntry(key: 'Father\'s name', value: 'unknown'),
+                        InfoTableEntry(key: 'Location', value: 'unknown'),
+                      ]),
+                      SizedBox(width: 50),
+                      InfoTable([
+                        InfoTableEntry(key: 'Age', value: 'unknown'),
+                        InfoTableEntry(key: 'Gender', value: 'unknown'),
+                      ]),
+                    ],
+                  ),
+                ],
               ),
             ),
           ],
@@ -152,4 +178,40 @@ class PatientSummary extends StatelessWidget {
       ),
     );
   }
+}
+
+class InfoTable extends StatelessWidget {
+  final List<InfoTableEntry> entries;
+
+  const InfoTable(this.entries, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: entries
+              .map((entry) => entry.key)
+              .map((key) => Text('$key:'))
+              .toList(),
+        ),
+        const SizedBox(width: 12),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: entries
+              .map((entry) => entry.value)
+              .map((value) => Text(value))
+              .toList(),
+        ),
+      ],
+    );
+  }
+}
+
+class InfoTableEntry {
+  final String key;
+  final String value;
+
+  InfoTableEntry({required this.key, required this.value});
 }
