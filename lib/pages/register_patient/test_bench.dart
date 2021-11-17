@@ -10,7 +10,6 @@ void main() {
   runApp(
     TestBench(
       child: RegisterPatientPage(),
-      isFullPage: true,
     ),
   );
 }

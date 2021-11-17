@@ -19,6 +19,9 @@ void main() {
 
   final patient = Patient(
     id: const Uuid().v4(),
+    name: 'Jonny Doe',
+    fatherName: 'John Doe',
+    location: 'Guesthouse',
   );
 
   final visit = Visit(
@@ -26,7 +29,9 @@ void main() {
     type: VisitType.OPD,
   );
 
-  when(() => patientService.get(any())).thenAnswer((_) => Future.delayed(const Duration(seconds: 2), () => patient));
+  when(() => patientService.get(any())).thenAnswer(
+    (_) => Future.delayed(const Duration(seconds: 1), () => patient),
+  );
   when(
     () => visitService.get(
       patientId: any(named: 'patientId'),
@@ -40,7 +45,6 @@ void main() {
   runApp(
     TestBench(
       child: PatientDetailsPage(patient.id!),
-      isFullPage: true,
     ),
   );
 }

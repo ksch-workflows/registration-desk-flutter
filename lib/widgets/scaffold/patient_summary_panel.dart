@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:registration_desk/api/patient/patient.dart';
+import 'package:registration_desk/widgets/info_table/info_table.dart';
 import 'package:registration_desk/widgets/tab_selection_bloc/tab_selection_bloc.dart';
 
 class DetailsPage extends StatefulWidget {
@@ -59,7 +60,7 @@ class _DetailsPageState extends State<DetailsPage>
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                PatientSummary(),
+                PatientSummary(widget.patient),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(100, 0, 0, 0),
                   child: Align(
@@ -129,7 +130,9 @@ class SummaryPanelTab {
 }
 
 class PatientSummary extends StatelessWidget {
-  const PatientSummary({Key? key}) : super(key: key);
+  final Patient patient;
+
+  const PatientSummary(this.patient, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -150,23 +153,32 @@ class PatientSummary extends StatelessWidget {
                 // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'unknown',
-                    style: TextStyle(
+                    patient.name ?? 'unknown',
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 25,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Row(
                     children: [
                       InfoTable([
-                        InfoTableEntry(key: 'Father\'s name', value: 'unknown'),
-                        InfoTableEntry(key: 'Location', value: 'unknown'),
+                        Info(
+                          key: 'Father\'s name',
+                          value: patient.fatherName ?? 'unknown',
+                        ),
+                        Info(
+                          key: 'Location',
+                          value: patient.location ?? 'unknown',
+                        ),
                       ]),
-                      SizedBox(width: 50),
+                      const SizedBox(width: 50),
                       InfoTable([
-                        InfoTableEntry(key: 'Age', value: 'unknown'),
-                        InfoTableEntry(key: 'Gender', value: 'unknown'),
+                        Info(key: 'Age', value: 'unknown'),
+                        Info(
+                          key: 'Gender',
+                          value: patient.gender ?? 'unknown',
+                        ),
                       ]),
                     ],
                   ),
@@ -180,38 +192,3 @@ class PatientSummary extends StatelessWidget {
   }
 }
 
-class InfoTable extends StatelessWidget {
-  final List<InfoTableEntry> entries;
-
-  const InfoTable(this.entries, {Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: entries
-              .map((entry) => entry.key)
-              .map((key) => Text('$key:'))
-              .toList(),
-        ),
-        const SizedBox(width: 12),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: entries
-              .map((entry) => entry.value)
-              .map((value) => Text(value))
-              .toList(),
-        ),
-      ],
-    );
-  }
-}
-
-class InfoTableEntry {
-  final String key;
-  final String value;
-
-  InfoTableEntry({required this.key, required this.value});
-}

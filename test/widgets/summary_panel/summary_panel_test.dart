@@ -11,7 +11,7 @@ void main() {
 
     await tester.pumpWidget(const TestBench(
       child: Text('Hello, Widget!'),
-      isFullPage: false,
+      pageSize: Size(800, 600),
     ));
 
     expect(find.byType(Text), findsWidgets);

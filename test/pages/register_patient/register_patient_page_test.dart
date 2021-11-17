@@ -12,7 +12,6 @@ void main() {
 
     await tester.pumpWidget(TestBench(
       child: RegisterPatientPage(),
-      isFullPage: true,
     ));
     var patientSearchInputField = find.byType(TextField);
 
@@ -28,7 +27,7 @@ void main() {
 
     await tester.pumpWidget(TestBench(
       child: RegisterPatientPage(),
-      isFullPage: false,
+      pageSize: const Size(800, 600),
     ));
 
     expect(find.byType(DataTable), findsNothing);
@@ -39,7 +38,7 @@ void main() {
 
     await tester.pumpWidget(TestBench(
       child: RegisterPatientPage(),
-      isFullPage: false,
+      pageSize: const Size(800, 600),
     ));
 
     var patientSearchInputField = find.byType(TextField);
