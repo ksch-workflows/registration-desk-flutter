@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
-import '../info_table/info_table.dart';
 
 class ContentCard extends StatelessWidget {
-  final List<Info> info;
+  final List<ContentCardInfo> info;
+  final String title;
+  final IconData icon;
+  final List<ContentCardAction>? actions;
 
-  const ContentCard({required this.info, Key? key}) : super(key: key);
+  const ContentCard({
+    required this.info,
+    required this.title,
+    required this.icon,
+    this.actions,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +22,11 @@ class ContentCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
+            Padding(
               padding: EdgeInsets.fromLTRB(0, 10, 10, 5),
               child: ListTile(
-                leading: Icon(Icons.perm_identity, size: 50),
-                title: Text('Identity'),
+                leading: Icon(icon, size: 50),
+                title: Text(title),
               ),
             ),
             _InfoTextFields(info: info),
@@ -27,14 +35,7 @@ class ContentCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      TextButton(
-                        onPressed: () => {},
-                        child: Text('CAPTURE PHOTOGRAPH'),
-                      ),
-                    ],
-                  ),
+                  _ActionButtons(actions),
                   Row(
                     children: [
                       Padding(
@@ -66,8 +67,42 @@ class ContentCard extends StatelessWidget {
   }
 }
 
+class ContentCardInfo {
+  final String key;
+  final String? value;
+
+  ContentCardInfo({required this.key, this.value});
+}
+
+class ContentCardAction {
+  final String title;
+  final VoidCallback? onPressed;
+
+  ContentCardAction({required this.title, required this.onPressed});
+}
+
+class _ActionButtons extends StatelessWidget {
+  final List<ContentCardAction>? actions;
+
+  const _ActionButtons(this.actions, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    if (actions == null) {
+      return Container();
+    }
+    return Row(
+      children: actions!.map((e) => TextButton(
+        onPressed: e.onPressed,
+        child: Text(e.title.toUpperCase()),
+      )).toList(),
+    );
+  }
+}
+
+
 class _InfoTextFields extends StatefulWidget {
-  final List<Info> info;
+  final List<ContentCardInfo> info;
 
   const _InfoTextFields({required this.info, Key? key}) : super(key: key);
 
