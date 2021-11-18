@@ -1,26 +1,86 @@
 import 'package:flutter/material.dart';
-import 'package:registration_desk/widgets/info_table/info_table.dart';
+import '../info_table/info_table.dart';
 
-class ContentCard extends StatefulWidget {
-
+class ContentCard extends StatelessWidget {
   final List<Info> info;
 
   const ContentCard({required this.info, Key? key}) : super(key: key);
 
   @override
-  State<ContentCard> createState() => _ContentCardState();
+  Widget build(BuildContext context) {
+    return IntrinsicHeight(
+      child: Card(
+        elevation: 5,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Padding(
+              padding: EdgeInsets.fromLTRB(0, 10, 10, 5),
+              child: ListTile(
+                leading: Icon(Icons.perm_identity, size: 50),
+                title: Text('Identity'),
+              ),
+            ),
+            _InfoTextFields(info: info),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(15, 5, 5, 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      TextButton(
+                        onPressed: () => {},
+                        child: Text('CAPTURE PHOTOGRAPH'),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
+                        child: IconButton(
+                          icon: const Icon(Icons.delete, size: 25),
+                          onPressed: () {},
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
+                        child: IconButton(
+                          icon: const Icon(
+                            Icons.edit,
+                            size: 24,
+                          ),
+                          onPressed: () {},
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
-class _ContentCardState extends State<ContentCard> {
+class _InfoTextFields extends StatefulWidget {
+  final List<Info> info;
 
+  const _InfoTextFields({required this.info, Key? key}) : super(key: key);
+
+  @override
+  _InfoTextFieldsState createState() => _InfoTextFieldsState();
+}
+
+class _InfoTextFieldsState extends State<_InfoTextFields> {
+  List<TextField> infoTextFields = [];
   List<TextEditingController> infoTextControllers = [];
-
-  late TextEditingController patientNameController;
-  late TextEditingController patientFatherNameController;
 
   @override
   void initState() {
-
     for (var i in widget.info) {
       var c = TextEditingController();
       if (i.value != null) {
@@ -29,6 +89,15 @@ class _ContentCardState extends State<ContentCard> {
         c.text = 'unknown';
       }
       infoTextControllers.add(c);
+      var f = TextField(
+        readOnly: true,
+        controller: c,
+        decoration: InputDecoration(
+          labelText: i.key,
+          border: const OutlineInputBorder(),
+        ),
+      );
+      infoTextFields.add(f);
     }
     super.initState();
   }
@@ -43,68 +112,19 @@ class _ContentCardState extends State<ContentCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const ListTile(
-            leading: const Icon(Icons.perm_identity),
-            title: Text('Identity'),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(25, 0, 40, 10),
-            child: Column(
-              children: [
-                Column(
-                  children: [
-                    TextField(
-                      readOnly: true,
-                      controller: infoTextControllers[0],
-                      decoration: const InputDecoration(
-                        labelText: "Patient's name",
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    TextFormField(
-                      readOnly: true,
-                      controller: infoTextControllers[1],
-                      decoration: const InputDecoration(
-                        labelText: "Father's name",
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  TextButton(
-                    onPressed: () => {},
-                    child: Text('CAPTURE PHOTOGRAPH'),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.edit),
-                    onPressed: () {},
-                  ),
-                ],
-              )
-            ],
-          ),
-        ],
-      ),
+    if (infoTextFields.isEmpty) {
+      return Container();
+    }
+    var children = <Widget>[];
+    for (var i = 0; i < infoTextFields.length; i++) {
+      children.add(infoTextFields[i]);
+      if (i + 1 < infoTextFields.length) {
+        children.add(const SizedBox(height: 20));
+      }
+    }
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(25, 15, 40, 10),
+      child: Column(children: children),
     );
   }
 }
