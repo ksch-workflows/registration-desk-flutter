@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 class ContentCard extends StatelessWidget {
+  final ContentCardTitle title;
   final List<ContentCardInfo> info;
-  final String title;
-  final IconData icon;
-  final List<ContentCardAction>? actions;
+  final List<ContentCardButton>? buttons;
+  final List<ContentCardIcon>? icons;
 
   const ContentCard({
-    required this.info,
     required this.title,
-    required this.icon,
-    this.actions,
+    required this.info,
+    this.buttons,
+    this.icons,
     Key? key,
   }) : super(key: key);
 
@@ -25,8 +25,8 @@ class ContentCard extends StatelessWidget {
             Padding(
               padding: EdgeInsets.fromLTRB(0, 10, 10, 5),
               child: ListTile(
-                leading: Icon(icon, size: 50),
-                title: Text(title),
+                leading: Icon(title.icon, size: 50),
+                title: Text(title.text),
               ),
             ),
             _InfoTextFields(info: info),
@@ -35,28 +35,8 @@ class ContentCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _ActionButtons(actions),
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
-                        child: IconButton(
-                          icon: const Icon(Icons.delete, size: 25),
-                          onPressed: () {},
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
-                        child: IconButton(
-                          icon: const Icon(
-                            Icons.edit,
-                            size: 24,
-                          ),
-                          onPressed: () {},
-                        ),
-                      ),
-                    ],
-                  )
+                  _Buttons(buttons),
+                  _Icons(icons),
                 ],
               ),
             ),
@@ -67,6 +47,13 @@ class ContentCard extends StatelessWidget {
   }
 }
 
+class ContentCardTitle {
+  final String text;
+  final IconData icon;
+
+  ContentCardTitle({required this.text, required this.icon});
+}
+
 class ContentCardInfo {
   final String key;
   final String? value;
@@ -74,25 +61,32 @@ class ContentCardInfo {
   ContentCardInfo({required this.key, this.value});
 }
 
-class ContentCardAction {
+class ContentCardButton {
   final String title;
   final VoidCallback? onPressed;
 
-  ContentCardAction({required this.title, required this.onPressed});
+  ContentCardButton({required this.title, required this.onPressed});
 }
 
-class _ActionButtons extends StatelessWidget {
-  final List<ContentCardAction>? actions;
+class ContentCardIcon {
+  final IconData icon;
+  final VoidCallback? onPressed;
 
-  const _ActionButtons(this.actions, {Key? key}) : super(key: key);
+  ContentCardIcon({required this.icon, required this.onPressed});
+}
+
+class _Buttons extends StatelessWidget {
+  final List<ContentCardButton>? buttons;
+
+  const _Buttons(this.buttons, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (actions == null) {
+    if (buttons == null) {
       return Container();
     }
     return Row(
-      children: actions!.map((e) => TextButton(
+      children: buttons!.map((e) => TextButton(
         onPressed: e.onPressed,
         child: Text(e.title.toUpperCase()),
       )).toList(),
@@ -100,6 +94,27 @@ class _ActionButtons extends StatelessWidget {
   }
 }
 
+class _Icons extends StatelessWidget {
+  final List<ContentCardIcon>? icons;
+
+  const _Icons(this.icons, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    if (icons == null) {
+      return Container();
+    }
+    return Row(
+      children: icons!.map((e) => Padding(
+        padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
+        child: IconButton(
+          icon: Icon(e.icon, size: 25),
+          onPressed: e.onPressed,
+        ),
+      )).toList(),
+    );
+  }
+}
 
 class _InfoTextFields extends StatefulWidget {
   final List<ContentCardInfo> info;
