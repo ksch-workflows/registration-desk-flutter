@@ -92,17 +92,21 @@ class _DetailsPageState extends State<DetailsPage>
                 return Scrollbar(
                   isAlwaysShown: false,
                   controller: scrollController,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(100, 50, 100, 0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Align(
-                            alignment: Alignment.topLeft,
-                            child: widget.tabs[state].child,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    controller: scrollController,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(100, 50, 100, 0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.topLeft,
+                              child: widget.tabs[state].child,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 );

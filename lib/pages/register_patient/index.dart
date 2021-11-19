@@ -25,11 +25,6 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
   final VisitService visitService = GetIt.I<VisitService>();
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return WebScaffold(
       title: 'Register patient',
