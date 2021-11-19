@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:registration_desk/pages/patient_details/patient_resource_bloc/patient_resource_bloc.dart';
+import 'package:registration_desk/widgets/content_card/content_card.dart';
 import 'package:registration_desk/widgets/scaffold/patient_summary_panel.dart';
 import 'package:registration_desk/widgets/scaffold/scaffold2.dart';
 import 'package:registration_desk/widgets/tab_selection_bloc/tab_selection_bloc.dart';
@@ -58,9 +59,7 @@ class PatientDetailsPage extends StatelessWidget {
                   ),
                   SummaryPanelTab(
                     title: 'Visits',
-                    child: Container(
-                      child: Text('Placeholder for visits content.'),
-                    ),
+                    child: _VisistsTabContent(),
                   ),
                 ],
               );
@@ -69,6 +68,36 @@ class PatientDetailsPage extends StatelessWidget {
           },
         ),
       ),
+    );
+  }
+}
+
+class _VisistsTabContent extends StatelessWidget {
+  const _VisistsTabContent({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        ContentCard(
+          title: ContentCardTitle(
+            text: 'Current visit',
+            icon: Icons.date_range,
+          ),
+          info: [
+            ContentCardInfo(key: 'Status', value: 'Admitted'),
+            ContentCardInfo(key: 'Type', value: 'OPD'),
+            ContentCardInfo(key: 'Start', value: 'Friday, 19-11-2021, 07:23a.m.'),
+          ],
+          buttons: [
+            ContentCardButton(title: 'Print registration card', onPressed: () {}),
+            ContentCardButton(title: 'Discharge', onPressed: () {}),
+          ],
+          icons: [
+            ContentCardIcon(icon: Icons.edit, onPressed: () {}),
+          ],
+        ),
+      ],
     );
   }
 }
