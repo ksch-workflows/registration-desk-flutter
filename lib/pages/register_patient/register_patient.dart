@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:registration_desk/widgets/scaffold/scaffold2.dart';
 
 import '../../api/patient/patient.dart';
 import '../../api/patient/patient_service.dart';
 import '../../api/visit/visit_service.dart';
 import '../../routing.dart';
+import '../../widgets/scaffold/generic_panel.dart';
 import '../../widgets/scaffold/scaffold.dart';
 import '../dashboard/index.dart';
 import 'register_patient_dialog/index.dart';
+
+// TODO(test): Should render patient search results
 
 class RegisterPatientPage extends StatefulWidget {
   @override
@@ -26,37 +28,40 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
 
   @override
   Widget build(BuildContext context) {
-    return WebScaffold(
+    return DesktopScaffold(
       title: 'Register patient',
-      body: Column(
-        children: [
-          _buildActionRow(),
-          const SizedBox(height: 25),
-          _buildPatientTable(),
-        ],
+      child: GenericPanel(
+        child: Column(
+          children: [
+            _buildActionRow(),
+            const SizedBox(height: 25),
+            _buildPatientTable(),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            searchTermController.clear();
+            final result = await _showRegisterPatientDialog(context);
+            if (result != null) {
+              final createdPatient =
+                  await patientService.create(result.patient);
+              visitService.startVisit(createdPatient.id!, result.visitType);
+            }
+          },
+          tooltip: 'Add new patient',
+          child: const Icon(Icons.add),
+        ),
       ),
       onNavigateBack: () {
         Navigator.push(context,
             WebPageRoute(builder: (context) => RegistrationDashboard()));
       },
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          searchTermController.clear();
-          final result = await _showRegisterPatientDialog(context);
-          if (result != null) {
-            final createdPatient = await patientService.create(result.patient);
-            visitService.startVisit(createdPatient.id!, result.visitType);
-          }
-        },
-        tooltip: 'Add new patient',
-        child: const Icon(Icons.add),
-      ),
     );
   }
 
   Future<RegisterPatientResult?> _showRegisterPatientDialog(
-      BuildContext context,
-      ) {
+    BuildContext context,
+  ) {
     return showDialog(
         context: context,
         builder: (context) {
@@ -113,13 +118,13 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
   List<DataRow> _buildTableRows() {
     return matchingPatients!
         .map((e) => DataRow(
-      cells: [
-        DataCell(Text(e.opdNumber ?? 'n/a')),
-        DataCell(Text(e.name ?? 'n/a')),
-        DataCell(Text(e.location ?? 'n/a')),
-        DataCell(Text(e.lastVisit?.toString() ?? 'n/a')),
-      ],
-    ))
+              cells: [
+                DataCell(Text(e.opdNumber ?? 'n/a')),
+                DataCell(Text(e.name ?? 'n/a')),
+                DataCell(Text(e.location ?? 'n/a')),
+                DataCell(Text(e.lastVisit?.toString() ?? 'n/a')),
+              ],
+            ))
         .toList();
   }
 

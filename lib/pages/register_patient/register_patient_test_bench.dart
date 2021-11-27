@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../context.dart';
 import '../../widgets/test_bench.dart';
-import 'index.dart';
+import 'register_patient.dart';
 
 void main() {
   initialiseInMemoryContext();

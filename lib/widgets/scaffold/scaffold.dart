@@ -2,19 +2,16 @@ import 'package:flutter/material.dart';
 
 import '../../pages/dashboard/index.dart';
 import '../../routing.dart';
-import '../test_bench.dart';
 
-class WebScaffold extends StatelessWidget {
+class DesktopScaffold extends StatelessWidget {
   final String title;
-  final Widget body;
-  final Widget? floatingActionButton;
+  final Widget child;
   final Function? onNavigateBack;
 
-  const WebScaffold({
+  const DesktopScaffold({
     required this.title,
-    required this.body,
+    required this.child,
     this.onNavigateBack,
-    this.floatingActionButton,
   });
 
   @override
@@ -29,36 +26,11 @@ class WebScaffold extends StatelessWidget {
                 title: title,
                 onNavigateBack: onNavigateBack,
               ),
-              const SizedBox(
-                height: 50,
-              ),
-              _buildBodyWrapper(constraints)
+              child,
             ],
           ),
         );
       }),
-    );
-  }
-
-  Row _buildBodyWrapper(BoxConstraints constraints) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          width: 100,
-          child: floatingActionButton,
-        ),
-        ConstrainedBox(
-          constraints: BoxConstraints(
-            maxHeight: constraints.maxHeight - 145,
-            maxWidth: constraints.maxWidth - 200,
-          ),
-          child: body,
-        ),
-        const SizedBox(
-          width: 100,
-        ),
-      ],
     );
   }
 }
@@ -156,17 +128,3 @@ class _AppBar extends StatelessWidget {
   }
 }
 
-void main() {
-  runApp(
-    TestBench(
-      child: WebScaffold(
-        title: 'Hello',
-        body: Row(
-          children: const [
-            Text('Hello, Test Bench!'),
-          ],
-        ),
-      ),
-    ),
-  );
-}

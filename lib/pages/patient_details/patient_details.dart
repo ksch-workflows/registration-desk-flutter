@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:registration_desk/pages/patient_details/patient_resource_bloc/patient_resource_bloc.dart';
-import 'package:registration_desk/widgets/content_card/index.dart';
-import 'package:registration_desk/widgets/scaffold/patient_summary_panel.dart';
-import 'package:registration_desk/widgets/scaffold/scaffold2.dart';
-import 'package:registration_desk/widgets/tab_selection_bloc/tab_selection_bloc.dart';
-import 'package:uuid/uuid.dart';
+import 'package:registration_desk/widgets/content_card/content_card.dart';
+import 'package:registration_desk/widgets/scaffold/tabbed_details_panel.dart';
 
 import '../../api/patient/patient.dart';
-import '../../api/patient/patient_service.dart';
 import '../../api/visit/visit.dart';
-import '../../api/visit/visit_service.dart';
 import '../../routing.dart';
 import '../../widgets/scaffold/scaffold.dart';
 import '../dashboard/index.dart';
@@ -23,7 +17,7 @@ class PatientDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WebScaffold2(
+    return DesktopScaffold(
       title: 'Patient details',
       onNavigateBack: () {
         Navigator.push(
@@ -31,15 +25,8 @@ class PatientDetailsPage extends StatelessWidget {
           WebPageRoute(builder: (context) => RegistrationDashboard()),
         );
       },
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => PatientResourceBloc(patientId: patientId),
-          ),
-          BlocProvider(
-            create: (context) => TabSelectionBloc(1),
-          ),
-        ],
+      child: BlocProvider(
+        create: (context) => PatientResourceBloc(patientId: patientId),
         child: BlocBuilder<PatientResourceBloc, PatientState>(
           builder: (context, state) {
             if (state is LoadingPatient) {
@@ -48,9 +35,8 @@ class PatientDetailsPage extends StatelessWidget {
               );
             }
             if (state is DisplayingPatient) {
-              return DetailsPage(
+              return TabbedDetailsPanel(
                 patient: state.patient,
-                tabSelectionBloc: context.read<TabSelectionBloc>(),
                 tabs: [
                   SummaryPanelTab(
                     title: 'General',
@@ -155,9 +141,9 @@ class CurrentVisitCard extends StatelessWidget {
     return ContentCard(
       title: _title,
       info: [
-        ContentCardInfo(key: 'Status', value: 'Admitted'),
-        ContentCardInfo(key: 'Type', value: currentVisit!.type.toString()),
         ContentCardInfo(key: 'Start', value: 'Friday, 19-11-2021, 07:23a.m.'),
+        ContentCardInfo(key: 'Type', value: currentVisit!.type.toString()),
+        // TODO: Render actual time of visit start
       ],
       buttons: [
         ContentCardButton(title: 'Print registration card', onPressed: () {}),

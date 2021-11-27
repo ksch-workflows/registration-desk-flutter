@@ -11,7 +11,7 @@ import '../../api/visit/visit_service.dart';
 import '../../utils/test_bench/mock_patient_service.dart';
 import '../../utils/test_bench/mock_visit_service.dart';
 import '../../widgets/test_bench.dart';
-import 'index.dart';
+import 'patient_details.dart';
 
 void main() {
   final patientService = MockPatientService();

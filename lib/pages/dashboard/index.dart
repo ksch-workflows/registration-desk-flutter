@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
 
 import '../../routing.dart';
+import '../../widgets/scaffold/generic_panel.dart';
 import '../../widgets/scaffold/scaffold.dart';
 import '../../widgets/test_bench.dart';
-import '../register_patient/index.dart';
+import '../register_patient/register_patient.dart';
 
 class RegistrationDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return WebScaffold(
+    return DesktopScaffold(
       title: 'Dashboard',
-      body: Align(
-        alignment: Alignment.topLeft,
-        child: Container(
-          padding: const EdgeInsets.fromLTRB(100, 30, 0, 0),
-          child: Wrap(
-            alignment: WrapAlignment.start,
-            children: const [
-              TileButton(icon: Icons.menu_book, title: 'Register patient'),
-            ],
+      child: GenericPanel(
+        child: Align(
+          alignment: Alignment.topLeft,
+          child: Container(
+            padding: const EdgeInsets.fromLTRB(100, 30, 0, 0),
+            child: Wrap(
+              alignment: WrapAlignment.start,
+              children: const [
+                TileButton(icon: Icons.menu_book, title: 'Register patient'),
+              ],
+            ),
           ),
         ),
       ),

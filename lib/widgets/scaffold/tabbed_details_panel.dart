@@ -2,25 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:registration_desk/api/patient/patient.dart';
 import 'package:registration_desk/widgets/info_table/info_table.dart';
-import 'package:registration_desk/widgets/tab_selection_bloc/tab_selection_bloc.dart';
 
-class DetailsPage extends StatefulWidget {
+// TODO(test): Should render first tab by default
+// TODO(test): Should render second tab
+// TODO(test): Should allow to switch tab
+class TabbedDetailsPanel extends StatefulWidget {
   final Patient patient;
-  final TabSelectionBloc tabSelectionBloc;
   final List<SummaryPanelTab> tabs;
+  final int initialTabIndex;
 
-  const DetailsPage({
+  const TabbedDetailsPanel({
     required this.patient,
     required this.tabs,
-    required this.tabSelectionBloc,
+    this.initialTabIndex = 0,
     Key? key,
   }) : super(key: key);
 
   @override
-  State<DetailsPage> createState() => _DetailsPageState();
+  State<TabbedDetailsPanel> createState() => _TabbedDetailsPanelState();
 }
 
-class _DetailsPageState extends State<DetailsPage>
+class _TabbedDetailsPanelState extends State<TabbedDetailsPanel>
     with SingleTickerProviderStateMixin {
   late int selectedTab;
   late TabController tabController;
@@ -31,16 +33,13 @@ class _DetailsPageState extends State<DetailsPage>
     tabController = TabController(
       length: widget.tabs.length,
       vsync: this,
-      initialIndex: widget.tabSelectionBloc.state,
+      initialIndex: widget.initialTabIndex,
     );
     tabController.addListener(() {
-      triggerTabSelectionEvent();
       setState(() {
         scrollController.jumpTo(0);
       });
     });
-    selectedTab = widget.tabSelectionBloc.state;
-    triggerTabSelectionEvent();
     super.initState();
   }
 
@@ -66,7 +65,7 @@ class _DetailsPageState extends State<DetailsPage>
                   child: Align(
                     alignment: Alignment.bottomLeft,
                     child: ConstrainedBox(
-                      constraints: BoxConstraints.loose(Size(1200, 500)),
+                      constraints: BoxConstraints.loose(const Size(1200, 500)),
                       child: TabBar(
                         controller: tabController,
                         // indicatorColor: Colors.red,
@@ -87,39 +86,31 @@ class _DetailsPageState extends State<DetailsPage>
             ),
           ),
           Expanded(
-            child: BlocBuilder<TabSelectionBloc, int>(
-              builder: (context, state) {
-                return Scrollbar(
-                  isAlwaysShown: false,
-                  controller: scrollController,
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    controller: scrollController,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(100, 50, 100, 0),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Align(
-                              alignment: Alignment.topLeft,
-                              child: widget.tabs[state].child,
-                            ),
-                          ),
-                        ],
+            child: Scrollbar(
+              isAlwaysShown: false,
+              controller: scrollController,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                controller: scrollController,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(100, 50, 100, 0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: widget.tabs[tabController.index].child,
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                );
-              },
+                ),
+              ),
             ),
           ),
         ],
       ),
     );
-  }
-
-  void triggerTabSelectionEvent() {
-    widget.tabSelectionBloc.add(TabSelectionChanged(tabController.index));
   }
 }
 
