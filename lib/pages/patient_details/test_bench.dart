@@ -19,9 +19,11 @@ void main() {
 
   final patient = Patient(
     id: const Uuid().v4(),
-    name: 'Jonny Doe',
+    name: 'Janie Doe',
     fatherName: 'John Doe',
     location: 'Guesthouse',
+    gender: 'Female',
+    currentVisit: const Uuid().v4(),
   );
 
   final visit = Visit(

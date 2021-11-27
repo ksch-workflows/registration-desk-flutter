@@ -5,12 +5,14 @@ class ContentCard extends StatelessWidget {
   final List<ContentCardInfo> info;
   final List<ContentCardButton>? buttons;
   final List<ContentCardIcon>? icons;
+  final Widget? emptyState;
 
   const ContentCard({
     required this.title,
-    required this.info,
+    this.info = const [],
     this.buttons,
     this.icons,
+    this.emptyState,
     Key? key,
   }) : super(key: key);
 
@@ -23,13 +25,15 @@ class ContentCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.fromLTRB(0, 10, 10, 5),
+              padding: const EdgeInsets.fromLTRB(0, 10, 10, 5),
               child: ListTile(
                 leading: Icon(title.icon, size: 50),
                 title: Text(title.text),
               ),
             ),
-            _InfoTextFields(info: info),
+            info.isNotEmpty
+                ? _InfoTextFields(info: info)
+                : _buildEmptyState(),
             Padding(
               padding: const EdgeInsets.fromLTRB(15, 5, 5, 10),
               child: Row(
@@ -45,13 +49,21 @@ class ContentCard extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildEmptyState() {
+    if (emptyState != null) {
+      return emptyState!;
+    } else {
+      return Container();
+    }
+  }
 }
 
 class ContentCardTitle {
   final String text;
   final IconData icon;
 
-  ContentCardTitle({required this.text, required this.icon});
+  const ContentCardTitle({required this.text, required this.icon});
 }
 
 class ContentCardInfo {
@@ -86,10 +98,12 @@ class _Buttons extends StatelessWidget {
       return Container();
     }
     return Row(
-      children: buttons!.map((e) => TextButton(
-        onPressed: e.onPressed,
-        child: Text(e.title.toUpperCase()),
-      )).toList(),
+      children: buttons!
+          .map((e) => TextButton(
+                onPressed: e.onPressed,
+                child: Text(e.title.toUpperCase()),
+              ))
+          .toList(),
     );
   }
 }
@@ -105,13 +119,15 @@ class _Icons extends StatelessWidget {
       return Container();
     }
     return Row(
-      children: icons!.map((e) => Padding(
-        padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
-        child: IconButton(
-          icon: Icon(e.icon, size: 25),
-          onPressed: e.onPressed,
-        ),
-      )).toList(),
+      children: icons!
+          .map((e) => Padding(
+                padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
+                child: IconButton(
+                  icon: Icon(e.icon, size: 25),
+                  onPressed: e.onPressed,
+                ),
+              ))
+          .toList(),
     );
   }
 }
@@ -173,7 +189,7 @@ class _InfoTextFieldsState extends State<_InfoTextFields> {
       }
     }
     return Padding(
-      padding: const EdgeInsets.fromLTRB(25, 15, 40, 10),
+      padding: const EdgeInsets.fromLTRB(25, 15, 40, 20),
       child: Column(children: children),
     );
   }
