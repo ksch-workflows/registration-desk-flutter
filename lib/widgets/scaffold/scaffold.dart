@@ -26,7 +26,15 @@ class DesktopScaffold extends StatelessWidget {
                 title: title,
                 onNavigateBack: onNavigateBack,
               ),
-              child,
+              // TODO(test): Should render patient search results.
+              // Without the constrained box, the test should fail.
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxHeight: constraints.maxHeight - 145,
+                  maxWidth: constraints.maxWidth - 200,
+                ),
+                child: child,
+              ),
             ],
           ),
         );

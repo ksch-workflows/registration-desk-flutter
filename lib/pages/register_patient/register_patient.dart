@@ -10,8 +10,6 @@ import '../../widgets/scaffold/scaffold.dart';
 import '../dashboard/index.dart';
 import 'register_patient_dialog/index.dart';
 
-// TODO(test): Should render patient search results
-
 class RegisterPatientPage extends StatefulWidget {
   @override
   _RegisterPatientPageState createState() => _RegisterPatientPageState();
