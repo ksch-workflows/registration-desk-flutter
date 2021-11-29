@@ -13,9 +13,14 @@ class TestBench extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Test Bench',
-      home: pageSize == null ? child : wrapComponentInScaffold(),
+      home:
+          pageSize == null ? wrapChildInMaterial() : wrapComponentInScaffold(),
       theme: ThemeData(fontFamily: 'Roboto'),
     );
+  }
+
+  Material wrapChildInMaterial() {
+    return Material(child: child);
   }
 
   Scaffold wrapComponentInScaffold() {
