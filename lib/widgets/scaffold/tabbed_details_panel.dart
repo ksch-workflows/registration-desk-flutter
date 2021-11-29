@@ -51,65 +51,63 @@ class _TabbedDetailsPanelState extends State<TabbedDetailsPanel>
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        children: [
-          Container(
-            color: Colors.grey[300],
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                PatientSummary(widget.patient),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(100, 0, 0, 0),
-                  child: Align(
-                    alignment: Alignment.bottomLeft,
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints.loose(const Size(1200, 500)),
-                      child: TabBar(
-                        controller: tabController,
-                        // indicatorColor: Colors.red,
-                        isScrollable: true,
-                        tabs: widget.tabs
-                            .map((t) => Tab(
-                                  child: Text(
-                                    t.title,
-                                    style: const TextStyle(color: Colors.black),
-                                  ),
-                                ))
-                            .toList(),
-                      ),
+    return Column(
+      children: [
+        Container(
+          color: Colors.grey[300],
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              PatientSummary(widget.patient),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(100, 0, 0, 0),
+                child: Align(
+                  alignment: Alignment.bottomLeft,
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints.loose(const Size(1200, 500)),
+                    child: TabBar(
+                      controller: tabController,
+                      // indicatorColor: Colors.red,
+                      isScrollable: true,
+                      tabs: widget.tabs
+                          .map((t) => Tab(
+                                child: Text(
+                                  t.title,
+                                  style: const TextStyle(color: Colors.black),
+                                ),
+                              ))
+                          .toList(),
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          Expanded(
-            child: Scrollbar(
-              isAlwaysShown: false,
+        ),
+        Expanded(
+          child: Scrollbar(
+            isAlwaysShown: false,
+            controller: scrollController,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
               controller: scrollController,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                controller: scrollController,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(100, 50, 100, 0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.topLeft,
-                          child: widget.tabs[tabController.index].child,
-                        ),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(100, 50, 100, 0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: widget.tabs[tabController.index].child,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

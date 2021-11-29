@@ -13,7 +13,7 @@ import '../../utils/test_bench/mock_visit_service.dart';
 import '../../widgets/test_bench.dart';
 import 'patient_details.dart';
 
-void main() {
+String setupMockPatient({int fetchDelayInSec = 1}) {
   final patientService = MockPatientService();
   final visitService = MockVisitService();
 
@@ -32,7 +32,10 @@ void main() {
   );
 
   when(() => patientService.get(any())).thenAnswer(
-    (_) => Future.delayed(const Duration(seconds: 1), () => patient),
+    (_) => Future.delayed(
+      Duration(seconds: fetchDelayInSec),
+      () => patient,
+    ),
   );
   when(
     () => visitService.get(
@@ -44,9 +47,15 @@ void main() {
   GetIt.I.registerSingleton<PatientService>(patientService);
   GetIt.I.registerSingleton<VisitService>(visitService);
 
+  return patient.id!;
+}
+
+void main() {
+  final patientId = setupMockPatient();
+
   runApp(
     TestBench(
-      child: PatientDetailsPage(patient.id!),
+      child: PatientDetailsPage(patientId),
     ),
   );
 }
