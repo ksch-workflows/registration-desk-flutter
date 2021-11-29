@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../constants.dart';
 import '../../pages/dashboard/index.dart';
 import '../../routing.dart';
 
@@ -30,8 +31,7 @@ class DesktopScaffold extends StatelessWidget {
               // Without the constrained box, the test should fail.
               ConstrainedBox(
                 constraints: BoxConstraints(
-                  maxHeight: constraints.maxHeight - 145,
-                  maxWidth: constraints.maxWidth - 200,
+                  maxHeight: constraints.maxHeight - AppLayout.appBarHeight,
                 ),
                 child: child,
               ),
@@ -54,12 +54,13 @@ class _AppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: Move color definitions into "constants.dart"
     final appBarColor = Theme.of(context).primaryColor;
     final buttonColor = Colors.grey[350]!;
 
     return Container(
       color: appBarColor,
-      height: 55,
+      height: AppLayout.appBarHeight,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

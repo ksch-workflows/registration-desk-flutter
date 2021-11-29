@@ -54,6 +54,7 @@ class _TabbedDetailsPanelState extends State<TabbedDetailsPanel>
     return Column(
       children: [
         Container(
+          // TODO: Move color definition into "constants.dart"
           color: Colors.grey[300],
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -92,7 +93,7 @@ class _TabbedDetailsPanelState extends State<TabbedDetailsPanel>
               scrollDirection: Axis.vertical,
               controller: scrollController,
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(100, 50, 100, 0),
+                padding: const EdgeInsets.fromLTRB(100, 50, 100, 50),
                 child: Row(
                   children: [
                     Expanded(
