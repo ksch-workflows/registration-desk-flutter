@@ -28,20 +28,19 @@ class _TabbedDetailsPanelState extends State<TabbedDetailsPanel>
     with SingleTickerProviderStateMixin {
   late int selectedTab;
   late TabController tabController;
-  final ScrollController scrollController = ScrollController();
+  late ScrollController scrollController;
 
-  // TODO: Improve readability
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _buildHeader(),
-        _buildDetailsView(),
+        _buildDetailsHeader(),
+        _buildDetailsContent(),
       ],
     );
   }
 
-  Container _buildHeader() {
+  Container _buildDetailsHeader() {
     return Container(
       color: summaryPanelBackgroundColor,
       child: Column(
@@ -54,7 +53,32 @@ class _TabbedDetailsPanelState extends State<TabbedDetailsPanel>
     );
   }
 
-  Expanded _buildDetailsView() {
+  Padding _buildTabBarPanel() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(100, 0, 0, 0),
+      child: Align(
+        alignment: Alignment.bottomLeft,
+        child: ConstrainedBox(
+          constraints: BoxConstraints.loose(const Size(1200, 500)),
+          child: TabBar(
+            controller: tabController,
+            isScrollable: true,
+            indicatorWeight: 4,
+            tabs: widget.tabs
+                .map((t) => Tab(
+              child: Text(
+                t.title,
+                style: const TextStyle(color: Colors.black),
+              ),
+            ))
+                .toList(),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Expanded _buildDetailsContent() {
     return Expanded(
       child: Scrollbar(
         isAlwaysShown: false,
@@ -80,34 +104,9 @@ class _TabbedDetailsPanelState extends State<TabbedDetailsPanel>
     );
   }
 
-  Padding _buildTabBarPanel() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(100, 0, 0, 0),
-      child: Align(
-        alignment: Alignment.bottomLeft,
-        child: ConstrainedBox(
-          constraints: BoxConstraints.loose(const Size(1200, 500)),
-          child: TabBar(
-            controller: tabController,
-            // indicatorColor: Colors.red,
-            isScrollable: true,
-            indicatorWeight: 4,
-            tabs: widget.tabs
-                .map((t) => Tab(
-                      child: Text(
-                        t.title,
-                        style: const TextStyle(color: Colors.black),
-                      ),
-                    ))
-                .toList(),
-          ),
-        ),
-      ),
-    );
-  }
-
   @override
   void initState() {
+    scrollController = ScrollController();
     tabController = TabController(
       length: widget.tabs.length,
       vsync: this,
@@ -124,6 +123,7 @@ class _TabbedDetailsPanelState extends State<TabbedDetailsPanel>
   @override
   void dispose() {
     tabController.dispose();
+    scrollController.dispose();
     super.dispose();
   }
 }
