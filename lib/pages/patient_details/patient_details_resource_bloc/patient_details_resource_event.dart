@@ -1,4 +1,4 @@
-part of 'patient_resource_bloc.dart';
+part of 'patient_details_resource_bloc.dart';
 
 abstract class PatientEvent extends Equatable {
   final Patient patient;

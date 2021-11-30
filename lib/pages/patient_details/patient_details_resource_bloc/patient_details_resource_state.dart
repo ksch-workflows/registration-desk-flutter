@@ -1,23 +1,23 @@
-part of 'patient_resource_bloc.dart';
+part of 'patient_details_resource_bloc.dart';
 
 abstract class PatientState extends Equatable {
   const PatientState();
 }
 
-class LoadingPatient extends PatientState {
+class LoadingPatientDetails extends PatientState {
   final String patientId;
 
-  const LoadingPatient(this.patientId);
+  const LoadingPatientDetails(this.patientId);
 
   @override
   List<Object?> get props => [];
 }
 
-class DisplayingPatient extends PatientState {
+class DisplayingPatientDetails extends PatientState {
   final Patient patient;
   final Visit? visit;
 
-  const DisplayingPatient({
+  const DisplayingPatientDetails({
     required this.patient,
     this.visit,
   });

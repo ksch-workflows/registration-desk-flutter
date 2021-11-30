@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:registration_desk/pages/patient_details/patient_resource_bloc/patient_resource_bloc.dart';
-import 'package:registration_desk/widgets/content_card/content_card.dart';
-import 'package:registration_desk/widgets/scaffold/tabbed_details_panel.dart';
 
 import '../../api/patient/patient.dart';
 import '../../api/visit/visit.dart';
 import '../../routing.dart';
+import '../../widgets/content_card/content_card.dart';
 import '../../widgets/scaffold/scaffold.dart';
+import '../../widgets/scaffold/tabbed_details_panel.dart';
 import '../dashboard/index.dart';
+import 'patient_details_resource_bloc/patient_details_resource_bloc.dart';
 
 class PatientDetailsPage extends StatelessWidget {
   final String patientId;
@@ -26,15 +26,15 @@ class PatientDetailsPage extends StatelessWidget {
         );
       },
       child: BlocProvider(
-        create: (context) => PatientResourceBloc(patientId: patientId),
-        child: BlocBuilder<PatientResourceBloc, PatientState>(
+        create: (context) => PatientDetailsResourceBloc(patientId: patientId),
+        child: BlocBuilder<PatientDetailsResourceBloc, PatientState>(
           builder: (context, state) {
-            if (state is LoadingPatient) {
+            if (state is LoadingPatientDetails) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
             }
-            if (state is DisplayingPatient) {
+            if (state is DisplayingPatientDetails) {
               return TabbedDetailsPanel(
                 patient: state.patient,
                 tabs: [
