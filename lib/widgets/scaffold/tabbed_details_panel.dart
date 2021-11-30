@@ -55,7 +55,7 @@ class _TabbedDetailsPanelState extends State<TabbedDetailsPanel>
       children: [
         Container(
           // TODO: Move color definition into "constants.dart"
-          color: Colors.grey[300],
+          color: Colors.grey[350],
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -70,6 +70,7 @@ class _TabbedDetailsPanelState extends State<TabbedDetailsPanel>
                       controller: tabController,
                       // indicatorColor: Colors.red,
                       isScrollable: true,
+                      indicatorWeight: 4,
                       tabs: widget.tabs
                           .map((t) => Tab(
                                 child: Text(

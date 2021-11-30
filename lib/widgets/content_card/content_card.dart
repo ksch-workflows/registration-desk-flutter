@@ -20,12 +20,12 @@ class ContentCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return IntrinsicHeight(
       child: Card(
-        elevation: 5,
+        elevation: 10,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 10, 10, 5),
+              padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
               child: ListTile(
                 leading: Icon(title.icon, size: 50),
                 title: Text(title.text),
