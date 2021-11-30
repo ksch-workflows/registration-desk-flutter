@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:registration_desk/api/patient/patient.dart';
 import 'package:registration_desk/widgets/info_table/info_table.dart';
 
+final summaryPanelBackgroundColor = Colors.grey[350];
+
 // TODO(test): Should render first tab by default
 // TODO(test): Should render second tab
 // TODO(test): Should allow to switch tab
@@ -28,6 +30,82 @@ class _TabbedDetailsPanelState extends State<TabbedDetailsPanel>
   late TabController tabController;
   final ScrollController scrollController = ScrollController();
 
+  // TODO: Improve readability
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        _buildHeader(),
+        _buildDetailsView(),
+      ],
+    );
+  }
+
+  Container _buildHeader() {
+    return Container(
+      color: summaryPanelBackgroundColor,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          PatientSummary(widget.patient),
+          _buildTabBarPanel(),
+        ],
+      ),
+    );
+  }
+
+  Expanded _buildDetailsView() {
+    return Expanded(
+      child: Scrollbar(
+        isAlwaysShown: false,
+        controller: scrollController,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          controller: scrollController,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(100, 50, 100, 50),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: widget.tabs[tabController.index].child,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Padding _buildTabBarPanel() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(100, 0, 0, 0),
+      child: Align(
+        alignment: Alignment.bottomLeft,
+        child: ConstrainedBox(
+          constraints: BoxConstraints.loose(const Size(1200, 500)),
+          child: TabBar(
+            controller: tabController,
+            // indicatorColor: Colors.red,
+            isScrollable: true,
+            indicatorWeight: 4,
+            tabs: widget.tabs
+                .map((t) => Tab(
+                      child: Text(
+                        t.title,
+                        style: const TextStyle(color: Colors.black),
+                      ),
+                    ))
+                .toList(),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   void initState() {
     tabController = TabController(
@@ -47,70 +125,6 @@ class _TabbedDetailsPanelState extends State<TabbedDetailsPanel>
   void dispose() {
     tabController.dispose();
     super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          // TODO: Move color definition into "constants.dart"
-          color: Colors.grey[350],
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              PatientSummary(widget.patient),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(100, 0, 0, 0),
-                child: Align(
-                  alignment: Alignment.bottomLeft,
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints.loose(const Size(1200, 500)),
-                    child: TabBar(
-                      controller: tabController,
-                      // indicatorColor: Colors.red,
-                      isScrollable: true,
-                      indicatorWeight: 4,
-                      tabs: widget.tabs
-                          .map((t) => Tab(
-                                child: Text(
-                                  t.title,
-                                  style: const TextStyle(color: Colors.black),
-                                ),
-                              ))
-                          .toList(),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        Expanded(
-          child: Scrollbar(
-            isAlwaysShown: false,
-            controller: scrollController,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              controller: scrollController,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(100, 50, 100, 50),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: widget.tabs[tabController.index].child,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
   }
 }
 
@@ -186,4 +200,3 @@ class PatientSummary extends StatelessWidget {
     );
   }
 }
-
