@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:registration_desk/pages/patient_details/patient_details.dart';
-import 'package:registration_desk/pages/patient_details/patient_details_test_bench.dart';
+import 'package:registration_desk/pages/patient_details/index.dart';
+import 'package:registration_desk/pages/patient_details/patient_details_example.dart';
 import 'package:registration_desk/widgets/test_bench.dart';
 
 void main() {

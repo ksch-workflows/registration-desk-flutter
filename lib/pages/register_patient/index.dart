@@ -6,7 +6,7 @@ import '../../api/patient/patient_service.dart';
 import '../../api/visit/visit_service.dart';
 import '../../routing.dart';
 import '../../widgets/scaffold/generic_panel.dart';
-import '../../widgets/scaffold/scaffold.dart';
+import '../../widgets/scaffold/index.dart';
 import '../dashboard/index.dart';
 import 'register_patient_dialog/index.dart';
 

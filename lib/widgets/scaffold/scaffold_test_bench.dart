@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:registration_desk/widgets/test_bench.dart';
 
 import 'generic_panel.dart';
-import 'scaffold.dart';
+import 'index.dart';
 
 void main() {
   var panel = GenericPanel(

@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_relative_imports, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:registration_desk/widgets/content_card/content_card.dart';
+import 'package:registration_desk/widgets/content_card/index.dart';
 import 'package:registration_desk/widgets/test_bench.dart';
 
 void main() {

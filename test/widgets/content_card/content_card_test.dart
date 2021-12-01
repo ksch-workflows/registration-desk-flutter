@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:registration_desk/context.dart';
-import 'package:registration_desk/widgets/content_card/content_card.dart';
+import 'package:registration_desk/widgets/content_card/index.dart';
 import 'package:registration_desk/widgets/test_bench.dart';
 
 void main() {

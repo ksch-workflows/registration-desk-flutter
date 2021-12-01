@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:registration_desk/api/patient/patient.dart';
-import 'package:registration_desk/widgets/info_table/info_table.dart';
+import 'package:registration_desk/widgets/info_table/index.dart';
 
 final summaryPanelBackgroundColor = Colors.grey[350];
 
