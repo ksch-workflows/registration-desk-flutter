@@ -90,6 +90,7 @@ class _AppBar extends StatelessWidget {
           padding: const EdgeInsets.only(left: 20),
           child: Text(
             title,
+            key: const ValueKey('pageName'),
             style: const TextStyle(
               color: Colors.white,
               //fontWeight: FontWeight.bold,
