@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../api/patient/patient.dart';
@@ -9,6 +10,7 @@ import '../../widgets/scaffold/generic_panel.dart';
 import '../../widgets/scaffold/index.dart';
 import '../dashboard/index.dart';
 import '../patient_details/index.dart';
+import 'register_patient_bloc/register_patient_bloc.dart';
 import 'register_patient_dialog/index.dart';
 
 class RegisterPatientPage extends StatefulWidget {
@@ -27,52 +29,62 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
 
   @override
   Widget build(BuildContext context) {
-    return DesktopScaffold(
-      title: 'Register patient',
-      child: GenericPanel(
-        child: Column(
-          children: [
-            _buildActionRow(),
-            const SizedBox(height: 25),
-            _buildPatientTable(),
-          ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            searchTermController.clear();
-            final result = await _showRegisterPatientDialog(context);
-            if (result != null) {
-              final createdPatient =
-                  await patientService.create(result.patient);
-              visitService.startVisit(createdPatient.id!, result.visitType);
-            }
+    return BlocProvider(
+      create: (context) => RegisterPatientBloc(),
+      child: BlocListener<RegisterPatientBloc, RegisterPatientState>(
+        listener: (context, state) {
+          if (state is NavigatingToPatientDetailsPage) {
+            Navigator.push(context,
+                DesktopPageRoute(
+                    builder: (context) => PatientDetailsPage(state.patientId)));
+          }
+        },
+        child: BlocBuilder<RegisterPatientBloc, RegisterPatientState>(
+          builder: (context, state) {
+            return DesktopScaffold(
+              title: 'Register patient',
+              child: GenericPanel(
+                child: Column(
+                  children: [
+                    _buildActionRow(),
+                    const SizedBox(height: 25),
+                    _buildPatientTable(),
+                  ],
+                ),
+                floatingActionButton: FloatingActionButton(
+                  onPressed: () async {
+                    searchTermController.clear();
+                    final result = await _showRegisterPatientDialog(context);
+                    if (result != null) {
+                      context.read<RegisterPatientBloc>().add(
+                        NewPatientSaved(result.patient, result.visitType),
+                      );
+                    }
+                  },
+                  tooltip: 'Add new patient',
+                  child: const Icon(Icons.add),
+                ),
+              ),
+              onNavigateBack: () {
+                Navigator.push(context,
+                    DesktopPageRoute(
+                        builder: (context) => RegistrationDashboard()));
+              },
+            );
           },
-          tooltip: 'Add new patient',
-          child: const Icon(Icons.add),
         ),
       ),
-      onNavigateBack: () {
-        Navigator.push(context,
-            DesktopPageRoute(builder: (context) => RegistrationDashboard()));
-      },
     );
   }
 
   Future<RegisterPatientResult?> _showRegisterPatientDialog(
-    BuildContext context,
-  ) {
+      BuildContext context,) {
     return showDialog(
       context: context,
       builder: (context) {
         return RegisterPatientDialog(
           onDialogClose: (RegisterPatientResult result) {
-            // Navigator.pop(context, result);
-            Navigator.push(
-              context,
-              DesktopPageRoute(
-                builder: (context) => PatientDetailsPage(result.patient.id!),
-              ),
-            );
+            Navigator.pop(context, result);
           },
         );
       },
@@ -125,14 +137,15 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
 
   List<DataRow> _buildTableRows() {
     return matchingPatients!
-        .map((e) => DataRow(
-              cells: [
-                DataCell(Text(e.opdNumber ?? 'n/a')),
-                DataCell(Text(e.name ?? 'n/a')),
-                DataCell(Text(e.location ?? 'n/a')),
-                DataCell(Text(e.lastVisit?.toString() ?? 'n/a')),
-              ],
-            ))
+        .map((e) =>
+        DataRow(
+          cells: [
+            DataCell(Text(e.opdNumber ?? 'n/a')),
+            DataCell(Text(e.name ?? 'n/a')),
+            DataCell(Text(e.location ?? 'n/a')),
+            DataCell(Text(e.lastVisit?.toString() ?? 'n/a')),
+          ],
+        ))
         .toList();
   }
 
