@@ -8,6 +8,7 @@ import '../../routing.dart';
 import '../../widgets/scaffold/generic_panel.dart';
 import '../../widgets/scaffold/index.dart';
 import '../dashboard/index.dart';
+import '../patient_details/index.dart';
 import 'register_patient_dialog/index.dart';
 
 class RegisterPatientPage extends StatefulWidget {
@@ -52,7 +53,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
       ),
       onNavigateBack: () {
         Navigator.push(context,
-            WebPageRoute(builder: (context) => RegistrationDashboard()));
+            DesktopPageRoute(builder: (context) => RegistrationDashboard()));
       },
     );
   }
@@ -61,12 +62,21 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
     BuildContext context,
   ) {
     return showDialog(
-        context: context,
-        builder: (context) {
-          return RegisterPatientDialog(
-            onDialogClose: (result) => Navigator.pop(context, result),
-          );
-        });
+      context: context,
+      builder: (context) {
+        return RegisterPatientDialog(
+          onDialogClose: (RegisterPatientResult result) {
+            // Navigator.pop(context, result);
+            Navigator.push(
+              context,
+              DesktopPageRoute(
+                builder: (context) => PatientDetailsPage(result.patient.id!),
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 
   Widget _buildPatientTable() {

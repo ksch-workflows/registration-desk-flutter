@@ -22,7 +22,7 @@ class PatientDetailsPage extends StatelessWidget {
       onNavigateBack: () {
         Navigator.push(
           context,
-          WebPageRoute(builder: (context) => RegistrationDashboard()),
+          DesktopPageRoute(builder: (context) => RegistrationDashboard()),
         );
       },
       child: BlocProvider(

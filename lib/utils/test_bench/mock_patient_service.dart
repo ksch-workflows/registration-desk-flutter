@@ -6,7 +6,39 @@ import '../../api/patient/patient_service.dart';
 
 int _nextOptNumberSuffix = 9000;
 
-class MockPatientService extends Mock implements PatientService {}
+class MockPatientService extends Mock implements PatientService {
+
+  void whenGetThenAnswer(Patient patient, {int fetchDelayInSec = 0}) {
+    when(() => get(any())).thenAnswer(
+          (_) => Future.delayed(
+        Duration(seconds: fetchDelayInSec),
+            () {
+              print("Fetching patient");
+              return patient;
+            },
+      ),
+    );
+  }
+  
+  void whenGetThenAnswerWithMinimalPatient() {
+    final minimalPatient = Patient(
+      id: const Uuid().v4(),
+    );
+    whenGetThenAnswer(minimalPatient);
+  }
+
+  void whenGetThenAnswerWithCompletePatient(String name) {
+    final completePatient = Patient(
+      id: const Uuid().v4(),
+      name: name,
+      fatherName: 'John Doe',
+      location: 'Guesthouse',
+      gender: 'Female',
+      currentVisit: const Uuid().v4(),
+    );
+    whenGetThenAnswer(completePatient);
+  }
+}
 
 class InMemoryPatientService implements PatientService {
   @override

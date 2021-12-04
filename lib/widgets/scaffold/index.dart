@@ -76,7 +76,7 @@ class _AppBar extends StatelessWidget {
       icon: Icon(Icons.home, color: color),
       onPressed: () => Navigator.push(
         context,
-        WebPageRoute(builder: (context) => RegistrationDashboard()),
+        DesktopPageRoute(builder: (context) => RegistrationDashboard()),
       ),
     );
   }
