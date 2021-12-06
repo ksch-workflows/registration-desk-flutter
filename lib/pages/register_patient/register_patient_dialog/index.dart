@@ -82,6 +82,12 @@ class _RegisterPatientDialogState extends State<RegisterPatientDialog> {
       name: _model!.nameController.text,
       fatherName: _model!.fatherNameController.text,
       location: _model!.locationController.text,
+      category: null,
+      id: null,
+      currentVisit: null,
+      lastVisit: null,
+      gender: null,
+      opdNumber: null,
     );
     final result = RegisterPatientResult(
       patient: newPatient,

@@ -12,9 +12,3 @@ void initialiseContext(String apiBaseUrl) {
   GetIt.I.registerSingleton<PatientService>(PatientServiceImpl(apiBaseUrl));
   GetIt.I.registerSingleton<VisitService>(VisitServiceImpl(api));
 }
-
-@deprecated
-void initialiseInMemoryContext() {
-  GetIt.I.registerSingleton<PatientService>(InMemoryPatientService());
-  GetIt.I.registerSingleton<VisitService>(InMemoryVisitService());
-}

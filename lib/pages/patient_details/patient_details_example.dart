@@ -24,6 +24,9 @@ String setupMockPatient({int fetchDelayInSec = 1}) {
     location: 'Guesthouse',
     gender: 'Female',
     currentVisit: const Uuid().v4(),
+    category: null,
+    opdNumber: null,
+    lastVisit: null,
   );
 
   final visit = Visit(

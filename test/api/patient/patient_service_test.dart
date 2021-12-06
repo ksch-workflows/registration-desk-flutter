@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:ksch_dart_client/core.dart';
 import 'package:nock/nock.dart';
 import 'package:registration_desk/api/patient/patient.dart';
@@ -68,7 +69,7 @@ class CompletePatientResponse extends PatientResponsePayload {
         );
 }
 
-class JohnDoe implements Patient {
+class JohnDoe extends Equatable implements Patient  {
   final String fatherName = 'Max Mustermann';
   final String gender = 'MALE';
   final String id = const Uuid().v4();
@@ -78,4 +79,17 @@ class JohnDoe implements Patient {
   final String name = 'John Doe';
   final String opdNumber = '10-12354';
   final String category = 'OPD';
+
+  @override
+  List<Object?> get props => [
+    id,
+    opdNumber,
+    name,
+    fatherName,
+    location,
+    gender,
+    currentVisit,
+    lastVisit,
+    category,
+  ];
 }

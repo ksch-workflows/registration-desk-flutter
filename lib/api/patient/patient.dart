@@ -1,7 +1,8 @@
+import 'package:equatable/equatable.dart';
 import 'package:ksch_dart_client/core.dart';
 import 'package:registration_desk/api/visit/visit.dart';
 
-class Patient {
+class Patient extends Equatable {
   final String? id;
   final String? opdNumber;
   final String? name;
@@ -13,16 +14,16 @@ class Patient {
   final DateTime? lastVisit;
   final String? category;
 
-  Patient({
-    this.id,
-    this.opdNumber,
-    this.name,
-    this.fatherName,
-    this.location,
-    this.gender,
-    this.currentVisit,
-    this.lastVisit,
-    this.category,
+  const Patient({
+    required this.id,
+    required this.opdNumber,
+    required this.name,
+    required this.fatherName,
+    required this.location,
+    required this.gender,
+    required this.currentVisit,
+    required this.lastVisit,
+    required this.category,
   });
 
   Patient.from(PatientResponsePayload payload)
@@ -35,4 +36,17 @@ class Patient {
         category = payload.patientCategory,
         currentVisit = payload.links.currentVisit?.visitId,
         lastVisit = null;
+
+  @override
+  List<Object?> get props => [
+    id,
+    opdNumber,
+    name,
+    fatherName,
+    location,
+    gender,
+    currentVisit,
+    lastVisit,
+    category,
+  ];
 }

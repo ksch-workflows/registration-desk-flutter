@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:uuid/uuid.dart';
 
+import '../../api/patient/patient.dart';
 import '../../api/patient/patient_service.dart';
 import '../../api/visit/visit_service.dart';
 import '../../utils/test_bench/mock_patient_service.dart';
@@ -10,7 +12,17 @@ import 'index.dart';
 
 void main() {
   var patientService = MockPatientService();
-  patientService.whenGetThenAnswerWithMinimalPatient();
+  patientService.patientResponse = Patient(
+    id: const Uuid().v4(),
+    gender: null,
+    fatherName: null,
+    lastVisit: null,
+    currentVisit: null,
+    opdNumber: null,
+    category: null,
+    location: null,
+    name: null,
+  );
 
   var visitService = MockVisitService();
 
