@@ -23,13 +23,15 @@ class VisitServiceImpl implements VisitService {
       id: response.id,
       patientId: patientId,
       type: response.type,
+      timeStart: response.timeStart,
+      opdNumber: response.opdNumber,
     );
-    print(
-        "[INFO] Started visit '${result.id}' of type '${type.name}' for patient '$patientId'.");
+    print("[INFO] Started visit '${result.id}' of type '${type.name}' for "
+            "patient '$patientId'.");
     return result;
   }
 
-  // TODO This method needs a unit test
+  // TODO(test): This method needs a unit test
   @override
   Future<Visit> get({
     required String patientId,
@@ -40,6 +42,8 @@ class VisitServiceImpl implements VisitService {
       id: response.id,
       patientId: patientId,
       type: response.type,
+      opdNumber: response.opdNumber,
+      timeStart: response.timeStart,
     );
   }
 }

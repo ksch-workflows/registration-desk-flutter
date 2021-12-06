@@ -13,6 +13,8 @@ class DummyVisitService implements VisitService {
       id: const Uuid().v4(),
       patientId: patientId,
       type: type,
+      timeStart: DateTime.now(),
+      opdNumber: '10-1110132'
     );
     visitResponse = result;
     return result;
