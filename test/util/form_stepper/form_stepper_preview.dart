@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:registration_desk/widgets/form_stepper/form_stepper.dart';
 import 'package:registration_desk/widgets/test_bench.dart';
 
-// Start via commandline: flutter run -d chrome test/widgets/form_stepper/form_stepper_example.dart
+// Start via commandline: flutter run -d chrome test/widgets/form_stepper/form_stepper_preview.dart
 void main() {
   runApp(
     TestBench(
