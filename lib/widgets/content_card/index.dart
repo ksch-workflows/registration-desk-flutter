@@ -31,9 +31,12 @@ class ContentCard extends StatelessWidget {
                 title: Text(title.text),
               ),
             ),
-            info.isNotEmpty
-                ? _InfoTextFields(info: info)
-                : _buildEmptyState(),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(25, 15, 40, 20),
+              child: info.isNotEmpty
+                  ? _InfoTextFields(info: info)
+                  : _buildEmptyState(),
+            ),
             Padding(
               padding: const EdgeInsets.fromLTRB(15, 5, 5, 10),
               child: Row(
@@ -188,9 +191,6 @@ class _InfoTextFieldsState extends State<_InfoTextFields> {
         children.add(const SizedBox(height: 20));
       }
     }
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(25, 15, 40, 20),
-      child: Column(children: children),
-    );
+    return Column(children: children);
   }
 }

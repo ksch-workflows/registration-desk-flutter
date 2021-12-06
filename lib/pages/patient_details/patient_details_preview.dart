@@ -22,7 +22,7 @@ String setupMockPatient({int fetchDelayInSec = 1}) {
     fatherName: 'John Doe',
     location: 'Guesthouse',
     gender: 'Female',
-    currentVisit: null,
+    currentVisit: const Uuid().v4(),
     category: null,
     opdNumber: null,
     lastVisit: null,
@@ -30,7 +30,7 @@ String setupMockPatient({int fetchDelayInSec = 1}) {
   patientService.patientResponse = patient;
   patientService.delay = Duration(seconds: fetchDelayInSec);
 
-  // visitService.startVisit(patient.id!, VisitType.OPD);
+  visitService.startVisit(patient.id!, VisitType.OPD);
 
   GetIt.I.registerSingleton<PatientService>(patientService);
   GetIt.I.registerSingleton<VisitService>(visitService);
