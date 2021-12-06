@@ -47,6 +47,7 @@ class PatientDetailsPage extends StatelessWidget {
                     child: VisitsTabContent(currentVisit: state.visit),
                   ),
                 ],
+                initialTabIndex: 1,
               );
             }
             return const Text('An error occurred');

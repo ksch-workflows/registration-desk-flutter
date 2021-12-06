@@ -76,5 +76,6 @@ void main() {
     expect(pageNameWidget.data, equals('Patient details'));
 
     // Verify that the visits tab has been opened
+    expect(find.text('Current visit'), findsOneWidget);
   });
 }
