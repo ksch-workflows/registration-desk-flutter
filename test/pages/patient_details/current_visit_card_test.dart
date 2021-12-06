@@ -53,7 +53,7 @@ void main() {
     expect(find.text('Current visit'), findsWidgets);
   });
 
-  testWidgets('Should show formatted start date', (tester) async {
+  testWidgets('Should show formatted visit details', (tester) async {
     tester.binding.window.textScaleFactorTestValue = 0.2;
 
     var time = const Time(hour: 20, minute: 40);
@@ -74,5 +74,6 @@ void main() {
     ));
 
     expect(find.text('Wednesday, 13-10-2021, 8:40p.m.'), findsWidgets);
+    expect(find.text('OPD'), findsWidgets);
   });
 }

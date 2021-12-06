@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ksch_dart_client/resources.dart';
+import 'package:ksch_dart_client/resources.dart';
 
 import '../../api/visit/visit.dart';
 import '../../utils/time.dart';
@@ -35,7 +37,10 @@ class CurrentVisitCard extends StatelessWidget {
           key: 'Start',
           value: currentVisit!.timeStart.toFormattedString(),
         ),
-        ContentCardInfo(key: 'Type', value: currentVisit!.type.toString()),
+        ContentCardInfo(
+          key: 'Type',
+          value: Name.of(VisitType.OPD),
+        ),
       ],
       buttons: [
         ContentCardButton(title: 'Print registration card', onPressed: () {}),
