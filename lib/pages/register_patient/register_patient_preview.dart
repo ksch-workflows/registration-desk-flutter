@@ -5,14 +5,14 @@ import 'package:uuid/uuid.dart';
 import '../../api/patient/patient.dart';
 import '../../api/patient/patient_service.dart';
 import '../../api/visit/visit_service.dart';
-import '../../utils/test_bench/mock_patient_service.dart';
-import '../../utils/test_bench/mock_visit_service.dart';
+import '../../utils/test_bench/dummy_patient_service.dart';
+import '../../utils/test_bench/dummy_visit_service.dart';
 import '../../widgets/test_bench.dart';
 import 'index.dart';
 
 void main() {
-  var patientService = MockPatientService();
-  var visitService = MockVisitService();
+  var patientService = DummyPatientService();
+  var visitService = DummyVisitService();
 
   GetIt.I.registerSingleton<PatientService>(patientService);
   GetIt.I.registerSingleton<VisitService>(visitService);

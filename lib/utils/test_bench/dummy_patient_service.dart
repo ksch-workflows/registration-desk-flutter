@@ -3,7 +3,7 @@ import 'package:uuid/uuid.dart';
 import '../../api/patient/patient.dart';
 import '../../api/patient/patient_service.dart';
 
-class MockPatientService implements PatientService {
+class DummyPatientService implements PatientService {
   late List<Patient> patientsResponse;
   late Patient patientResponse;
 
