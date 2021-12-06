@@ -12,18 +12,6 @@ import 'index.dart';
 
 void main() {
   var patientService = MockPatientService();
-  patientService.patientResponse = Patient(
-    id: const Uuid().v4(),
-    gender: null,
-    fatherName: null,
-    lastVisit: null,
-    currentVisit: null,
-    opdNumber: null,
-    category: null,
-    location: null,
-    name: null,
-  );
-
   var visitService = MockVisitService();
 
   GetIt.I.registerSingleton<PatientService>(patientService);

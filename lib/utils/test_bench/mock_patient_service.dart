@@ -31,7 +31,7 @@ class MockPatientService implements PatientService {
         category: null,
       );
     }
-    return Patient(
+    var result = Patient(
       id: const Uuid().v4(),
       opdNumber: patient.opdNumber,
       name: patient.name,
@@ -42,6 +42,8 @@ class MockPatientService implements PatientService {
       lastVisit: patient.lastVisit,
       category: patient.category,
     );
+    patientResponse = result;
+    return result;
   }
 
   @override
