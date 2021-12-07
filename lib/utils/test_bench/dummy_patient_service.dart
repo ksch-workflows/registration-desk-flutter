@@ -17,7 +17,7 @@ class DummyPatientService implements PatientService {
 
   @override
   Future<Patient> create(Patient? patient) async {
-    _simulateNetworkDelay();
+    await _simulateNetworkDelay();
     if (patient == null) {
       return Patient(
         id: const Uuid().v4(),
@@ -48,7 +48,7 @@ class DummyPatientService implements PatientService {
 
   @override
   Future<Patient> get(String patientId) async {
-    _simulateNetworkDelay();
+    await _simulateNetworkDelay();
     return Patient(
       id: patientId,
       opdNumber: patientResponse.opdNumber,
@@ -64,7 +64,7 @@ class DummyPatientService implements PatientService {
 
   @override
   Future<List<Patient>> find(String query) async {
-    _simulateNetworkDelay();
+    await _simulateNetworkDelay();
     return patientsResponse;
   }
 }

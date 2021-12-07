@@ -116,7 +116,7 @@ extension WidgetTesterExtensions on WidgetTester {
   void printStringValueKeys() {
     print(
         '══╡ CURRENT STRING VALUE KEYS ╞═══════════════════════════════════════'
-            '══════════════════════════════');
+        '══════════════════════════════');
     allWidgets
         .map((widget) => widget.key)
         .whereType<ValueKey>()

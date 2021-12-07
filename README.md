@@ -103,8 +103,8 @@ It is recommended to add the following [Git hooks](https://git-scm.com/book/en/v
 ```bash
 #!/bin/bash
 
+dart format . --set-exit-if-changed
 flutter test
-dart format .
 ```
 
 `.git/hooks/pre-push`:
