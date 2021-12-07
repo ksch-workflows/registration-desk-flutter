@@ -5,30 +5,26 @@ import 'package:registration_desk/api/patient/patient.dart';
 import 'package:registration_desk/api/patient/patient_service.dart';
 import 'package:registration_desk/api/visit/visit_service.dart';
 import 'package:registration_desk/pages/register_patient/index.dart';
+import 'package:registration_desk/utils/test_bench/dummy_context.dart';
 import 'package:registration_desk/utils/test_bench/dummy_patient_service.dart';
 import 'package:registration_desk/utils/test_bench/dummy_visit_service.dart';
 import 'package:registration_desk/widgets/test_bench.dart';
 import 'package:uuid/uuid.dart';
 
 void main() {
-  late DummyPatientService mockPatientService;
-  late DummyVisitService mockVisitService;
+  late DummyContext ctx;
 
   setUp(() {
-    mockPatientService = DummyPatientService();
-    GetIt.I.registerSingleton<PatientService>(mockPatientService);
-
-    mockVisitService = DummyVisitService();
-    GetIt.I.registerSingleton<VisitService>(mockVisitService);
+    ctx = DummyContext()..init();
   });
 
-  tearDown(() {
-    GetIt.I.reset();
+  tearDown(() async {
+    await GetIt.I.reset();
   });
 
   testWidgets('Should show search results', (tester) async {
     tester.binding.window.textScaleFactorTestValue = 0.2;
-    mockPatientService.patientsResponse = [
+    ctx.patientService.patientsResponse = [
       Patient(
         id: const Uuid().v4(),
         opdNumber: null,
@@ -67,7 +63,7 @@ void main() {
 
   testWidgets('Should show message about no search results', (tester) async {
     tester.binding.window.textScaleFactorTestValue = 0.2;
-    mockPatientService.patientsResponse = [];
+    ctx.patientService.patientsResponse = [];
 
     await tester.pumpWidget(TestBench(
       child: RegisterPatientPage(),
