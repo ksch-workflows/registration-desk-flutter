@@ -13,7 +13,7 @@ abstract class PatientService {
 class PatientServiceImpl implements PatientService {
   final KschApi _api;
 
-  PatientServiceImpl(String baseUrl) : _api = KschApi(baseUrl);
+  PatientServiceImpl(this._api);
 
   @override
   Future<Patient> create(Patient? patient) async {

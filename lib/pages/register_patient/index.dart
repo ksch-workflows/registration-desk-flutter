@@ -83,7 +83,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
       context: context,
       builder: (context) {
         return RegisterPatientDialog(
-          onDialogClose: (RegisterPatientResult result) {
+          onDialogClose: (result) {
             Navigator.pop(context, result);
           },
         );

@@ -16,7 +16,7 @@ void main() {
   setUp(() {
     nock.cleanAll();
 
-    patientService = PatientServiceImpl('http://localhost');
+    patientService = PatientServiceImpl(KschApi('http://localhost'));
   });
 
   test('Should create patient', () async {

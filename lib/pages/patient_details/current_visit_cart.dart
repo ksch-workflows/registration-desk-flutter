@@ -39,7 +39,7 @@ class CurrentVisitCard extends StatelessWidget {
         ),
         ContentCardInfo(
           key: 'Type',
-          value: Name.of(VisitType.OPD),
+          value: Name.of(currentVisit!.type),
         ),
       ],
       buttons: [

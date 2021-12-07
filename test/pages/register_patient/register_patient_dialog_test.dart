@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:registration_desk/api/patient/patient.dart';
@@ -77,5 +78,73 @@ void main() {
 
     // Verify that the visits tab has been opened
     expect(find.text('Current visit'), findsOneWidget);
+  });
+
+  testWidgets('Should allow to cancel patient registration',
+      (tester) async {
+    tester.binding.window.textScaleFactorTestValue = 0.2;
+
+    // Open "Register patient" page
+    var widget = RegisterPatientPage();
+    await tester.pumpWidget(TestBench(
+      child: widget,
+    ));
+
+    // Open "Register patient" wizard
+    await tester.tap(find.byIcon(Icons.add));
+    await tester.pumpAndSettle();
+
+    // Enter personal data
+    await tester.enterText(
+      find.byKey(const ValueKey('patientNameInput')),
+      'John Doe',
+    );
+    await tester.tap(find.byKey(const ValueKey('continueButton')));
+    await tester.pumpAndSettle();
+
+    // Cancel registration
+    await tester.tap(find.byKey(const ValueKey('cancelButton')));
+    await tester.pumpAndSettle();
+
+    // Re-open "Register patient" wizard
+    await tester.tap(find.byIcon(Icons.add));
+    await tester.pumpAndSettle();
+
+    // Check that patient name is not present
+    expect(find.text('John Doe'), findsNothing);
+  });
+
+  testWidgets('Should allow to pause and resume patient registration',
+      (tester) async {
+    tester.binding.window.textScaleFactorTestValue = 0.2;
+
+    // Open "Register patient" page
+    var widget = RegisterPatientPage();
+    await tester.pumpWidget(TestBench(
+      child: widget,
+    ));
+
+    // Open "Register patient" wizard
+    await tester.tap(find.byIcon(Icons.add));
+    await tester.pumpAndSettle();
+
+    // Enter personal data
+    await tester.enterText(
+      find.byKey(const ValueKey('patientNameInput')),
+      'John Doe',
+    );
+    await tester.tap(find.byKey(const ValueKey('continueButton')));
+    await tester.pumpAndSettle();
+
+    // Click outside of dialog
+    await tester.sendKeyEvent(LogicalKeyboardKey.escape);
+    await tester.pumpAndSettle();
+
+    // Re-open "Register patient" wizard
+    await tester.tap(find.byIcon(Icons.add));
+    await tester.pumpAndSettle();
+
+    // Check that patient name is present
+    expect(find.text('John Doe'), findsOneWidget);
   });
 }

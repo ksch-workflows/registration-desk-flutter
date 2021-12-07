@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:uuid/uuid.dart';
 
-import '../../api/patient/patient.dart';
 import '../../api/patient/patient_service.dart';
 import '../../api/visit/visit_service.dart';
 import '../../utils/test_bench/dummy_patient_service.dart';

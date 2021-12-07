@@ -7,8 +7,5 @@ import 'utils/test_bench/dummy_patient_service.dart';
 import 'utils/test_bench/dummy_visit_service.dart';
 
 void initialiseContext(String apiBaseUrl) {
-  var api = KschApi(apiBaseUrl);
 
-  GetIt.I.registerSingleton<PatientService>(PatientServiceImpl(apiBaseUrl));
-  GetIt.I.registerSingleton<VisitService>(VisitServiceImpl(api));
 }

@@ -18,7 +18,7 @@ class VisitServiceImpl implements VisitService {
   @override
   Future<Visit> startVisit(String patientId, VisitType type) async {
     var response =
-        await _api.patients(patientId).visits.startVisit(VisitType.OPD);
+        await _api.patients(patientId).visits.startVisit(type);
     var result = Visit(
       id: response.id,
       patientId: patientId,
