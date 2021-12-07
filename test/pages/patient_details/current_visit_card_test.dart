@@ -7,7 +7,7 @@ import 'package:ksch_dart_client/resources.dart';
 import 'package:registration_desk/api/patient/patient_service.dart';
 import 'package:registration_desk/api/visit/visit.dart';
 import 'package:registration_desk/api/visit/visit_service.dart';
-import 'package:registration_desk/pages/patient_details/current_visit_cart.dart';
+import 'package:registration_desk/pages/patient_details/tabs/current_visit_cart.dart';
 import 'package:registration_desk/utils/test_bench/dummy_patient_service.dart';
 import 'package:registration_desk/utils/test_bench/dummy_visit_service.dart';
 import 'package:registration_desk/utils/time.dart';

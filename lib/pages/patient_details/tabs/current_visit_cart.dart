@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ksch_dart_client/resources.dart';
 
-import '../../api/visit/visit.dart';
-import '../../utils/time.dart';
-import '../../widgets/content_card/index.dart';
+import '../../../api/visit/visit.dart';
+import '../../../utils/time.dart';
+import '../../../widgets/content_card/index.dart';
 
 class CurrentVisitCard extends StatelessWidget {
   final Visit? currentVisit;
