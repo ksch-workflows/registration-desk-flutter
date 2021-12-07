@@ -79,9 +79,9 @@ class _RegisterPatientDialogState extends State<RegisterPatientDialog> {
 
   void save() {
     final newPatient = Patient(
-      name: _notEmptyOrNull(_model!.nameController.text),
-      fatherName: _notEmptyOrNull(_model!.fatherNameController.text),
-      location: _notEmptyOrNull(_model!.locationController.text),
+      name: _model!.nameController.text.notEmptyOrNull,
+      fatherName: _model!.fatherNameController.text.notEmptyOrNull,
+      location: _model!.locationController.text.notEmptyOrNull,
       category: null,
       id: null,
       currentVisit: null,
@@ -98,16 +98,18 @@ class _RegisterPatientDialogState extends State<RegisterPatientDialog> {
     widget.onDialogClose(result);
   }
 
-  String? _notEmptyOrNull(String value) {
-    if (value.trim().isEmpty) {
-      return null;
-    } else {
-      return value;
-    }
-  }
-
   void cancel() {
     SingletonBucket.reset<_RegisterPatientDialogModel>();
     widget.onDialogClose(null);
+  }
+}
+
+extension NotEmptyOrNull on String {
+  String? get notEmptyOrNull {
+    if (trim().isEmpty) {
+      return null;
+    } else {
+      return this;
+    }
   }
 }

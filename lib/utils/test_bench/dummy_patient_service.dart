@@ -19,7 +19,7 @@ class DummyPatientService implements PatientService {
   Future<Patient> create(Patient? patient) async {
     await _simulateNetworkDelay();
     if (patient == null) {
-      return Patient(
+      patientResponse = Patient(
         id: const Uuid().v4(),
         opdNumber: null,
         name: null,
@@ -30,20 +30,20 @@ class DummyPatientService implements PatientService {
         lastVisit: null,
         category: null,
       );
+    } else {
+      patientResponse = Patient(
+        id: const Uuid().v4(),
+        opdNumber: patient.opdNumber,
+        name: patient.name,
+        fatherName: patient.fatherName,
+        location: patient.location,
+        gender: patient.gender,
+        currentVisit: patient.currentVisit,
+        lastVisit: patient.lastVisit,
+        category: patient.category,
+      );
     }
-    var result = Patient(
-      id: const Uuid().v4(),
-      opdNumber: patient.opdNumber,
-      name: patient.name,
-      fatherName: patient.fatherName,
-      location: patient.location,
-      gender: patient.gender,
-      currentVisit: patient.currentVisit,
-      lastVisit: patient.lastVisit,
-      category: patient.category,
-    );
-    patientResponse = result;
-    return result;
+    return patientResponse;
   }
 
   @override
