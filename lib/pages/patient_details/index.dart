@@ -29,7 +29,7 @@ class PatientDetailsPage extends StatelessWidget {
           }
         },
         buildWhen: (previous, current) {
-          return current is LoadingPatientDetails;
+          return previous is LoadingPatientDetails;
         },
         builder: (context, state) {
           return DesktopScaffold(
