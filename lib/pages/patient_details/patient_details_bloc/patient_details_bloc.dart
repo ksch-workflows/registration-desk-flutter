@@ -9,23 +9,30 @@ import '../../../api/patient/patient_service.dart';
 import '../../../api/visit/visit.dart';
 import '../../../api/visit/visit_service.dart';
 
-part 'patient_details_resource_event.dart';
-part 'patient_details_resource_state.dart';
+part 'patient_details_event.dart';
 
-class PatientDetailsResourceBloc extends Bloc<PatientEvent, PatientState> {
+part 'patient_details_state.dart';
+
+class PatientDetailsBloc
+    extends Bloc<PatientDetailsEvent, PatientDetailsState> {
   final PatientService patientService = GetIt.I.get();
   final VisitService visitService = GetIt.I.get();
 
   final String patientId;
 
-  PatientDetailsResourceBloc({
+  PatientDetailsBloc({
     required this.patientId,
   }) : super(LoadingPatientDetails(patientId)) {
-    on<PatientEvent>((event, emit) {
+    on<PatientLoaded>((event, emit) {
       emit(
         DisplayingPatientDetails(patient: event.patient, visit: event.visit),
       );
     });
+
+    on<NavigateBackRequested>((event, emit) {
+      emit(NavigatingBack());
+    });
+
     _fetchPatientDetails();
   }
 

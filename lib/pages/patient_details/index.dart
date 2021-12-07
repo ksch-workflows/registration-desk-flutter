@@ -9,7 +9,7 @@ import '../../widgets/scaffold/index.dart';
 import '../../widgets/scaffold/tabbed_details_panel.dart';
 import '../dashboard/index.dart';
 import 'current_visit_cart.dart';
-import 'patient_details_resource_bloc/patient_details_resource_bloc.dart';
+import 'patient_details_bloc/patient_details_bloc.dart';
 
 class PatientDetailsPage extends StatelessWidget {
   final String patientId;
@@ -18,42 +18,55 @@ class PatientDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DesktopScaffold(
-      title: 'Patient details',
-      onNavigateBack: () {
-        Navigator.push(
-          context,
-          DesktopPageRoute(builder: (context) => RegistrationDashboard()),
-        );
-      },
-      child: BlocProvider(
-        create: (context) => PatientDetailsResourceBloc(patientId: patientId),
-        child: BlocBuilder<PatientDetailsResourceBloc, PatientState>(
-          builder: (context, state) {
-            if (state is LoadingPatientDetails) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            if (state is DisplayingPatientDetails) {
-              return TabbedDetailsPanel(
-                patient: state.patient,
-                tabs: [
-                  SummaryPanelTab(
-                    title: 'General',
-                    child: GeneralTabContent(patient: state.patient),
-                  ),
-                  SummaryPanelTab(
-                    title: 'Visits',
-                    child: VisitsTabContent(currentVisit: state.visit),
-                  ),
-                ],
-                initialTabIndex: 1,
-              );
-            }
-            return const Text('An error occurred');
-          },
-        ),
+    return BlocProvider(
+      create: (context) => PatientDetailsBloc(patientId: patientId),
+      child: BlocConsumer<PatientDetailsBloc, PatientDetailsState>(
+        listener: (context, state) {
+          if (state is NavigatingBack) {
+            Navigator.push(
+              context,
+              DesktopPageRoute(builder: (context) => RegistrationDashboard()),
+            );
+            return;
+          }
+        },
+        buildWhen: (previous, current) {
+          return current is LoadingPatientDetails;
+        },
+        builder: (context, state) {
+          return DesktopScaffold(
+            title: 'Patient details',
+            onNavigateBack: () {
+              context.read<PatientDetailsBloc>().add(NavigateBackRequested());
+            },
+            child: BlocBuilder<PatientDetailsBloc, PatientDetailsState>(
+              builder: (context, state) {
+                if (state is LoadingPatientDetails) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                if (state is DisplayingPatientDetails) {
+                  return TabbedDetailsPanel(
+                    patient: state.patient,
+                    tabs: [
+                      SummaryPanelTab(
+                        title: 'General',
+                        child: GeneralTabContent(patient: state.patient),
+                      ),
+                      SummaryPanelTab(
+                        title: 'Visits',
+                        child: VisitsTabContent(currentVisit: state.visit),
+                      ),
+                    ],
+                    initialTabIndex: 1,
+                  );
+                }
+                return const Text('An error occurred');
+              },
+            ),
+          );
+        },
       ),
     );
   }
