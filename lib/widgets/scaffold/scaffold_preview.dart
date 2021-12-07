@@ -9,7 +9,7 @@ import 'index.dart';
 
 void main() {
   var panel = GenericPanel(
-    child: Text('Hello, web scaffold'),
+    child: Text('Hello, desktop scaffold'),
     floatingActionButton: FloatingActionButton(
       onPressed: () {
         // Add your onPressed code here!

@@ -147,9 +147,6 @@ class PatientSummary extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 100,
-      // decoration: BoxDecoration(
-      //   border: Border.all(),
-      // ),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(100, 20, 100, 0),
         child: Row(
@@ -159,7 +156,6 @@ class PatientSummary extends StatelessWidget {
               alignment: Alignment.topLeft,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     patient.name ?? 'unknown',
