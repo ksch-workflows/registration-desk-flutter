@@ -5,9 +5,6 @@ import '../info_table/index.dart';
 
 final summaryPanelBackgroundColor = Colors.grey[350];
 
-// TODO(test): Should render first tab by default
-// TODO(test): Should render second tab
-// TODO(test): Should allow to switch tab
 class TabbedDetailsPanel extends StatefulWidget {
   final Patient patient;
   final List<SummaryPanelTab> tabs;
