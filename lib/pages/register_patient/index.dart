@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../api/patient/patient.dart';
 import '../../api/patient/patient_service.dart';
 import '../../api/visit/visit_service.dart';
 import '../../routing.dart';
-import '../../widgets/scaffold.dart';
+import '../../widgets/scaffold/generic_panel.dart';
+import '../../widgets/scaffold/index.dart';
 import '../dashboard/index.dart';
+import '../patient_details/index.dart';
+import 'register_patient_bloc/register_patient_bloc.dart';
 import 'register_patient_dialog/index.dart';
 
 class RegisterPatientPage extends StatefulWidget {
@@ -24,36 +28,53 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
   final VisitService visitService = GetIt.I<VisitService>();
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return WebScaffold(
-      title: 'Register patient',
-      body: Column(
-        children: [
-          _buildActionRow(),
-          const SizedBox(height: 25),
-          _buildPatientTable(),
-        ],
-      ),
-      onNavigateBack: () {
-        Navigator.push(context,
-            WebPageRoute(builder: (context) => RegistrationDashboard()));
-      },
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          searchTermController.clear();
-          final result = await _showRegisterPatientDialog(context);
-          if (result != null) {
-            final createdPatient = await patientService.create(result.patient);
-            visitService.startVisit(createdPatient.id!, result.visitType);
+    return BlocProvider(
+      create: (context) => RegisterPatientBloc(),
+      child: BlocListener<RegisterPatientBloc, RegisterPatientState>(
+        listener: (context, state) {
+          if (state is NavigatingToPatientDetailsPage) {
+            Navigator.push(
+                context,
+                DesktopPageRoute(
+                    builder: (context) => PatientDetailsPage(state.patientId)));
           }
         },
-        tooltip: 'Add new patient',
-        child: const Icon(Icons.add),
+        child: BlocBuilder<RegisterPatientBloc, RegisterPatientState>(
+          builder: (context, state) {
+            return DesktopScaffold(
+              title: 'Register patient',
+              child: GenericPanel(
+                child: Column(
+                  children: [
+                    _buildActionRow(),
+                    const SizedBox(height: 25),
+                    _buildPatientTable(),
+                  ],
+                ),
+                floatingActionButton: FloatingActionButton(
+                  onPressed: () async {
+                    searchTermController.clear();
+                    final result = await _showRegisterPatientDialog(context);
+                    if (result != null) {
+                      context.read<RegisterPatientBloc>().add(
+                            NewPatientSaved(result.patient, result.visitType),
+                          );
+                    }
+                  },
+                  tooltip: 'Add new patient',
+                  child: const Icon(Icons.add),
+                ),
+              ),
+              onNavigateBack: () {
+                Navigator.push(
+                    context,
+                    DesktopPageRoute(
+                        builder: (context) => RegistrationDashboard()));
+              },
+            );
+          },
+        ),
       ),
     );
   }
@@ -62,12 +83,15 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
     BuildContext context,
   ) {
     return showDialog(
-        context: context,
-        builder: (context) {
-          return RegisterPatientDialog(
-            onDialogClose: (result) => Navigator.pop(context, result),
-          );
-        });
+      context: context,
+      builder: (context) {
+        return RegisterPatientDialog(
+          onDialogClose: (result) {
+            Navigator.pop(context, result);
+          },
+        );
+      },
+    );
   }
 
   Widget _buildPatientTable() {

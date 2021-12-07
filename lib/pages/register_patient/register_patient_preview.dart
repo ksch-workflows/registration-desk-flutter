@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 
-import '../../context.dart';
+import '../../utils/test_bench/dummy_context.dart';
 import '../../widgets/test_bench.dart';
 import 'index.dart';
 
 void main() {
-  initialiseMockContext();
+  DummyContext()..init();
 
   runApp(
     TestBench(
       child: RegisterPatientPage(),
-      isFullPage: true,
     ),
   );
 }

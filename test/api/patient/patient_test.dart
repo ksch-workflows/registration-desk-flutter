@@ -30,6 +30,7 @@ class TestPatient extends Equatable implements Patient {
   final String name;
   final String? fatherName;
   final String? id;
+  final String? currentVisit;
   final DateTime? lastVisit;
   final String? location;
   final String? gender;
@@ -40,6 +41,7 @@ class TestPatient extends Equatable implements Patient {
       : name = payload.name!,
         fatherName = null,
         id = payload.id,
+        currentVisit = null,
         lastVisit = null,
         location = payload.residentialAddress,
         gender = payload.gender,
@@ -50,6 +52,7 @@ class TestPatient extends Equatable implements Patient {
       : name = patient.name!,
         fatherName = patient.fatherName,
         id = patient.id,
+        currentVisit = null,
         lastVisit = patient.lastVisit,
         location = patient.location,
         gender = patient.gender,
@@ -61,6 +64,7 @@ class TestPatient extends Equatable implements Patient {
         name,
         fatherName,
         id,
+        currentVisit,
         lastVisit,
         location,
         gender,

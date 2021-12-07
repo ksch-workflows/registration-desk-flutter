@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:ksch_dart_client/core.dart';
 
+import 'api/patient/patient_service.dart';
+import 'api/visit/visit_service.dart';
 import 'app.dart';
-import 'context.dart';
 
 void main() {
-  var apiBaseUrl = const String.fromEnvironment(
-    'apiBaseUrl',
-    defaultValue: 'http://localhost:8080',
+  var api = KschApi(
+    const String.fromEnvironment(
+      'apiBaseUrl',
+      defaultValue: 'http://localhost:8080',
+    ),
   );
-  initialiseContext(apiBaseUrl);
+
+  GetIt.I.registerSingleton<PatientService>(PatientServiceImpl(api));
+  GetIt.I.registerSingleton<VisitService>(VisitServiceImpl(api));
 
   runApp(RegistrationDeskApp());
 }

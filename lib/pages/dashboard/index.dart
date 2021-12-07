@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
 
 import '../../routing.dart';
-import '../../widgets/scaffold.dart';
+import '../../widgets/scaffold/generic_panel.dart';
+import '../../widgets/scaffold/index.dart';
 import '../../widgets/test_bench.dart';
 import '../register_patient/index.dart';
 
 class RegistrationDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return WebScaffold(
+    return DesktopScaffold(
       title: 'Dashboard',
-      body: Align(
-        alignment: Alignment.topLeft,
-        child: Container(
-          padding: const EdgeInsets.fromLTRB(100, 30, 0, 0),
-          child: Wrap(
-            alignment: WrapAlignment.start,
-            children: const [
-              TileButton(icon: Icons.menu_book, title: 'Register patient'),
-            ],
+      child: GenericPanel(
+        child: Align(
+          alignment: Alignment.topLeft,
+          child: Container(
+            padding: const EdgeInsets.fromLTRB(100, 30, 0, 0),
+            child: Wrap(
+              alignment: WrapAlignment.start,
+              children: const [
+                TileButton(icon: Icons.menu_book, title: 'Register patient'),
+              ],
+            ),
           ),
         ),
       ),
@@ -60,7 +63,7 @@ class TileButton extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            WebPageRoute(builder: (context) => RegisterPatientPage()),
+            DesktopPageRoute(builder: (context) => RegisterPatientPage()),
           );
         },
       ),

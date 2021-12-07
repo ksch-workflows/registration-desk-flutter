@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:ksch_dart_client/core.dart';
 import 'package:nock/nock.dart';
 import 'package:registration_desk/api/patient/patient.dart';
@@ -15,7 +16,7 @@ void main() {
   setUp(() {
     nock.cleanAll();
 
-    patientService = PatientServiceImpl('http://localhost');
+    patientService = PatientServiceImpl(KschApi('http://localhost'));
   });
 
   test('Should create patient', () async {
@@ -68,13 +69,27 @@ class CompletePatientResponse extends PatientResponsePayload {
         );
 }
 
-class JohnDoe implements Patient {
+class JohnDoe extends Equatable implements Patient {
   final String fatherName = 'Max Mustermann';
   final String gender = 'MALE';
   final String id = const Uuid().v4();
+  final String? currentVisit = null;
   final DateTime? lastVisit = null;
   final String location = 'Guesthouse';
   final String name = 'John Doe';
   final String opdNumber = '10-12354';
   final String category = 'OPD';
+
+  @override
+  List<Object?> get props => [
+        id,
+        opdNumber,
+        name,
+        fatherName,
+        location,
+        gender,
+        currentVisit,
+        lastVisit,
+        category,
+      ];
 }

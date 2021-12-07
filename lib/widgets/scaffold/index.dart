@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 
-import '../pages/dashboard/index.dart';
-import '../routing.dart';
-import 'test_bench.dart';
+import '../../constants.dart';
+import '../../pages/dashboard/index.dart';
+import '../../routing.dart';
 
-class WebScaffold extends StatelessWidget {
+class DesktopScaffold extends StatelessWidget {
   final String title;
-  final Widget body;
-  final Widget? floatingActionButton;
+  final Widget child;
   final Function? onNavigateBack;
 
-  const WebScaffold({
+  const DesktopScaffold({
     required this.title,
-    required this.body,
+    required this.child,
     this.onNavigateBack,
-    this.floatingActionButton,
   });
 
   @override
@@ -29,36 +27,18 @@ class WebScaffold extends StatelessWidget {
                 title: title,
                 onNavigateBack: onNavigateBack,
               ),
-              const SizedBox(
-                height: 50,
+              // TODO(test): Should render patient search results.
+              // Without the constrained box, the test should fail.
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxHeight: constraints.maxHeight - AppLayout.appBarHeight,
+                ),
+                child: child,
               ),
-              _buildBodyWrapper(constraints)
             ],
           ),
         );
       }),
-    );
-  }
-
-  Row _buildBodyWrapper(BoxConstraints constraints) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          width: 100,
-          child: floatingActionButton,
-        ),
-        ConstrainedBox(
-          constraints: BoxConstraints(
-            maxHeight: constraints.maxHeight - 145,
-            maxWidth: constraints.maxWidth - 200,
-          ),
-          child: body,
-        ),
-        const SizedBox(
-          width: 100,
-        ),
-      ],
     );
   }
 }
@@ -74,12 +54,13 @@ class _AppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: Move color definitions into "constants.dart"
     final appBarColor = Theme.of(context).primaryColor;
     final buttonColor = Colors.grey[350]!;
 
     return Container(
       color: appBarColor,
-      height: 55,
+      height: AppLayout.appBarHeight,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -95,7 +76,7 @@ class _AppBar extends StatelessWidget {
       icon: Icon(Icons.home, color: color),
       onPressed: () => Navigator.push(
         context,
-        WebPageRoute(builder: (context) => RegistrationDashboard()),
+        DesktopPageRoute(builder: (context) => RegistrationDashboard()),
       ),
     );
   }
@@ -109,6 +90,7 @@ class _AppBar extends StatelessWidget {
           padding: const EdgeInsets.only(left: 20),
           child: Text(
             title,
+            key: const ValueKey('pageName'),
             style: const TextStyle(
               color: Colors.white,
               //fontWeight: FontWeight.bold,
@@ -128,14 +110,14 @@ class _AppBar extends StatelessWidget {
             Icons.settings,
             color: color,
           ),
-          onPressed: () => print('TODO: Open settings dialog'),
+          onPressed: () {},
         ),
         IconButton(
           icon: Icon(
             Icons.logout,
             color: color,
           ),
-          onPressed: () => print('TODO: Trigger logout'),
+          onPressed: () {},
         ),
       ],
     );
@@ -154,19 +136,4 @@ class _AppBar extends StatelessWidget {
       );
     }
   }
-}
-
-void main() {
-  runApp(
-    TestBench(
-      child: WebScaffold(
-        title: 'Hello',
-        body: Row(
-          children: const [
-            Text('Hello, Test Bench!'),
-          ],
-        ),
-      ),
-    ),
-  );
 }
