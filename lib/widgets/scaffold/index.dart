@@ -110,14 +110,14 @@ class _AppBar extends StatelessWidget {
             Icons.settings,
             color: color,
           ),
-          onPressed: () => print('TODO: Open settings dialog'),
+          onPressed: () {},
         ),
         IconButton(
           icon: Icon(
             Icons.logout,
             color: color,
           ),
-          onPressed: () => print('TODO: Trigger logout'),
+          onPressed: () {},
         ),
       ],
     );

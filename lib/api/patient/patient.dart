@@ -9,7 +9,6 @@ class Patient extends Equatable {
   final String? location;
   final String? gender;
   final String? currentVisit;
-  // TODO Probably this should also be just an ID
   final DateTime? lastVisit;
   final String? category;
 

@@ -30,7 +30,6 @@ class VisitServiceImpl implements VisitService {
     return result;
   }
 
-  // TODO(test): This method needs a unit test
   @override
   Future<Visit> get({
     required String patientId,

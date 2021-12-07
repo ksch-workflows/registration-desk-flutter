@@ -43,12 +43,39 @@ void main() {
     expect(visit.id, equals(expectedId));
     expect(visit.type, equals(expectedVisitType));
   });
+
+  test('Should get visit', () async {
+    const expectedVisitType = VisitType.IPD;
+    final visitId = const Uuid().v4();
+    const opdNumber = '10-2342';
+    final timeStart = DateTime.now();
+    final patientId = const Uuid().v4();
+
+    givenGetVisitResponse(ExampleVisitResponsePayload(
+      id: visitId,
+      visitType: expectedVisitType,
+      timeStart: timeStart,
+      opdNumber: opdNumber,
+    ));
+
+    var visit = await visitService.get(patientId: patientId, visitId: visitId);
+
+    expect(visit, isNotNull);
+    expect(visit.id, equals(visitId));
+    expect(visit.type, equals(expectedVisitType));
+  });
 }
 
 void givenStartVisitResponse(dynamic body) {
   nock('http://localhost')
       .post(RegExp('^/api/patients/$uuidPattern/visits'), any())
     ..reply(201, json.encode(body));
+}
+
+void givenGetVisitResponse(dynamic body) {
+  nock('http://localhost')
+      .get(RegExp('^/api/patients/$uuidPattern/visits/$uuidPattern'))
+    ..reply(200, json.encode(body));
 }
 
 class ExampleVisitResponsePayload extends VisitResponsePayload {
