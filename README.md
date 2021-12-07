@@ -94,6 +94,17 @@ $ sudo apt-get install clang cmake ninja-build pkg-config libgtk-3-dev
 $ flutter config --enable-linux-desktop
 ```
 
+### Pre-commit hook
+
+It is recommended to add the following pre-commit hook:
+
+`.git/hooks/`:
+
+```
+```
+
+See https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks
+
 ## Deployment
 
 ### Testing
