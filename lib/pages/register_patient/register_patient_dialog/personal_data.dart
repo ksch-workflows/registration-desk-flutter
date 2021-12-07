@@ -71,9 +71,9 @@ class _PersonalDataFormState extends State<_PersonalDataForm> {
           controller: widget.nameController,
           focusNode: initialFocus,
           decoration: const InputDecoration(
-              labelText: "Patient's name",
-              border: OutlineInputBorder(),
-              hintText: "Please enter the patient's name",
+            labelText: "Patient's name",
+            border: OutlineInputBorder(),
+            hintText: "Please enter the patient's name",
           ),
         ),
         const SizedBox(

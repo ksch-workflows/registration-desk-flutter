@@ -34,7 +34,8 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
       child: BlocListener<RegisterPatientBloc, RegisterPatientState>(
         listener: (context, state) {
           if (state is NavigatingToPatientDetailsPage) {
-            Navigator.push(context,
+            Navigator.push(
+                context,
                 DesktopPageRoute(
                     builder: (context) => PatientDetailsPage(state.patientId)));
           }
@@ -57,8 +58,8 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
                     final result = await _showRegisterPatientDialog(context);
                     if (result != null) {
                       context.read<RegisterPatientBloc>().add(
-                        NewPatientSaved(result.patient, result.visitType),
-                      );
+                            NewPatientSaved(result.patient, result.visitType),
+                          );
                     }
                   },
                   tooltip: 'Add new patient',
@@ -66,7 +67,8 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
                 ),
               ),
               onNavigateBack: () {
-                Navigator.push(context,
+                Navigator.push(
+                    context,
                     DesktopPageRoute(
                         builder: (context) => RegistrationDashboard()));
               },
@@ -78,7 +80,8 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
   }
 
   Future<RegisterPatientResult?> _showRegisterPatientDialog(
-      BuildContext context,) {
+    BuildContext context,
+  ) {
     return showDialog(
       context: context,
       builder: (context) {
@@ -137,15 +140,14 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
 
   List<DataRow> _buildTableRows() {
     return matchingPatients!
-        .map((e) =>
-        DataRow(
-          cells: [
-            DataCell(Text(e.opdNumber ?? 'n/a')),
-            DataCell(Text(e.name ?? 'n/a')),
-            DataCell(Text(e.location ?? 'n/a')),
-            DataCell(Text(e.lastVisit?.toString() ?? 'n/a')),
-          ],
-        ))
+        .map((e) => DataRow(
+              cells: [
+                DataCell(Text(e.opdNumber ?? 'n/a')),
+                DataCell(Text(e.name ?? 'n/a')),
+                DataCell(Text(e.location ?? 'n/a')),
+                DataCell(Text(e.lastVisit?.toString() ?? 'n/a')),
+              ],
+            ))
         .toList();
   }
 

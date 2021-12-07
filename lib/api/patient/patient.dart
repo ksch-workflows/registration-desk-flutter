@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:ksch_dart_client/core.dart';
-import 'package:registration_desk/api/visit/visit.dart';
 
 class Patient extends Equatable {
   final String? id;
@@ -39,14 +38,14 @@ class Patient extends Equatable {
 
   @override
   List<Object?> get props => [
-    id,
-    opdNumber,
-    name,
-    fatherName,
-    location,
-    gender,
-    currentVisit,
-    lastVisit,
-    category,
-  ];
+        id,
+        opdNumber,
+        name,
+        fatherName,
+        location,
+        gender,
+        currentVisit,
+        lastVisit,
+        category,
+      ];
 }

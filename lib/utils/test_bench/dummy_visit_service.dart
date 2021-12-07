@@ -10,12 +10,11 @@ class DummyVisitService implements VisitService {
   @override
   Future<Visit> startVisit(String patientId, VisitType type) async {
     var result = Visit(
-      id: const Uuid().v4(),
-      patientId: patientId,
-      type: type,
-      timeStart: DateTime.now(),
-      opdNumber: '10-1110132'
-    );
+        id: const Uuid().v4(),
+        patientId: patientId,
+        type: type,
+        timeStart: DateTime.now(),
+        opdNumber: '10-1110132');
     visitResponse = result;
     return result;
   }

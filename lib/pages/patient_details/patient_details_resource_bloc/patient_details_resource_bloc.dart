@@ -3,10 +3,11 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:get_it/get_it.dart';
-import 'package:registration_desk/api/patient/patient.dart';
-import 'package:registration_desk/api/patient/patient_service.dart';
-import 'package:registration_desk/api/visit/visit.dart';
-import 'package:registration_desk/api/visit/visit_service.dart';
+
+import '../../../api/patient/patient.dart';
+import '../../../api/patient/patient_service.dart';
+import '../../../api/visit/visit.dart';
+import '../../../api/visit/visit_service.dart';
 
 part 'patient_details_resource_event.dart';
 part 'patient_details_resource_state.dart';

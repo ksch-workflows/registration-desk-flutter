@@ -52,10 +52,9 @@ class Time extends Equatable {
 }
 
 extension DateTimeExtension on DateTime {
-
   String toFormattedString() {
     late String formattedDayOfWeek;
-    switch(weekday) {
+    switch (weekday) {
       case DateTime.monday:
         formattedDayOfWeek = 'Monday';
         break;

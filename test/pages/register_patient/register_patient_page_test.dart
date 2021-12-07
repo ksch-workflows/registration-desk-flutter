@@ -4,7 +4,6 @@ import 'package:get_it/get_it.dart';
 import 'package:registration_desk/api/patient/patient.dart';
 import 'package:registration_desk/api/patient/patient_service.dart';
 import 'package:registration_desk/api/visit/visit_service.dart';
-import 'package:registration_desk/context.dart';
 import 'package:registration_desk/pages/register_patient/index.dart';
 import 'package:registration_desk/utils/test_bench/dummy_patient_service.dart';
 import 'package:registration_desk/utils/test_bench/dummy_visit_service.dart';

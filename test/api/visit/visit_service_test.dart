@@ -48,7 +48,7 @@ void main() {
 void givenStartVisitResponse(dynamic body) {
   nock('http://localhost')
       .post(RegExp('^/api/patients/$uuidPattern/visits'), any())
-        ..reply(201, json.encode(body));
+    ..reply(201, json.encode(body));
 }
 
 class ExampleVisitResponsePayload extends VisitResponsePayload {

@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../api/patient/patient.dart';
 import '../../api/visit/visit.dart';
 import '../../routing.dart';
-import '../../utils/time.dart';
 import '../../widgets/content_card/index.dart';
 import '../../widgets/scaffold/index.dart';
 import '../../widgets/scaffold/tabbed_details_panel.dart';

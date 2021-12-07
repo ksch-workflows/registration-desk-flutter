@@ -137,4 +137,3 @@ class _AppBar extends StatelessWidget {
     }
   }
 }
-

@@ -5,7 +5,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:registration_desk/api/patient/patient_service.dart';
 import 'package:registration_desk/api/visit/visit_service.dart';
-import 'package:registration_desk/context.dart';
 import 'package:registration_desk/utils/test_bench/dummy_patient_service.dart';
 import 'package:registration_desk/utils/test_bench/dummy_visit_service.dart';
 import 'package:registration_desk/widgets/content_card/index.dart';
@@ -61,7 +60,7 @@ void main() {
     );
 
     await tester.pumpWidget(TestBench(
-      child: Text('Hello, Widget!'),
+      child: widget,
       pageSize: Size(800, 600),
     ));
 

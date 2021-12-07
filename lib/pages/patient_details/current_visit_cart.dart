@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ksch_dart_client/resources.dart';
-import 'package:ksch_dart_client/resources.dart';
 
 import '../../api/visit/visit.dart';
 import '../../utils/time.dart';

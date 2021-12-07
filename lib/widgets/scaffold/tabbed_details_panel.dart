@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:registration_desk/api/patient/patient.dart';
-import 'package:registration_desk/widgets/info_table/index.dart';
+
+import '../../api/patient/patient.dart';
+import '../info_table/index.dart';
 
 final summaryPanelBackgroundColor = Colors.grey[350];
 
@@ -66,11 +66,11 @@ class _TabbedDetailsPanelState extends State<TabbedDetailsPanel>
             indicatorWeight: 4,
             tabs: widget.tabs
                 .map((t) => Tab(
-              child: Text(
-                t.title,
-                style: const TextStyle(color: Colors.black),
-              ),
-            ))
+                      child: Text(
+                        t.title,
+                        style: const TextStyle(color: Colors.black),
+                      ),
+                    ))
                 .toList(),
           ),
         ),

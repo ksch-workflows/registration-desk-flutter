@@ -69,7 +69,7 @@ class CompletePatientResponse extends PatientResponsePayload {
         );
 }
 
-class JohnDoe extends Equatable implements Patient  {
+class JohnDoe extends Equatable implements Patient {
   final String fatherName = 'Max Mustermann';
   final String gender = 'MALE';
   final String id = const Uuid().v4();
@@ -82,14 +82,14 @@ class JohnDoe extends Equatable implements Patient  {
 
   @override
   List<Object?> get props => [
-    id,
-    opdNumber,
-    name,
-    fatherName,
-    location,
-    gender,
-    currentVisit,
-    lastVisit,
-    category,
-  ];
+        id,
+        opdNumber,
+        name,
+        fatherName,
+        location,
+        gender,
+        currentVisit,
+        lastVisit,
+        category,
+      ];
 }
