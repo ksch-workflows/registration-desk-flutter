@@ -5,34 +5,26 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:registration_desk/api/patient/patient.dart';
-import 'package:registration_desk/api/patient/patient_service.dart';
-import 'package:registration_desk/api/visit/visit_service.dart';
 import 'package:registration_desk/pages/register_patient/index.dart';
-import 'package:registration_desk/utils/test_bench/dummy_patient_service.dart';
-import 'package:registration_desk/utils/test_bench/dummy_visit_service.dart';
+import 'package:registration_desk/utils/test_bench/dummy_context.dart';
 import 'package:registration_desk/widgets/test_bench.dart';
 import 'package:uuid/uuid.dart';
 
 void main() {
-  late DummyPatientService mockPatientService;
-  late DummyVisitService mockVisitService;
+  late DummyContext ctx;
 
   setUp(() {
-    mockPatientService = DummyPatientService();
-    GetIt.I.registerSingleton<PatientService>(mockPatientService);
-
-    mockVisitService = DummyVisitService();
-    GetIt.I.registerSingleton<VisitService>(mockVisitService);
+    ctx = DummyContext()..init();
   });
 
-  tearDown(() {
-    GetIt.I.reset();
+  tearDown(() async {
+    await GetIt.I.reset();
   });
 
   testWidgets('Should open patient details after registration wizard',
       (tester) async {
     tester.binding.window.textScaleFactorTestValue = 0.2;
-    mockPatientService.patientResponse = Patient(
+    ctx.patientService.patientResponse = Patient(
       id: const Uuid().v4(),
       opdNumber: null,
       name: 'Janie Doe',
