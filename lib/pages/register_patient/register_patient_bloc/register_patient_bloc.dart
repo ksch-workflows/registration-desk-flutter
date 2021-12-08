@@ -18,10 +18,14 @@ class RegisterPatientBloc
 
   RegisterPatientBloc() : super(ShowingRegisterPatientPage()) {
     on<NewPatientSaved>((event, emit) async {
+      emit(SavingPatient());
       final createdPatient = await patientService.create(event.patient);
       await visitService.startVisit(createdPatient.id!, event.visitType);
-
       emit(NavigatingToPatientDetailsPage(createdPatient.id!));
+    });
+
+    on<PatientRegistrationStopped>((event, emit) {
+      emit(ClosingRegisterPatientDialog());
     });
   }
 }

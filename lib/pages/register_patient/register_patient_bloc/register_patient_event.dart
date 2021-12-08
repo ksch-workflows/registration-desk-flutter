@@ -16,4 +16,4 @@ class NewPatientSaved extends RegisterPatientEvent {
   const NewPatientSaved(this.patient, this.visitType);
 }
 
-class PatientRegistrationCanceled extends RegisterPatientEvent {}
+class PatientRegistrationStopped extends RegisterPatientEvent {}

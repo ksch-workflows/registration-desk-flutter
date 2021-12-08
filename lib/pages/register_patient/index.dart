@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 import '../../api/patient/patient.dart';
 import '../../api/patient/patient_service.dart';
@@ -33,11 +34,15 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
       create: (context) => RegisterPatientBloc(),
       child: BlocListener<RegisterPatientBloc, RegisterPatientState>(
         listener: (context, state) {
+          if (state is ClosingRegisterPatientDialog) {
+            Navigator.pop(context);
+          }
           if (state is NavigatingToPatientDetailsPage) {
             Navigator.push(
                 context,
                 DesktopPageRoute(
                     builder: (context) => PatientDetailsPage(state.patientId)));
+            return;
           }
         },
         child: BlocBuilder<RegisterPatientBloc, RegisterPatientState>(
@@ -53,14 +58,9 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
                   ],
                 ),
                 floatingActionButton: FloatingActionButton(
-                  onPressed: () async {
+                  onPressed: () {
                     searchTermController.clear();
-                    final result = await _showRegisterPatientDialog(context);
-                    if (result != null) {
-                      context.read<RegisterPatientBloc>().add(
-                            NewPatientSaved(result.patient, result.visitType),
-                          );
-                    }
+                    _showRegisterPatientDialog(context);
                   },
                   tooltip: 'Add new patient',
                   child: const Icon(Icons.add),
@@ -82,13 +82,23 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
   Future<RegisterPatientResult?> _showRegisterPatientDialog(
     BuildContext context,
   ) {
+    var registerPatientBloc = context.read<RegisterPatientBloc>();
     return showDialog(
       context: context,
       builder: (context) {
-        return RegisterPatientDialog(
-          onDialogClose: (result) {
-            Navigator.pop(context, result);
-          },
+        return LoaderOverlay(
+          child: RegisterPatientDialog(
+            onDialogClose: (result) {
+              if (result != null) {
+                context.loaderOverlay.show();
+                registerPatientBloc.add(
+                  NewPatientSaved(result.patient, result.visitType),
+                );
+              } else {
+                registerPatientBloc.add(PatientRegistrationStopped());
+              }
+            },
+          ),
         );
       },
     );
