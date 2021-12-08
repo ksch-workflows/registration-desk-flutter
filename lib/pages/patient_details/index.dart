@@ -28,9 +28,6 @@ class PatientDetailsPage extends StatelessWidget {
             return;
           }
         },
-        buildWhen: (previous, current) {
-          return previous is LoadingPatientDetails;
-        },
         builder: (context, state) {
           return DesktopScaffold(
             title: 'Patient details',
@@ -65,6 +62,7 @@ class PatientDetailsPage extends StatelessWidget {
             ),
           );
         },
+        buildWhen: (previous, current) => false,
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 import '../../constants.dart';
 import '../../pages/dashboard/index.dart';
@@ -18,27 +19,29 @@ class DesktopScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: LayoutBuilder(builder: (context, constraints) {
-        return Container(
-          height: constraints.maxHeight,
-          child: Column(
-            children: [
-              _AppBar(
-                title: title,
-                onNavigateBack: onNavigateBack,
-              ),
-              // TODO(test): Should render patient search results.
-              // Without the constrained box, the test should fail.
-              ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxHeight: constraints.maxHeight - AppLayout.appBarHeight,
+      child: LoaderOverlay(
+        child: LayoutBuilder(builder: (context, constraints) {
+          return Container(
+            height: constraints.maxHeight,
+            child: Column(
+              children: [
+                _AppBar(
+                  title: title,
+                  onNavigateBack: onNavigateBack,
                 ),
-                child: child,
-              ),
-            ],
-          ),
-        );
-      }),
+                // TODO(test): Should render patient search results.
+                // Without the constrained box, the test should fail.
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxHeight: constraints.maxHeight - AppLayout.appBarHeight,
+                  ),
+                  child: child,
+                ),
+              ],
+            ),
+          );
+        }),
+      ),
     );
   }
 }

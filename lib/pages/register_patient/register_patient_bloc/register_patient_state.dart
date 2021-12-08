@@ -9,7 +9,11 @@ abstract class RegisterPatientState extends Equatable {
 
 class ShowingRegisterPatientPage extends RegisterPatientState {}
 
-class OpeningPatientRegistrationWizard extends RegisterPatientState {}
+class SavingPatient extends RegisterPatientState {}
+
+class OpeningRegisterPatientDialog extends RegisterPatientState {}
+
+class ClosingRegisterPatientDialog extends RegisterPatientState {}
 
 class NavigatingToPatientDetailsPage extends RegisterPatientState {
   final String patientId;
