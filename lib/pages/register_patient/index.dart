@@ -36,6 +36,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
         listener: (context, state) {
           if (state is ClosingRegisterPatientDialog) {
             Navigator.pop(context);
+            return;
           }
           if (state is NavigatingToPatientDetailsPage) {
             Navigator.push(

@@ -12,6 +12,7 @@ class ShowingRegisterPatientPage extends RegisterPatientState {}
 class SavingPatient extends RegisterPatientState {}
 
 class OpeningRegisterPatientDialog extends RegisterPatientState {}
+
 class ClosingRegisterPatientDialog extends RegisterPatientState {}
 
 class NavigatingToPatientDetailsPage extends RegisterPatientState {

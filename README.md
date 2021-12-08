@@ -103,6 +103,8 @@ It is recommended to add the following [Git hooks](https://git-scm.com/book/en/v
 ```bash
 #!/bin/bash
 
+set -e
+
 dart format . --set-exit-if-changed
 flutter test
 ```
@@ -111,6 +113,8 @@ flutter test
 
 ```bash
 #!/bin/bash
+
+set -e
 
 flutter analyze
 ```
