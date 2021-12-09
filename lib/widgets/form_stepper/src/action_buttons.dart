@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../constants.dart';
+import '../../buttons.dart';
 
 class ActionButtons extends StatelessWidget {
   final Function onBack;
@@ -42,48 +42,32 @@ class ActionButtons extends StatelessWidget {
   }
 
   Widget _continueButton(BuildContext context) {
-    return Tooltip(
-      message: 'Go to the next step',
-      child: ElevatedButton(
-        key: const ValueKey('continueButton'),
-        child: Text(
-          isLastStep ? 'Save' : 'Continue',
-        ),
-        onPressed: onContinue as void Function()?,
-      ),
+    return PrimaryButton(
+      buttonKey: const ValueKey('continueButton'),
+      tooltip: 'Go to the next step',
+      text: isLastStep ? 'Save' : 'Continue',
+      onPressed: onContinue as void Function()?,
+      minWidth: 120,
     );
   }
 
   Widget _cancelButton(BuildContext context) {
-    return ElevatedButton(
-      key: const ValueKey('cancelButton'),
-      child: const Text(
-        'Cancel',
-        style: TextStyle(
-          color: AppLayout.secondaryButtonTextColor,
-        ),
-      ),
+    return SecondaryButton(
+      tooltip: 'Close the dialog and discard all entries',
+      buttonKey: const ValueKey('cancelButton'),
+      text: 'Cancel',
       onPressed: onCancel as void Function()?,
-      style: ElevatedButton.styleFrom(
-        primary: AppLayout.secondaryButtonBackgroundColor,
-      ),
+      minWidth: 120,
     );
   }
 
   Widget _backButton() {
-    return Tooltip(
-      message: 'Go back to the previous step.',
-      child: ElevatedButton(
-        key: const ValueKey('backButton'),
-        child: const Text('Back',
-            style: TextStyle(
-              color: AppLayout.secondaryButtonTextColor,
-            )),
-        onPressed: onBack as void Function()?,
-        style: ElevatedButton.styleFrom(
-          primary: AppLayout.secondaryButtonBackgroundColor,
-        ),
-      ),
+    return SecondaryButton(
+      tooltip: 'Go back to the previous step.',
+      buttonKey: const ValueKey('backButton'),
+      text: 'Back',
+      onPressed: onBack as void Function()?,
+      minWidth: 120,
     );
   }
 }

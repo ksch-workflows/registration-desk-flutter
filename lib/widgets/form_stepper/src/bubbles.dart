@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../constants.dart';
+
 class IndexBubble extends StatelessWidget {
   final int? index;
   final Color? foregroundColor;
@@ -56,8 +58,8 @@ class InactiveIndexBubble extends StatelessWidget {
   Widget build(BuildContext context) {
     return IndexBubble(
       index: index,
-      backgroundColor: Colors.grey[350],
-      foregroundColor: Theme.of(context).colorScheme.onSurface,
+      backgroundColor: AppLayout.secondaryButtonBackgroundColor,
+      foregroundColor: AppLayout.secondaryButtonTextColor,
     );
   }
 }
