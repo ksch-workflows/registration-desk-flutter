@@ -7,7 +7,7 @@ import '../../widgets/scaffold/index.dart';
 import '../../widgets/test_bench.dart';
 import '../register_patient/index.dart';
 
-const double _kTileFontSize = 20;
+const double _kTileFontSize = 22;
 
 class RegistrationDashboard extends StatelessWidget {
   @override
@@ -40,42 +40,46 @@ class TileButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 16, 0, 0),
-      child: InkWell(
-        child: Ink(
-          width: 200,
-          height: 200,
-          color: AppLayout.dashboardTileBackgroundColor,
-          child: Container(
-            padding: const EdgeInsets.all(20),
-            child: Column(
+    return InkWell(
+      child: Ink(
+        width: 220,
+        height: 220,
+        color: AppLayout.dashboardTileBackgroundColor,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
                   icon,
                   size: 100,
                 ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Text(
+                const SizedBox(height: 40),
+              ],
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 35),
+                child: Text(
                   title,
                   style: const TextStyle(
                     color: AppLayout.dashboardTileTextColor,
                     fontSize: _kTileFontSize,
                   ),
                 ),
-              ],
-            ),
-          ),
+              ),
+            )
+          ],
         ),
-        onTap: () {
-          Navigator.push(
-            context,
-            DesktopPageRoute(builder: (context) => RegisterPatientPage()),
-          );
-        },
       ),
+      onTap: () {
+        Navigator.push(
+          context,
+          DesktopPageRoute(builder: (context) => RegisterPatientPage()),
+        );
+      },
     );
   }
 }
