@@ -29,8 +29,6 @@ class DesktopScaffold extends StatelessWidget {
                   title: title,
                   onNavigateBack: onNavigateBack,
                 ),
-                // TODO(test): Should render patient search results.
-                // Without the constrained box, the test should fail.
                 ConstrainedBox(
                   constraints: BoxConstraints(
                     maxHeight: constraints.maxHeight - AppLayout.appBarHeight,
@@ -107,22 +105,7 @@ class _AppBar extends StatelessWidget {
 
   Row _actionButtons(Color color) {
     return Row(
-      children: [
-        IconButton(
-          icon: Icon(
-            Icons.settings,
-            color: color,
-          ),
-          onPressed: () {},
-        ),
-        IconButton(
-          icon: Icon(
-            Icons.logout,
-            color: color,
-          ),
-          onPressed: () {},
-        ),
-      ],
+      children: const [],
     );
   }
 

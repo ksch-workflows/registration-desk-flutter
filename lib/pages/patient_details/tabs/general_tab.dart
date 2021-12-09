@@ -30,9 +30,6 @@ class GeneralTabContent extends StatelessWidget {
               value: patient.fatherName ?? 'unknown',
             ),
           ],
-          icons: [
-            ContentCardIcon(icon: Icons.edit, onPressed: () {}),
-          ],
         ),
       ],
     );

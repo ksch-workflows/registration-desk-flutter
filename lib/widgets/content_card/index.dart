@@ -119,7 +119,7 @@ class _Icons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (icons == null) {
-      return Container();
+      return Container(height: 15);
     }
     return Row(
       children: icons!
