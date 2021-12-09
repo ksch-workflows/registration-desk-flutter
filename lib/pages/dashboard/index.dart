@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:registration_desk/constants.dart';
 
+import '../../constants.dart';
 import '../../routing.dart';
 import '../../widgets/scaffold/generic_panel.dart';
 import '../../widgets/scaffold/index.dart';
@@ -44,7 +44,7 @@ class TileButton extends StatelessWidget {
       child: Ink(
         width: 220,
         height: 220,
-        color: AppLayout.dashboardTileBackgroundColor,
+        color: AppLayout.secondaryButtonBackgroundColor,
         child: Stack(
           alignment: Alignment.center,
           children: [
@@ -55,17 +55,17 @@ class TileButton extends StatelessWidget {
                   icon,
                   size: 100,
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 50),
               ],
             ),
             Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 35),
+                padding: const EdgeInsets.only(bottom: 40),
                 child: Text(
                   title,
                   style: const TextStyle(
-                    color: AppLayout.dashboardTileTextColor,
+                    color: AppLayout.secondaryButtonTextColor,
                     fontSize: _kTileFontSize,
                   ),
                 ),
