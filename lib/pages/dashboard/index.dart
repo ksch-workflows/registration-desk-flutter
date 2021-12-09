@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:registration_desk/constants.dart';
 
 import '../../routing.dart';
 import '../../widgets/scaffold/generic_panel.dart';
 import '../../widgets/scaffold/index.dart';
 import '../../widgets/test_bench.dart';
 import '../register_patient/index.dart';
+
+const double _kTileFontSize = 20;
 
 class RegistrationDashboard extends StatelessWidget {
   @override
@@ -43,7 +46,7 @@ class TileButton extends StatelessWidget {
         child: Ink(
           width: 200,
           height: 200,
-          color: Colors.grey,
+          color: AppLayout.dashboardTileBackgroundColor,
           child: Container(
             padding: const EdgeInsets.all(20),
             child: Column(
@@ -55,7 +58,13 @@ class TileButton extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                Text(title),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    color: AppLayout.dashboardTileTextColor,
+                    fontSize: _kTileFontSize,
+                  ),
+                ),
               ],
             ),
           ),
