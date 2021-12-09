@@ -43,7 +43,7 @@ class ActionButtons extends StatelessWidget {
 
   Widget _continueButton(BuildContext context) {
     return PrimaryButton(
-      buttonKey: const ValueKey('continueButton'),
+      key: const ValueKey('continueButton'),
       tooltip: 'Go to the next step',
       text: isLastStep ? 'Save' : 'Continue',
       onPressed: onContinue as void Function()?,
@@ -54,7 +54,7 @@ class ActionButtons extends StatelessWidget {
   Widget _cancelButton(BuildContext context) {
     return SecondaryButton(
       tooltip: 'Close the dialog and discard all entries',
-      buttonKey: const ValueKey('cancelButton'),
+      key: const ValueKey('cancelButton'),
       text: 'Cancel',
       onPressed: onCancel as void Function()?,
       minWidth: 120,
@@ -64,7 +64,7 @@ class ActionButtons extends StatelessWidget {
   Widget _backButton() {
     return SecondaryButton(
       tooltip: 'Go back to the previous step.',
-      buttonKey: const ValueKey('backButton'),
+      key: const ValueKey('backButton'),
       text: 'Back',
       onPressed: onBack as void Function()?,
       minWidth: 120,
