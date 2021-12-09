@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../constants.dart';
+
 class ActionButtons extends StatelessWidget {
   final Function onBack;
   final Function onCancel;
@@ -55,10 +57,15 @@ class ActionButtons extends StatelessWidget {
   Widget _cancelButton(BuildContext context) {
     return ElevatedButton(
       key: const ValueKey('cancelButton'),
-      child: const Text('Cancel', style: TextStyle(color: Colors.black)),
+      child: const Text(
+        'Cancel',
+        style: TextStyle(
+          color: AppLayout.secondaryButtonTextColor,
+        ),
+      ),
       onPressed: onCancel as void Function()?,
       style: ElevatedButton.styleFrom(
-        primary: Colors.grey[350],
+        primary: AppLayout.secondaryButtonBackgroundColor,
       ),
     );
   }
@@ -68,10 +75,13 @@ class ActionButtons extends StatelessWidget {
       message: 'Go back to the previous step.',
       child: ElevatedButton(
         key: const ValueKey('backButton'),
-        child: const Text('Back', style: TextStyle(color: Colors.black)),
+        child: const Text('Back',
+            style: TextStyle(
+              color: AppLayout.secondaryButtonTextColor,
+            )),
         onPressed: onBack as void Function()?,
         style: ElevatedButton.styleFrom(
-          primary: Colors.grey[350],
+          primary: AppLayout.secondaryButtonBackgroundColor,
         ),
       ),
     );

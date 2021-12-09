@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../../constants.dart';
 import '../../routing.dart';
 import '../../widgets/scaffold/generic_panel.dart';
 import '../../widgets/scaffold/index.dart';
 import '../../widgets/test_bench.dart';
 import '../register_patient/index.dart';
+
+const double _kTileFontSize = 22;
 
 class RegistrationDashboard extends StatelessWidget {
   @override
@@ -37,36 +40,46 @@ class TileButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 16, 0, 0),
-      child: InkWell(
-        child: Ink(
-          width: 200,
-          height: 200,
-          color: Colors.grey,
-          child: Container(
-            padding: const EdgeInsets.all(20),
-            child: Column(
+    return InkWell(
+      child: Ink(
+        width: 220,
+        height: 220,
+        color: AppLayout.secondaryButtonBackgroundColor,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
                   icon,
                   size: 100,
                 ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Text(title),
+                const SizedBox(height: 50),
               ],
             ),
-          ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 40),
+                child: Text(
+                  title,
+                  style: const TextStyle(
+                    color: AppLayout.secondaryButtonTextColor,
+                    fontSize: _kTileFontSize,
+                  ),
+                ),
+              ),
+            )
+          ],
         ),
-        onTap: () {
-          Navigator.push(
-            context,
-            DesktopPageRoute(builder: (context) => RegisterPatientPage()),
-          );
-        },
       ),
+      onTap: () {
+        Navigator.push(
+          context,
+          DesktopPageRoute(builder: (context) => RegisterPatientPage()),
+        );
+      },
     );
   }
 }
