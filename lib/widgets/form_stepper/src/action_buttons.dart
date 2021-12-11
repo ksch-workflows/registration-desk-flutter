@@ -6,12 +6,14 @@ class ActionButtons extends StatelessWidget {
   final Function onBack;
   final Function onCancel;
   final Function onContinue;
+  final bool isFirstStep;
   final bool isLastStep;
 
   const ActionButtons({
     required this.onBack,
     required this.onCancel,
     required this.onContinue,
+    this.isFirstStep = false,
     this.isLastStep = false,
   });
 
@@ -62,6 +64,9 @@ class ActionButtons extends StatelessWidget {
   }
 
   Widget _backButton() {
+    if (isFirstStep) {
+      return Container();
+    }
     return SecondaryButton(
       tooltip: 'Go back to the previous step.',
       key: const ValueKey('backButton'),

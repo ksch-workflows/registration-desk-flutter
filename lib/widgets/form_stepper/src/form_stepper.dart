@@ -57,11 +57,14 @@ class _FormStepperState extends State<FormStepper> {
           onBack: onBack,
           onCancel: onCancel,
           onContinue: onContinue,
+          isFirstStep: isFirstStep(),
           isLastStep: isLastStep(),
         ),
       ],
     );
   }
+
+  bool isFirstStep() => currentIndex == 0;
 
   bool isLastStep() => currentIndex == widget.steps.length - 1;
 

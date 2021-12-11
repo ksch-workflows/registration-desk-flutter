@@ -116,7 +116,7 @@ flutter test
 
 set -e
 
-flutter analyze
+flutter analyze --fatal-infos
 ```
 
 ## Deployment

@@ -69,6 +69,13 @@ void main() {
     expect(find.text('The input for the first step is mandatory.'),
         findsOneWidget);
   });
+
+  testWidgets('Should not show back button on first wizard page',
+      (tester) async {
+    await tester.open(ExampleStepper());
+
+    expect(find.byKey(const ValueKey('backButton')), findsNothing);
+  });
 }
 
 Future goToNextStep(WidgetTester tester) async {
