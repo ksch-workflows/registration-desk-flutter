@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:ksch_dart_client/resources.dart';
 
 import '../../../api/patient/patient.dart';
-import '../../../utils/singleton_bucket.dart';
 import '../../../widgets/form_stepper/form_stepper.dart';
 import 'contact_information.dart';
 import 'personal_data.dart';
@@ -29,18 +28,21 @@ class RegisterPatientDialog extends StatefulWidget {
   State<StatefulWidget> createState() => _RegisterPatientDialogState();
 }
 
-class _RegisterPatientDialogModel {
+class _RegisterPatientDialogState extends State<RegisterPatientDialog> {
   final visitTypeSelection = FormValue<VisitType>();
   final nameController = TextEditingController();
   final fatherNameController = TextEditingController();
   final locationController = TextEditingController();
-}
-
-class _RegisterPatientDialogState extends State<RegisterPatientDialog> {
-  // FIXME Dispose is missing
-  final _model = SingletonBucket.get(() => _RegisterPatientDialogModel());
 
   late List<FormStep> _steps;
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    fatherNameController.dispose();
+    locationController.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -48,14 +50,14 @@ class _RegisterPatientDialogState extends State<RegisterPatientDialog> {
 
     _steps = [
       PersonalDataFormStep(
-        nameController: _model!.nameController,
-        fatherNameController: _model!.fatherNameController,
+        nameController: nameController,
+        fatherNameController: fatherNameController,
       ),
       ContactInformationFormStep(
-        locationController: _model!.locationController,
+        locationController: locationController,
       ),
       VisitTypeFormStep(
-        visitTypeSelection: _model!.visitTypeSelection,
+        visitTypeSelection: visitTypeSelection,
       ),
     ];
   }
@@ -79,9 +81,9 @@ class _RegisterPatientDialogState extends State<RegisterPatientDialog> {
 
   void save() {
     final newPatient = Patient(
-      name: _model!.nameController.text.notEmptyOrNull,
-      fatherName: _model!.fatherNameController.text.notEmptyOrNull,
-      location: _model!.locationController.text.notEmptyOrNull,
+      name: nameController.text.notEmptyOrNull,
+      fatherName: fatherNameController.text.notEmptyOrNull,
+      location: locationController.text.notEmptyOrNull,
       category: null,
       id: null,
       currentVisit: null,
@@ -91,15 +93,12 @@ class _RegisterPatientDialogState extends State<RegisterPatientDialog> {
     );
     final result = RegisterPatientResult(
       patient: newPatient,
-      visitType: _model!.visitTypeSelection.value!,
+      visitType: visitTypeSelection.value!,
     );
-    // FIXME: This needs to trigger a disposal
-    SingletonBucket.reset<_RegisterPatientDialogModel>();
     widget.onDialogClose(result);
   }
 
   void cancel() {
-    SingletonBucket.reset<_RegisterPatientDialogModel>();
     widget.onDialogClose(null);
   }
 }
