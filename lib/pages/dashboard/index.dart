@@ -7,7 +7,7 @@ import '../../widgets/scaffold/index.dart';
 import '../../widgets/test_bench.dart';
 import '../register_patient/index.dart';
 
-const double _kTileFontSize = 22;
+const double _kTileFontSize = 20;
 
 class RegistrationDashboard extends StatelessWidget {
   @override
