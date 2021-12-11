@@ -14,8 +14,25 @@ void main() {
     ),
   );
 
+  runHealthCheck(api);
+
   GetIt.I.registerSingleton<PatientService>(PatientServiceImpl(api));
   GetIt.I.registerSingleton<VisitService>(VisitServiceImpl(api));
 
   runApp(RegistrationDeskApp());
+}
+
+/// Triggers wakeup of sleeping servers and provides debugging information.
+Future<void> runHealthCheck(KschApi api) async {
+  try {
+    var healthResponse = await api.actuator.health.get();
+    if (healthResponse.status == 'UP') {
+      print('[INFO] Backend is up and running');
+    } else {
+      print('[ERROR] Backend is down');
+    }
+  } on HttpException catch (e) {
+    print('[ERROR] Failed to run health check for backend: '
+        '${e.statusCode} - ${e.responseBody}');
+  }
 }

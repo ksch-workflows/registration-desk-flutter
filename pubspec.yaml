@@ -21,7 +21,7 @@ dependencies:
 #    path: ../ksch-dart-client
     git:
       url: https://github.com/ksch-workflows/ksch-dart-client
-      ref: abc127d28cea613c707cb96d859f8d316a60352d
+      ref: 8ef5086d97ac1001d6f87b8a18bc17ecc4dd2a77
   loader_overlay: ^2.0.4+3
 
 dev_dependencies:
