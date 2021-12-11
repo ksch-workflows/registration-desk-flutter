@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ksch_dart_client/resources.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../api/patient/patient.dart';
 import '../../../api/patient/patient_service.dart';
