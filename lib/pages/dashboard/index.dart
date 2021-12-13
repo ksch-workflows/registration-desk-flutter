@@ -5,7 +5,7 @@ import '../../routing.dart';
 import '../../widgets/scaffold/generic_panel.dart';
 import '../../widgets/scaffold/index.dart';
 import '../../widgets/test_bench.dart';
-import '../register_patient/register_patient_page.dart';
+import '../register_patient/index.dart';
 
 const double _kTileFontSize = 20;
 

@@ -4,10 +4,10 @@ import 'package:uuid/uuid.dart';
 import '../../api/patient/patient.dart';
 import '../../utils/test_bench/dummy_context.dart';
 import '../../widgets/test_bench.dart';
-import 'register_patient_page.dart';
+import 'index.dart';
 
 void main() {
-  final ctx = DummyAppContext()..init();
+  final ctx = DummyContext()..init();
 
   final patient = Patient(
     id: const Uuid().v4(),

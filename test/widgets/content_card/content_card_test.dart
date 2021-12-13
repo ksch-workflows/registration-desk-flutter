@@ -9,7 +9,7 @@ import 'package:registration_desk/widgets/test_bench.dart';
 
 void main() {
   setUp(() {
-    DummyAppContext()..init();
+    DummyContext()..init();
   });
 
   tearDown(() async {
