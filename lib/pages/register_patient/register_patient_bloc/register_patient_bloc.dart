@@ -25,6 +25,10 @@ class RegisterPatientBloc
       emit(NavigatingToPatientDetailsPage(createdPatient.id!));
     });
 
+    on<PatientSearchResultSelected>((event, emit) {
+      emit(NavigatingToPatientDetailsPage(event.patientId));
+    });
+
     on<PatientRegistrationStopped>((event, emit) {
       emit(ClosingRegisterPatientDialog());
     });

@@ -55,7 +55,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
                   children: [
                     _buildActionRow(),
                     const SizedBox(height: 25),
-                    _buildPatientTable(),
+                    _buildPatientTable(context),
                   ],
                 ),
                 floatingActionButton: FloatingActionButton(
@@ -105,7 +105,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
     );
   }
 
-  Widget _buildPatientTable() {
+  Widget _buildPatientTable(BuildContext context) {
     if (matchingPatients == null) {
       return Container();
     }
@@ -125,6 +125,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
                 scrollDirection: Axis.vertical,
                 controller: scrollController,
                 child: DataTable(
+                  showCheckboxColumn: false,
                   columns: const <DataColumn>[
                     DataColumn(
                       label: Text('OPD No.'),
@@ -139,7 +140,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
                       label: Text('Last visit'),
                     ),
                   ],
-                  rows: _buildTableRows(),
+                  rows: _buildTableRows(context),
                 ),
               ),
             ),
@@ -149,14 +150,19 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
     );
   }
 
-  List<DataRow> _buildTableRows() {
+  List<DataRow> _buildTableRows(BuildContext context) {
     return matchingPatients!
-        .map((e) => DataRow(
+        .map((p) => DataRow(
+              onSelectChanged: (_) {
+                context
+                    .read<RegisterPatientBloc>()
+                    .add(PatientSearchResultSelected(p.id!));
+              },
               cells: [
-                DataCell(Text(e.opdNumber ?? 'n/a')),
-                DataCell(Text(e.name ?? 'n/a')),
-                DataCell(Text(e.location ?? 'n/a')),
-                DataCell(Text(e.lastVisit?.toString() ?? 'n/a')),
+                DataCell(Text(p.opdNumber ?? 'n/a')),
+                DataCell(Text(p.name ?? 'n/a', key: ValueKey(p.id!))),
+                DataCell(Text(p.location ?? 'n/a')),
+                DataCell(Text(p.lastVisit?.toString() ?? 'n/a')),
               ],
             ))
         .toList();
