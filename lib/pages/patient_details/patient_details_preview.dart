@@ -19,7 +19,7 @@ void main() {
     opdNumber: null,
     lastVisit: null,
   );
-  var ctx = DummyContext()..init();
+  var ctx = DummyAppContext()..init();
   ctx.patientService.patientResponse = patient;
   ctx.patientService.delay = const Duration(seconds: 2);
   ctx.visitService.startVisit(patient.id!, VisitType.OPD);

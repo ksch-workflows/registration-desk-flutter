@@ -13,7 +13,7 @@ import 'package:uuid/uuid.dart';
 
 void main() {
   setUp(() {
-    DummyContext()..init();
+    DummyAppContext()..init();
   });
 
   tearDown(() async {

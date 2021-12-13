@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:registration_desk/api/patient/patient.dart';
-import 'package:registration_desk/pages/register_patient/index.dart';
+import 'package:registration_desk/pages/register_patient/register_patient_page.dart';
 import 'package:registration_desk/utils/test_bench/dummy_context.dart';
 import 'package:registration_desk/widgets/test_bench.dart';
 import 'package:uuid/uuid.dart';
 
 void main() {
-  late DummyContext ctx;
+  late DummyAppContext ctx;
 
   setUp(() {
-    ctx = DummyContext()..init();
+    ctx = DummyAppContext()..init();
   });
 
   tearDown(() async {

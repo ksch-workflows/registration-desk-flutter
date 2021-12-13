@@ -9,10 +9,10 @@ import 'package:registration_desk/widgets/test_bench.dart';
 import 'package:uuid/uuid.dart';
 
 void main() {
-  late DummyContext ctx;
+  late DummyAppContext ctx;
 
   setUp(() {
-    ctx = DummyContext()..init();
+    ctx = DummyAppContext()..init();
   });
 
   tearDown(() async {

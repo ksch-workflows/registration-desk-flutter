@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ksch_dart_client/resources.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../api/patient/patient.dart';
 import '../../../api/patient/patient_service.dart';
@@ -22,6 +23,10 @@ class RegisterPatientBloc
       final createdPatient = await patientService.create(event.patient);
       await visitService.startVisit(createdPatient.id!, event.visitType);
       emit(NavigatingToPatientDetailsPage(createdPatient.id!));
+    });
+
+    on<PatientSearchResultSelected>((event, emit) {
+      emit(NavigatingToPatientDetailsPage(event.patientId));
     });
 
     on<PatientRegistrationStopped>((event, emit) {

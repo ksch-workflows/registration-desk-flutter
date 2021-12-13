@@ -5,7 +5,7 @@ import '../../api/visit/visit_service.dart';
 import 'dummy_patient_service.dart';
 import 'dummy_visit_service.dart';
 
-class DummyContext {
+class DummyAppContext {
   final patientService = DummyPatientService();
   final visitService = DummyVisitService();
 
