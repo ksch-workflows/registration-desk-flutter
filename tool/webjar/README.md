@@ -1,0 +1,5 @@
+# WebJar
+
+## Dependencies
+
+- Maven
