@@ -8,5 +8,13 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>registration-desk</name>
   <description>Webjar for registration desk web app</description>
+  
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub K.S.C.H. Workflows Apache Maven Packages</name>
+      <url>https://maven.pkg.github.com/ksch-workflows/registration-desk</url>
+    </repository>
+  </distributionManagement>
 
 </project>
