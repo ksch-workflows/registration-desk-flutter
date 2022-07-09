@@ -2,8 +2,7 @@
 
 set -e
 
-which mvn > /dev/null || { echo "Maven not installed"; exit 1; }
-which flutter > /dev/null || { echo "Flutter not installed"; exit 1; }
+which fvm > /dev/null || { echo "fvm not installed"; exit 1; }
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 TEMP_DIR=$(mktemp -d)
@@ -30,4 +29,7 @@ git commit -m "Add code for snapshot release"
 pwd
 git remote add origin git@github.com:ksch-workflows/registration-desk.git
 
-git tag 0.0.5
+VERSION="0.0.10"
+
+git tag $VERSION
+git push origin $VERSION
