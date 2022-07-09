@@ -1,0 +1,60 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "ksch-workflows",
+    "module": "registration-desk",
+    "version": "0.0.7",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "registration-desk-0.0.7.jar",
+          "url": "registration-desk-0.0.7.jar",
+          "size": 7540468,
+          "sha512": "09c5dbd9cdb779e7d061cc1a54ff46615cf3cf9642115a6166eb90f38a335984e90b478e868474923234aa9748e17be095c811b70e2090a53b800b079a519fe4",
+          "sha256": "93db2c7304e276c4260390ee01aa00eb763ef79074e06ec07c258a22391063e5",
+          "sha1": "962c1670e591672deee546f843342f4d3fb7dab9",
+          "md5": "a8795c706b7a6bbab7d9acae8d2c1768"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "registration-desk-0.0.7.jar",
+          "url": "registration-desk-0.0.7.jar",
+          "size": 7540468,
+          "sha512": "09c5dbd9cdb779e7d061cc1a54ff46615cf3cf9642115a6166eb90f38a335984e90b478e868474923234aa9748e17be095c811b70e2090a53b800b079a519fe4",
+          "sha256": "93db2c7304e276c4260390ee01aa00eb763ef79074e06ec07c258a22391063e5",
+          "sha1": "962c1670e591672deee546f843342f4d3fb7dab9",
+          "md5": "a8795c706b7a6bbab7d9acae8d2c1768"
+        }
+      ]
+    }
+  ]
+}
