@@ -1,8 +1,6 @@
 # Registration Desk
 
-This repository contains the source code for the app to be used at the registration desk of the [Kirpal Sagar Charitable Hospital](https://kirpal-sagar.org/en/kirpal-charitable-hospital-en/).
-
-![KSCH Registration Desk](doc/img/registration-desk.png)
+This repository contains the source code for the app intended to be used at the registration desk.
 
 ## Context
 
