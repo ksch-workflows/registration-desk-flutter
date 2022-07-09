@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   uuid: ^3.0.4
-  flutter_bloc: ^7.0.0
+  flutter_bloc: ^8.0.1
   equatable: ^2.0.0
   meta: ^1.7.0
   test: ^1.16.5
