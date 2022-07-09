@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   uuid: ^3.0.4
-  flutter_bloc: ^7.0.0
+  flutter_bloc: ^8.0.1
   equatable: ^2.0.0
   meta: ^1.7.0
   test: ^1.16.5
@@ -32,7 +32,10 @@ dev_dependencies:
     sdk: flutter
   integration_test:
     sdk: flutter
-  nock: ^1.1.2
+  nock:
+    git:
+      url: https://github.com/cah4a/dart_nock
+      ref: 7643ccb71b1340e81d6291028d0a7eae9da45bb3
 
 flutter:
   uses-material-design: true
