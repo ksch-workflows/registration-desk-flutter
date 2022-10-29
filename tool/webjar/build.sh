@@ -2,11 +2,9 @@
 
 set -e
 
-which fvm > /dev/null || { echo "fvm not installed"; exit 1; }
-
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 TEMP_DIR=$(mktemp -d)
-REPO_ROOT_DIR=${SCRIPT_DIR}/..
+REPO_ROOT_DIR=${SCRIPT_DIR}/../..
 FLUTTER_BUILD_DIR=${REPO_ROOT_DIR}/build/web
 
 cd ${REPO_ROOT_DIR}
@@ -24,7 +22,7 @@ cp -r ${SCRIPT_DIR}/webjar/* ${TEMP_DIR}
 cd ${TEMP_DIR}
 git init
 git add .
-git commit -m "Add code for snapshot release"
+git commit -m "Add app compiled to HTML/JavaScript"
 
 pwd
 git remote add origin git@github.com:ksch-workflows/registration-desk.git
@@ -32,4 +30,4 @@ git remote add origin git@github.com:ksch-workflows/registration-desk.git
 VERSION="0.0.10"
 
 git tag $VERSION
-git push origin $VERSION
+git push origin $VERSION --force
