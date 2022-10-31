@@ -10,6 +10,7 @@ void main() {
   var api = KschApi(
     const String.fromEnvironment(
       'apiBaseUrl',
+      // TODO How does this work now?
       defaultValue: 'http://localhost:8080',
     ),
   );
@@ -22,6 +23,7 @@ void main() {
   runApp(RegistrationDeskApp());
 }
 
+// TODO That is no obsolete, isn't it?
 /// Triggers wakeup of sleeping servers and provides debugging information.
 Future<void> runHealthCheck(KschApi api) async {
   try {
