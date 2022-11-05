@@ -6,8 +6,7 @@ publishing {
     mavenJava(MavenPublication) {
       groupId = 'ksch'
       artifactId = 'registration-desk'
-      version = '0.0.1'
-      // TODO Read version number from properties
+      version = project.property('version')
 
       from components.java
     }
