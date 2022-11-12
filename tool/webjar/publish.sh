@@ -58,7 +58,7 @@ set -e
 
 cd ${REPO_ROOT_DIR}
 if [[ "${LOCAL_RELEASE}" != "yes" ]] ; then
-  flutter test
+  flutter test --reporter expanded
 fi
 flutter build web --base-href /registration-desk/ --dart-define="apiBaseUrl=${BASE_URL}"
 
