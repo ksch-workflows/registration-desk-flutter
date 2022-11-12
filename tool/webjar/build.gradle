@@ -1,0 +1,25 @@
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+publishing {
+  publications {
+    mavenJava(MavenPublication) {
+      groupId = 'ksch'
+      artifactId = 'registration-desk'
+      version = project.property('version')
+
+      from components.java
+    }
+  }
+
+  repositories {
+    maven {
+      name = 'GitHubPackages'
+      url = 'https://maven.pkg.github.com/ksch-workflows/registration-desk'
+      credentials {
+        username = System.getenv('GITHUB_ACTOR')
+        password = System.getenv('GITHUB_TOKEN')
+      }
+    }
+  }
+}
