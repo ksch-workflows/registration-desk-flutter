@@ -10,14 +10,13 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-java@v1
+      - uses: actions/setup-java@v3
         with:
-          distribution: "temurin"
+          distribution: temurin
           java-version: 17
       - uses: gradle/gradle-build-action@v2
         with:
           gradle-version: current
-      # TODO Replace with call of "publish.sh --version xxxxx"
       - run: ./tool/webjar/publish.sh -v ${GITHUB_REF#refs/*/}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
