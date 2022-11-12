@@ -117,21 +117,6 @@ set -e
 flutter analyze --fatal-infos
 ```
 
-## Deployment
-
-### Testing
-
-For demos and quality assurance, the Registration Desk app is deployed on GitHub Pages:
-
-https://ksch-workflows.github.io/registration-desk
-
-This gets automatically updated with every change on the repository with the help of [GitHub Actions](https://dev.to/janux_de/automatically-publish-a-flutter-web-app-on-github-pages-3m1f).
-
-### Production
-
-There is no production deployment, yet.
-It is planned that the Registration Desk web app is packaged together with a web server in a [Docker image](https://searchitoperations.techtarget.com/definition/Docker-image) so that it can be started with [Docker Compose](https://docs.docker.com/compose/).
-
 ## License
 
 K.S.C.H. Workflows is maintained by [KS-plus e.V.](https://ks-plus.org/en/welcome/),
