@@ -14,14 +14,8 @@ The installation can e.g. be done with [SDKMAN!](https://sdkman.io/).
 ## Local testing
 
 ```bash
-./tool/webjar/publish.sh -l -v 0.1.0-SNAPSHOT
+./tool/webjar/publish.sh -l -v 0.1.0-SNAPSHOT -b http://localhost:8080
 find ~/.m2/repository/ksch
-```
-
-```gradle
-repositories {
-	mavenLocal()
-}
 ```
 
 ## Production release

@@ -15,7 +15,7 @@ publishing {
   repositories {
     maven {
       name = 'GitHubPackages'
-      url = 'https://maven.pkg.github.com/experimental-software/example-webjar'
+      url = 'https://maven.pkg.github.com/ksch-workflows/registration-desk'
       credentials {
         username = System.getenv('GITHUB_ACTOR')
         password = System.getenv('GITHUB_TOKEN')
