@@ -17,6 +17,6 @@ jobs:
       - uses: gradle/gradle-build-action@v2
         with:
           gradle-version: current
-      - run: ./tool/webjar/publish.sh -v ${GITHUB_REF#refs/*/}
+      - run: ./tool/webjar/publish.sh -v ${GITHUB_REF#refs/*/} -b https://ksch-workflows-306713.ey.r.appspot.com
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

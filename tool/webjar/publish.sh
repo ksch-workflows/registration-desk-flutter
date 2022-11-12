@@ -8,7 +8,7 @@ APP_RESOURCE_TARGET_PATH="src/main/resources/META-INF/resources/registration-des
 function usage()
 {
     cat <<-END
-usage: publish.sh -v VERSION [-l] [-h]
+usage: publish.sh -v VERSION [-l] [-b BASE_URL] [-h]
 
 This script compiles the Flutter Web app, packages it
 into a JAR file and then publishes it into a Maven repository.
@@ -18,19 +18,24 @@ required arguments:
 
 optional arguments:
   -l    Publish to Maven Local instead of the cloud repository.
+  -b    The base URL for the HTTP requests.
   -h    Show this help message and exit.  
 END
 }
 
 LOCAL_RELEASE="no"
+BASE_URL="/"
 
-while getopts "h l v:" o; do
+while getopts "h l v: b:" o; do
   case "${o}" in
     v)
       VERSION=${OPTARG}
       ;;
     l)
       LOCAL_RELEASE="yes"
+      ;;
+    b)
+      BASE_URL=${OPTARG}
       ;;
     h | *)
       usage
@@ -55,7 +60,7 @@ cd ${REPO_ROOT_DIR}
 if [[ "${LOCAL_RELEASE}" != "yes" ]] ; then
   flutter test
 fi
-flutter build web --base-href /registration-desk/
+flutter build web --base-href /registration-desk/ --dart-define="apiBaseUrl=${BASE_URL}"
 
 cd ${SCRIPT_DIR}
 if [[ -d src ]]; then

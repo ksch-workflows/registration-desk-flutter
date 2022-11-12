@@ -7,15 +7,7 @@ import 'api/visit/visit_service.dart';
 import 'app.dart';
 
 void main() {
-  var api = KschApi(
-    const String.fromEnvironment(
-      'apiBaseUrl',
-      // TODO How does this work now?
-      defaultValue: 'http://localhost:8080',
-    ),
-  );
-
-  runHealthCheck(api);
+  var api = KschApi(baseUrl);
 
   GetIt.I.registerSingleton<PatientService>(PatientServiceImpl(api));
   GetIt.I.registerSingleton<VisitService>(VisitServiceImpl(api));
@@ -23,18 +15,12 @@ void main() {
   runApp(RegistrationDeskApp());
 }
 
-// TODO That is no obsolete, isn't it?
-/// Triggers wakeup of sleeping servers and provides debugging information.
-Future<void> runHealthCheck(KschApi api) async {
-  try {
-    var healthResponse = await api.actuator.health.get();
-    if (healthResponse.status == 'UP') {
-      print('[INFO] Backend is up and running');
-    } else {
-      print('[ERROR] Backend is down');
-    }
-  } on HttpException catch (e) {
-    print('[ERROR] Failed to run health check for backend: '
-        '${e.statusCode} - ${e.responseBody}');
-  }
+/// The protocol and domain of the resource server.
+///
+/// See [Api Url Parts Nomenclature | stackoverflow.com](https://stackoverflow.com/a/55815212/2339010)
+String get baseUrl {
+  return const String.fromEnvironment(
+    'apiBaseUrl',
+    defaultValue: 'http://localhost:8080',
+  );
 }
