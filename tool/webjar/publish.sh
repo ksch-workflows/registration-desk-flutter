@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
-set -e
-
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 REPO_ROOT_DIR=${SCRIPT_DIR}/../..
 FLUTTER_BUILD_DIR=${REPO_ROOT_DIR}/build/web
+APP_RESOURCE_TARGET_PATH="src/main/resources/META-INF/resources/registration-desk"
 
 function usage()
 {
@@ -53,19 +52,21 @@ which gradle > /dev/null || { echo "ERROR: gradle not installed"; exit 1; }
 set -e
 
 cd ${REPO_ROOT_DIR}
-flutter test
+if [[ "${LOCAL_RELEASE}" != "yes" ]] ; then
+  flutter test
+fi
 flutter build web --base-href /registration-desk/
 
 cd ${SCRIPT_DIR}
 if [[ -d src ]]; then
   rm -rf src/
 fi
-mkdir -p src/main/resources/META-INF/resources/registration-desk
-cp -r ${FLUTTER_BUILD_DIR}/* src/main/resources/META-INF/resources/registration-desk
+mkdir -p ${APP_RESOURCE_TARGET_PATH}
+cp -r ${FLUTTER_BUILD_DIR}/* ${APP_RESOURCE_TARGET_PATH}
 
 PROPS="-Pversion=${VERSION}"
-if [[ "${LOCAL_RELEASE}" == "yes" ]]; then
-  gradle publishToMavenLocal $PROPS 
+if [[ "${LOCAL_RELEASE}" == "yes" ]] ; then
+  gradle publishToMavenLocal ${PROPS}
 else
-  echo "TODO: gradle publish $PROPS"
+  gradle publish ${PROPS}
 fi

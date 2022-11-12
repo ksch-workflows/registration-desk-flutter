@@ -18,6 +18,6 @@ jobs:
         with:
           gradle-version: current
       # TODO Replace with call of "publish.sh --version xxxxx"
-      - run: gradle publish
+      - run: ./tool/webjar/publish.sh -v ${GITHUB_REF#refs/*/}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
