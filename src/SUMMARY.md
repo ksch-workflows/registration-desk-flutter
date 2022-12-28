@@ -6,11 +6,9 @@
 - [Solution Strategy](./solution-strategy/index.md)
 - [Building Block View](./building-block-view/index.md)
 - [Runtime View](./runtime-view/index.md)
-- [Deployment View ](./deployment-view/index.md)
+- [Deployment View](./deployment-view/index.md)
 - [Crosscutting Concepts](./crosscutting-concepts/index.md)
 - [Architectural Decisions](./architectural-decisions/index.md)
 - [Quality Requirements](./quality-requirements/index.md)
 - [Risks and Technical Debt](./risks-and-technical-debt/index.md)
 - [Glossary](./glossary/index.md)
-
-[Imprint](./imprint/index.md)

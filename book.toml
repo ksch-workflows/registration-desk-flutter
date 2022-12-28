@@ -5,7 +5,8 @@ src = "src"
 title = "Registration Desk"
 
 [build]
-create-missing = false
+create-missing = true
+build-dir = "docs"
 
 [output.html]
 git-repository-url = "https://github.com/ksch-workflows/registration-desk"
