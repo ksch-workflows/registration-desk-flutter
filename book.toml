@@ -11,7 +11,7 @@ build-dir = "docs"
 [output.html]
 git-repository-url = "https://github.com/ksch-workflows/registration-desk"
 edit-url-template = "https://github.com/ksch-workflows/registration-desk/edit/gh-pages/{path}"
-site-url = "/registration-desk/"
+site-url = "https://ksch-workflows.github.io/registration-desk/"
 
 [output.html.fold]
 enable = true
