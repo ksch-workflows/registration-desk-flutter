@@ -62,7 +62,7 @@ cd ../backend
 For local development, the Registration Desk app can be started like this:
 
 ```
-flutter run -d chrome
+flutter run -d chrome --target lib/main_dev.dart
 ```
 
 ### Linting

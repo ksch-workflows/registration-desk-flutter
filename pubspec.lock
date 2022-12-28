@@ -8,6 +8,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "41.0.0"
+  adaptive_number:
+    dependency: transitive
+    description:
+      name: adaptive_number
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   analyzer:
     dependency: transitive
     description:
@@ -84,7 +91,7 @@ packages:
       name: convert
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.2"
+    version: "3.1.1"
   coverage:
     dependency: transitive
     description:
@@ -99,6 +106,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.2"
+  dart_jsonwebtoken:
+    dependency: "direct main"
+    description:
+      name: dart_jsonwebtoken
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.6.2"
+  ed25519_edwards:
+    dependency: transitive
+    description:
+      name: ed25519_edwards
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.1"
   effective_dart:
     dependency: "direct dev"
     description:
@@ -127,6 +148,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.2"
+  fixnum:
+    dependency: transitive
+    description:
+      name: fixnum
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -226,8 +254,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "8ef5086d97ac1001d6f87b8a18bc17ecc4dd2a77"
-      resolved-ref: "8ef5086d97ac1001d6f87b8a18bc17ecc4dd2a77"
+      ref: f40defd5adb641b40916e6660ec7d8032b6a76d7
+      resolved-ref: f40defd5adb641b40916e6660ec7d8032b6a76d7
       url: "https://github.com/ksch-workflows/ksch-dart-client"
     source: git
     version: "0.0.0"
@@ -317,6 +345,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.0"
+  pointycastle:
+    dependency: transitive
+    description:
+      name: pointycastle
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.6.2"
   pool:
     dependency: transitive
     description:
