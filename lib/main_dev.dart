@@ -17,8 +17,6 @@ void main() {
 }
 
 /// The protocol and domain of the resource server.
-///
-/// See [Api Url Parts Nomenclature | stackoverflow.com](https://stackoverflow.com/a/55815212/2339010)
 String get baseUrl {
   return const String.fromEnvironment(
     'apiBaseUrl',

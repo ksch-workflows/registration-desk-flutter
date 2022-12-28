@@ -16,12 +16,21 @@ void main() {
 }
 
 /// The protocol and domain of the resource server.
-///
-/// See [Api Url Parts Nomenclature | stackoverflow.com](https://stackoverflow.com/a/55815212/2339010)
 String get baseUrl {
-  // TODO Don't default to :8080 in prod profile
-  return const String.fromEnvironment(
-    'apiBaseUrl',
-    defaultValue: 'http://localhost:8080',
+  const result = String.fromEnvironment(
+    'apiBaseUrl'
   );
+  if (result.isEmpty) {
+    throw ConfigurationException('Could not find "apiBaseUrl" in environment');
+  }
+  return result;
+}
+
+class ConfigurationException implements Exception {
+  final String message;
+
+  ConfigurationException(this.message);
+
+  @override
+  String toString() => message;
 }
