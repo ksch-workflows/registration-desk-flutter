@@ -1,4 +1,4 @@
-[Overview](overview/index.md)
+[Overview](index.md)
 
 - [Introduction and Goals](introduction-and-goals/index.md)
 - [Constraints](constraints/index.md)
